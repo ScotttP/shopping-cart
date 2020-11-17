@@ -18,7 +18,7 @@ const Shop = () => {
 		return driverFilter.map((element) => <ItemCard data={element} />);
 	}
 	function putterRendering() {
-		const driverFilter = itemList.filter((item) => item.category === "putter");
+		const driverFilter = itemList.filter((item) => item.category === "Putter");
 		return driverFilter.map((element) => <ItemCard data={element} />);
 	}
 	useEffect(() => {}, []);
