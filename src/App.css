@@ -23,3 +23,17 @@ a {
 span {
 	padding: 10px;
 }
+.increaseOrDecreaseQtyContainer {
+	display: flex;
+	align-items: center;
+}
+.increaseQty,
+.decreaseQty {
+	margin: 5px;
+	height: 2vh;
+}
+.itemCard {
+	border: 2px solid black;
+	margin: 2%;
+	width: 20%;
+}

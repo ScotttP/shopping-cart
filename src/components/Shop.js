@@ -1,27 +1,73 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ItemCard from "./ItemCard";
 import itemList from "./itemList";
 
 const Shop = () => {
-	function driverRendering() {
-		const driverFilter = itemList.filter((item) => item.category === "Driver");
-		return driverFilter.map((element) => <ItemCard data={element} />);
-	}
+	const [item, setItem] = useState(itemList);
 
-	function ironRendering() {
-		const driverFilter = itemList.filter((item) => item.category === "Iron");
-		return driverFilter.map((element) => <ItemCard data={element} />);
-	}
-	function wedgeRendering() {
-		const driverFilter = itemList.filter((item) => item.category === "Wedge");
-		return driverFilter.map((element) => <ItemCard data={element} />);
-	}
-	function putterRendering() {
-		const driverFilter = itemList.filter((item) => item.category === "Putter");
-		return driverFilter.map((element) => <ItemCard data={element} />);
-	}
-	useEffect(() => {}, []);
+	useEffect(() => {
+		// setItem(item);
+	}, [item]);
+
+	const changeQty = (e) => {
+		const index = Number(e.target.getAttribute("index"));
+		const copyItemListArray = JSON.parse(JSON.stringify(item));
+		if (e.target.className === "decreaseQty") {
+			if (copyItemListArray[index].quantity <= 0) return;
+			else
+				copyItemListArray[index].quantity = --copyItemListArray[index].quantity;
+		} else if (e.target.className === "increaseQty") {
+			copyItemListArray[index].quantity = ++copyItemListArray[index].quantity;
+		}
+		setItem(copyItemListArray);
+	};
+
+	const driverRendering = () => {
+		const driverFilter = item.filter((item) => item.category === "Driver");
+		return driverFilter.map((element, index) => (
+			<ItemCard
+				key={element.name + index}
+				index={index}
+				data={element}
+				onChangeQty={changeQty}
+			/>
+		));
+	};
+
+	const ironRendering = () => {
+		const driverFilter = item.filter((item) => item.category === "Iron");
+		return driverFilter.map((element, index) => (
+			<ItemCard
+				key={element.name + index}
+				index={index}
+				data={element}
+				onChangeQty={changeQty}
+			/>
+		));
+	};
+	const wedgeRendering = () => {
+		const driverFilter = item.filter((item) => item.category === "Wedge");
+		return driverFilter.map((element, index) => (
+			<ItemCard
+				key={element.name + index}
+				index={index}
+				data={element}
+				onChangeQty={changeQty}
+			/>
+		));
+	};
+	const putterRendering = () => {
+		const driverFilter = item.filter((item) => item.category === "Putter");
+		return driverFilter.map((element, index) => (
+			<ItemCard
+				key={element.name + index}
+				index={index}
+				data={element}
+				onChangeQty={changeQty}
+			/>
+		));
+	};
 
 	return (
 		<div>
