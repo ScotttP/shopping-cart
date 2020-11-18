@@ -1,11 +1,8 @@
 import React from "react";
+import { useState } from "react";
+import ItemCard from "./ItemCard";
+import itemList from "./itemList";
 
-const Cart = () => {
-	return (
-		<div>
-			<h1>Hello from Cart</h1>
-		</div>
-	);
-};
+const Cart = () => {};
 
 export default Cart;

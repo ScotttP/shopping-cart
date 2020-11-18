@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import itemList from "./itemList";
+import AddToCartButton from "./AddToCartButton";
 
 const ItemCard = (props) => {
-	//console.log(props.data);
 	return (
 		<div className="itemCard">
 			<h3>{props.data.name}</h3>
@@ -25,8 +24,7 @@ const ItemCard = (props) => {
 					+
 				</button>
 			</div>
-
-			<button>Add to Cart</button>
+			<AddToCartButton element={props.data} />
 		</div>
 	);
 };
