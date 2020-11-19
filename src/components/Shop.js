@@ -1,40 +1,26 @@
 import React from "react";
-import { useEffect, useState } from "react";
+
 import ItemCard from "./ItemCard";
-import itemList from "./itemList";
 
-const Shop = () => {
-	const [item, setItem] = useState(itemList);
-
-	useEffect(() => {
-		// setItem(item);
-	}, [item]);
-
-	const changeQty = (e) => {
-		const index = Number(e.target.getAttribute("data-index"));
-		const copyItemListArray = JSON.parse(JSON.stringify(item));
-		if (e.target.className === "decreaseQty") {
-			if (copyItemListArray[index].quantity <= 0) return;
-			else
-				copyItemListArray[index].quantity = --copyItemListArray[index].quantity;
-		} else if (e.target.className === "increaseQty") {
-			copyItemListArray[index].quantity = ++copyItemListArray[index].quantity;
-		}
-		setItem(copyItemListArray);
-	};
-
-	const itemRendering = () => {
-		return item.map((element, index) => (
-			<ItemCard
-				key={element.name + index}
-				index={index}
-				data={element}
-				onChangeQty={changeQty}
-			/>
+const Shop = (props) => {
+	const shopRendering = () => {
+		return props.items.map((element, index) => (
+			<div
+				className="itemCardContainer"
+				key={"shopItemCardContainerFor" + element.name}
+			>
+				<ItemCard
+					key={element.name + index + "inShop"}
+					index={index}
+					data={element}
+					onChangeQty={(e) => props.onChangeQty(e)}
+				/>
+				<button onClick={() => props.addToCart(element)}>Add to Cart</button>
+			</div>
 		));
 	};
 
-	return <div>{itemRendering()}</div>;
+	return <div>{shopRendering()}</div>;
 };
 
 export default Shop;

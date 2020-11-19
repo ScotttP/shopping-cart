@@ -32,7 +32,7 @@ span {
 	margin: 5px;
 	height: 2vh;
 }
-.itemCard {
+.itemCardContainer {
 	border: 2px solid black;
 	margin: 2%;
 	width: 20%;
