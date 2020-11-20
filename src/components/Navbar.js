@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
 	return (
 		<div id="navBarContainer">
 			<ul id="navBarList">
@@ -14,7 +14,7 @@ const Navbar = () => {
 					</li>
 					<li>
 						<Link to="/shopping-cart/cart">Cart</Link>
-						<span id="inShoppingCart"> 0</span>
+						<span id="inShoppingCart">{props.sumQty()} </span>
 					</li>
 				</div>
 			</ul>

@@ -6,7 +6,6 @@ import Shop from "./components/Shop";
 import Cart from "./components/Cart";
 import Navbar from "./components/Navbar";
 import itemList from "./components/itemList";
-import { computeHeadingLevel } from "@testing-library/react";
 
 const App = () => {
 	const [cartItems, setCartItems] = useState([]);
@@ -14,7 +13,10 @@ const App = () => {
 
 	const addToCart = (newItem) => {
 		if (newItem.quantity === 0) return;
-		else setCartItems([...cartItems, newItem]);
+		else {
+			setCartItems([...cartItems, newItem]);
+			resetQty();
+		}
 	};
 
 	const changeQty = (e) => {
@@ -40,16 +42,34 @@ const App = () => {
 			setCartItems(copyItemListArray);
 		} else setItem(copyItemListArray);
 	};
+
+	const resetQty = () => {
+		let copyItemListArray = JSON.parse(JSON.stringify(item));
+		for (let items of copyItemListArray) {
+			items.quantity = 0;
+		}
+		setItem(copyItemListArray);
+	};
+
+	function sumQty() {
+		if (cartItems.length === 0) return 0;
+		else {
+			let array = cartItems.map((item) => item.quantity);
+			return array.reduce((acc, curr) => acc + curr);
+		}
+	}
+
 	return (
 		<BrowserRouter>
-			<Navbar />
+			<Navbar cartItems={cartItems} sumQty={sumQty} />
 			<Switch>
 				<Route exact path="/shopping-cart" component={Home} />
+
 				<Route exact path="/shopping-cart/shop">
 					<Shop addToCart={addToCart} onChangeQty={changeQty} items={item} />
 				</Route>
 				<Route exact path="/shopping-cart/cart">
-					<Cart cartItems={cartItems} onChangeQty={changeQty} />
+					<Cart cartItems={cartItems} onChangeQty={changeQty} sumQty={sumQty} />
 				</Route>
 			</Switch>
 		</BrowserRouter>
