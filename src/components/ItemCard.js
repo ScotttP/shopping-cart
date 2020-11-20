@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from "react";
-//import AddToCartButton from "./AddToCartButton";
+import React from "react";
 
 const ItemCard = (props) => {
-	console.log(props.data.quantity);
 	return (
 		<div className="itemCard">
 			<h3>{props.data.name}</h3>
-			<img src={props.data.image}></img>
+			<img src={props.data.image} alt={props.data.name}></img>
 			<p>{props.data.price}</p>
 			<div className="increaseOrDecreaseQtyContainer">
 				<button
 					className="decreaseQty"
 					data-index={props.index}
+					data-incart={props.inCart}
 					onClick={(e) => props.onChangeQty(e)}
 				>
 					-
@@ -20,6 +19,7 @@ const ItemCard = (props) => {
 				<button
 					className="increaseQty"
 					data-index={props.index}
+					data-incart={props.inCart}
 					onClick={(e) => props.onChangeQty(e)}
 				>
 					+

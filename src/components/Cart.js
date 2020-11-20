@@ -1,20 +1,17 @@
 import React from "react";
-import { useState } from "react";
+import uniqid from "uniqid";
 import ItemCard from "./ItemCard";
-import itemList from "./itemList";
 
 const Cart = (props) => {
 	const cartRendering = () => {
 		return props.cartItems.map((element, index) => (
-			<div
-				className="itemCardContainer"
-				key={"cartItemCardContainerFor" + element.name}
-			>
+			<div className="itemCardContainer" key={uniqid()}>
 				<ItemCard
-					key={element.name + index + "inCart"}
+					key={uniqid()}
 					index={index}
 					data={element}
 					onChangeQty={(e) => props.onChangeQty(e)}
+					inCart={true}
 				/>
 			</div>
 		));
