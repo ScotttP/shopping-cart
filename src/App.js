@@ -11,11 +11,11 @@ const App = () => {
 	const [cartItems, setCartItems] = useState([]);
 	const [item, setItem] = useState(itemList);
 
-	const addToCart = (newItem) => {
+	const addToCart = (newItem, index) => {
 		if (newItem.quantity === 0) return;
 		else {
 			setCartItems([...cartItems, newItem]);
-			resetQty();
+			resetQty(index);
 		}
 	};
 
@@ -43,11 +43,9 @@ const App = () => {
 		} else setItem(copyItemListArray);
 	};
 
-	const resetQty = () => {
+	const resetQty = (index) => {
 		let copyItemListArray = JSON.parse(JSON.stringify(item));
-		for (let items of copyItemListArray) {
-			items.quantity = 0;
-		}
+		copyItemListArray[index].quantity = 0;
 		setItem(copyItemListArray);
 	};
 

@@ -5,7 +5,12 @@ const ItemCard = (props) => {
 		<div className="itemCard">
 			<h3>{props.data.name}</h3>
 			<img src={props.data.image} alt={props.data.name}></img>
-			<p>{props.data.price}</p>
+			<p>
+				{new Intl.NumberFormat("en-US", {
+					style: "currency",
+					currency: "USD",
+				}).format(props.data.price)}
+			</p>
 			<div className="increaseOrDecreaseQtyContainer">
 				<button
 					className="decreaseQty"

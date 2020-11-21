@@ -16,7 +16,9 @@ const Shop = (props) => {
 					onChangeQty={(e) => props.onChangeQty(e)}
 					inCart={false}
 				/>
-				<button onClick={() => props.addToCart(element)}>Add to Cart</button>
+				<button onClick={() => props.addToCart(element, index)}>
+					Add to Cart
+				</button>
 			</div>
 		));
 	};
