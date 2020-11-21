@@ -2,7 +2,8 @@ const itemList = [
 	{
 		name: "SIM Max Driver",
 		category: "Driver",
-		image: "https",
+		image:
+			"https://www.taylormadegolf.com/on/demandware.static/-/Sites-tmag-master-catalog/en_US/v1605949646327/zoom/JJI27_zoom_D.jpg",
 		price: 500,
 		quantity: 0,
 	},
