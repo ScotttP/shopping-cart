@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const ItemCard = (props) => {
+	useEffect(() => {
+		console.log("useEffect");
+	}, [props.data.quantity]);
 	return (
 		<div className="itemCard">
 			<h3>{props.data.name}</h3>

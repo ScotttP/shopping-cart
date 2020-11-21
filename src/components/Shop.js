@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import uniqid from "uniqid";
 import ItemCard from "./ItemCard";
 
 const Shop = (props) => {
+	console.log("shopRendering");
 	const shopRendering = () => {
 		return props.items.map((element, index) => (
-			<div
-				className="itemCardContainer"
-				key={"shopItemCardContainerFor" + element.name}
-			>
+			<div className="itemCardContainer">
 				<ItemCard
 					key={uniqid()}
 					index={index}
