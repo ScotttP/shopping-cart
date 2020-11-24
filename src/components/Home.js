@@ -5,7 +5,9 @@ const Home = () => {
 	return (
 		<div id="home">
 			<Link id="startShoppingLink" to="/shopping-cart/shop">
-				<button id="startShoppingButton">Start Shopping!</button>
+				<button id="startShoppingButton">
+					<span>Start Shopping </span>
+				</button>
 			</Link>
 		</div>
 	);
