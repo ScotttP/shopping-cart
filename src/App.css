@@ -12,15 +12,20 @@
 	align-items: center;
 	margin: 0%;
 	width: 100%;
+	height: 100%;
 }
 #navBarRight {
 	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 }
 #navBarContainer {
 	background-color: rgb(233, 238, 240);
 	height: 10vh;
 	display: flex;
 	align-items: center;
+	min-height: 80px;
 }
 a {
 	text-decoration: none;
@@ -102,10 +107,51 @@ span {
 	width: 150px;
 	height: 35px;
 }
+
+#golfBagLogo {
+	width: 35px;
+	height: 35px;
+}
+#golfBagLink {
+	height: 55px;
+}
+#inShoppingCartCount {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	top: 1.5%;
+	right: 11px;
+	border-radius: 30px;
+	background-color: #e64343;
+	height: 28px;
+	width: 29.44px;
+}
+#shoppingCartElement {
+	display: flex;
+	align-items: center;
+	margin-right: 20px;
+	height: 100%;
+}
+#shopElement {
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+#homepage {
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
 @media only screen and (max-width: 800px) {
 	#startShoppingLink {
 		left: 50%;
 		top: 25%;
+	}
+}
+@media only screen and (min-width: 350px) {
+	#startShoppingButton {
+		left: 20%;
 	}
 }
 

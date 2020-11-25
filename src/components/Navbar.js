@@ -1,26 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from "../components/taylorMadeLogo.png";
+import golfBag from "../components/golf-bag.svg";
 
 const Navbar = (props) => {
 	return (
 		<div id="navBarContainer">
 			<ul id="navBarList">
-				<li>
+				<li id="homepage">
 					<Link to="/shopping-cart">
-						<img
-							id="taylorMadeLogo"
-							src="https://o.remove.bg/downloads/2218af9b-ee28-42da-8903-766742f1125e/490-4901795_salisbury-new-taylormade-m1-demo-tailor-made-logo-removebg-preview.png"
-							alt="logo"
-						></img>
+						<img id="taylorMadeLogo" src={Logo} alt="logo"></img>
 					</Link>
 				</li>
 				<div id="navBarRight">
-					<li>
+					<li id="shopElement">
 						<Link to="/shopping-cart/shop">Shop</Link>
 					</li>
-					<li>
-						<Link to="/shopping-cart/cart">Cart</Link>
-						<span id="inShoppingCart">{props.sumQty()} </span>
+					<li id="shoppingCartElement">
+						<Link to="/shopping-cart/cart">
+							<span id="inShoppingCartCount">{props.sumQty()} </span>
+							<a id="golfBagLink">
+								<img id="golfBagLogo" src={golfBag}></img>
+							</a>
+						</Link>
 					</li>
 				</div>
 			</ul>
