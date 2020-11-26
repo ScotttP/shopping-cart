@@ -48,13 +48,33 @@ span {
 .increaseQty,
 .decreaseQty {
 	margin: 5px;
-	height: 2vh;
+	height: 3vh;
+	width: 2.5vw;
 }
 .itemCardContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	border: 2px solid black;
 	margin: 2%;
-	width: 20%;
+	width: 33vw;
 }
+
+.itemCard {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.itemCard * {
+	padding: 2%;
+}
+.addToCartButton {
+	margin: 2%;
+	padding: 2%;
+}
+
 #home {
 	width: 100%;
 	height: 90vh;
@@ -147,6 +167,11 @@ span {
 	height: 100%;
 	display: flex;
 	align-items: center;
+}
+
+.productImages {
+	width: 30vw;
+	height: 30vh;
 }
 
 @media only screen and (max-width: 800px) {

@@ -3,10 +3,9 @@ import uniqid from "uniqid";
 import ItemCard from "./ItemCard";
 
 const Shop = (props) => {
-	console.log("shopRendering");
 	const shopRendering = () => {
 		return props.items.map((element, index) => (
-			<div className="itemCardContainer">
+			<div key={uniqid()} className="itemCardContainer">
 				<ItemCard
 					key={uniqid()}
 					index={index}
@@ -14,7 +13,10 @@ const Shop = (props) => {
 					onChangeQty={(e) => props.onChangeQty(e)}
 					inCart={false}
 				/>
-				<button onClick={() => props.addToCart(element, index)}>
+				<button
+					className="addToCartButton"
+					onClick={() => props.addToCart(element, index)}
+				>
 					Add to Cart
 				</button>
 			</div>

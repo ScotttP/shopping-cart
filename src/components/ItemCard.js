@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 const ItemCard = (props) => {
-	useEffect(() => {
-		console.log("useEffect");
-	}, [props.data.quantity]);
 	return (
 		<div className="itemCard">
 			<h3>{props.data.name}</h3>
-			<img src={props.data.image} alt={props.data.name}></img>
+			<img
+				className="productImages"
+				src={props.data.image}
+				alt={props.data.name}
+			></img>
 			<p>
 				{new Intl.NumberFormat("en-US", {
 					style: "currency",
