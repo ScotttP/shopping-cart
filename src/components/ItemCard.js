@@ -8,7 +8,7 @@ const ItemCard = (props) => {
 					className="addToCartButton"
 					onClick={() => props.addToCart(props.data, props.index)}
 				>
-					Add to Cart
+					+ Add to Cart
 				</button>
 			);
 		} else
@@ -17,7 +17,7 @@ const ItemCard = (props) => {
 					className="deleteFromCartButton"
 					onClick={() => props.deleteFromCart(props.index)}
 				>
-					Remove
+					- Remove
 				</button>
 			);
 	};
@@ -45,7 +45,7 @@ const ItemCard = (props) => {
 				>
 					-
 				</button>
-				<p>{props.data.quantity}</p>
+				<p className="displayQty">{props.data.quantity}</p>
 				<button
 					className="increaseQty"
 					data-index={props.index}

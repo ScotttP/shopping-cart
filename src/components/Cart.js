@@ -4,18 +4,21 @@ import ItemCard from "./ItemCard";
 
 const Cart = (props) => {
 	const cartRendering = () => {
-		return props.cartItems.map((element, index) => (
-			<div className="itemCardContainer" key={uniqid()}>
-				<ItemCard
-					key={uniqid()}
-					index={index}
-					data={element}
-					onChangeQty={(e) => props.onChangeQty(e)}
-					inCart={true}
-					deleteFromCart={() => props.deleteFromCart(element, index)}
-				/>
-			</div>
-		));
+		if (props.cartItems.length === 0) {
+			return <h1>Your Cart is Empty</h1>;
+		} else
+			return props.cartItems.map((element, index) => (
+				<div className="itemCardContainer" key={uniqid()}>
+					<ItemCard
+						key={uniqid()}
+						index={index}
+						data={element}
+						onChangeQty={(e) => props.onChangeQty(e)}
+						inCart={true}
+						deleteFromCart={() => props.deleteFromCart(element, index)}
+					/>
+				</div>
+			));
 	};
 
 	const sumOrder = () => {
@@ -40,8 +43,8 @@ const Cart = (props) => {
 				<h3>Order Summary</h3>
 				<p>Order Quantity: {props.sumQty()}</p>
 				<p>Order Total: {sumOrder()} </p>
+				<button>Checkout</button>
 			</div>
-			<button>Checkout</button>
 		</div>
 	);
 };

@@ -49,12 +49,14 @@ const App = () => {
 	};
 
 	const resetQty = (index) => {
+		//this just resets the quantity of the item that was added to the cart. for instance, when you add something to the cart, and then go to your cart and press back, the quantity will be at zero.
 		let copyItemListArray = JSON.parse(JSON.stringify(item));
 		copyItemListArray[index].quantity = 0;
 		setItem(copyItemListArray);
 	};
 
 	function sumQty() {
+		//this adds the number of items in the cart to the navbar. as well as adds total quantity in cart component
 		if (cartItems.length === 0) return 0;
 		else {
 			let array = cartItems.map((item) => item.quantity);
