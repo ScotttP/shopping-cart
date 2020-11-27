@@ -18,6 +18,11 @@ const App = () => {
 			resetQty(index);
 		}
 	};
+	const deleteFromCart = (index) => {
+		let copyItemListArray = JSON.parse(JSON.stringify(cartItems));
+		copyItemListArray.splice(index, 1);
+		setCartItems(copyItemListArray);
+	};
 
 	const changeQty = (e) => {
 		let isInCart = JSON.parse(e.target.getAttribute("data-incart"));
@@ -67,7 +72,12 @@ const App = () => {
 					<Shop addToCart={addToCart} onChangeQty={changeQty} items={item} />
 				</Route>
 				<Route exact path="/shopping-cart/cart">
-					<Cart cartItems={cartItems} onChangeQty={changeQty} sumQty={sumQty} />
+					<Cart
+						deleteFromCart={deleteFromCart}
+						cartItems={cartItems}
+						onChangeQty={changeQty}
+						sumQty={sumQty}
+					/>
 				</Route>
 			</Switch>
 		</BrowserRouter>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import uniqid from "uniqid";
 import ItemCard from "./ItemCard";
 
@@ -12,13 +12,8 @@ const Shop = (props) => {
 					data={element}
 					onChangeQty={(e) => props.onChangeQty(e)}
 					inCart={false}
+					addToCart={() => props.addToCart(element, index)}
 				/>
-				<button
-					className="addToCartButton"
-					onClick={() => props.addToCart(element, index)}
-				>
-					Add to Cart
-				</button>
 			</div>
 		));
 	};

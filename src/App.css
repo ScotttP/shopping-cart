@@ -60,7 +60,7 @@ span {
 	justify-content: center;
 	align-items: center;
 	border-radius: 25px;
-	margin: 2%;
+	margin-bottom: 25px;
 	height: 100%;
 	box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 5px 8px 0 rgba(0, 0, 0, 0.14),
 		0 1px 14px 0 rgba(0, 0, 0, 0.12);
@@ -176,21 +176,20 @@ span {
 }
 
 .productImages {
-	width: 30vw;
-	height: 30vh;
-	max-width: 350px;
-	min-height: 330px;
+	max-width: 100%;
+	height: auto;
+	max-height: 400px;
 }
 
 #itemCardGridContainer {
 	display: grid;
 	flex-wrap: wrap;
 	grid-template-columns: 32% 32% 32%;
-	grid-template-rows: repeat(4, minmax(20%, 1fr));
+	grid-template-rows: repeat(5, minmax(20%, 1fr));
 	column-gap: 2%;
 	row-gap: 1%;
-	margin: 2%;
 	min-height: 100%;
+	margin: 2%;
 }
 
 @media only screen and (max-width: 800px) {
@@ -238,8 +237,18 @@ span {
 		width: 10em;
 	}
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 650px) {
 	#itemCardGridContainer {
-		grid-template-columns: 50% 50%;
+		grid-template-columns: 49% 49%;
+		grid-template-rows: repeat(5, minmax(13%, 1fr));
+	}
+}
+@media only screen and (max-width: 650px) {
+	#itemCardGridContainer {
+		grid-template-columns: 100%;
+		grid-template-rows: repeat(5, minmax(7%, 1fr));
+		column-gap: 1%;
+		row-gap: 30px;
+		margin: 5%;
 	}
 }

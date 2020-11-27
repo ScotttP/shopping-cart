@@ -12,6 +12,7 @@ const Cart = (props) => {
 					data={element}
 					onChangeQty={(e) => props.onChangeQty(e)}
 					inCart={true}
+					deleteFromCart={() => props.deleteFromCart(element, index)}
 				/>
 			</div>
 		));

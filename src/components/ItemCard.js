@@ -1,6 +1,27 @@
 import React from "react";
 
 const ItemCard = (props) => {
+	const buttonRender = () => {
+		if (props.inCart === false) {
+			return (
+				<button
+					className="addToCartButton"
+					onClick={() => props.addToCart(props.data, props.index)}
+				>
+					Add to Cart
+				</button>
+			);
+		} else
+			return (
+				<button
+					className="deleteFromCartButton"
+					onClick={() => props.deleteFromCart(props.index)}
+				>
+					Remove
+				</button>
+			);
+	};
+
 	return (
 		<div className="itemCard">
 			<h3>{props.data.name}</h3>
@@ -34,6 +55,7 @@ const ItemCard = (props) => {
 					+
 				</button>
 			</div>
+			{buttonRender()}
 		</div>
 	);
 };
