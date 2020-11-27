@@ -23,7 +23,7 @@ const Shop = (props) => {
 		));
 	};
 
-	return <div>{shopRendering()}</div>;
+	return <div id="itemCardGridContainer">{shopRendering()}</div>;
 };
 
 export default Shop;
