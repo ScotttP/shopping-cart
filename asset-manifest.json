@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/shopping-cart/static/css/main.9159512e.chunk.css",
+    "main.js": "/shopping-cart/static/js/main.0aa9de13.chunk.js",
+    "main.js.map": "/shopping-cart/static/js/main.0aa9de13.chunk.js.map",
+    "runtime-main.js": "/shopping-cart/static/js/runtime-main.64cac64e.js",
+    "runtime-main.js.map": "/shopping-cart/static/js/runtime-main.64cac64e.js.map",
+    "static/js/2.ecddcbed.chunk.js": "/shopping-cart/static/js/2.ecddcbed.chunk.js",
+    "static/js/2.ecddcbed.chunk.js.map": "/shopping-cart/static/js/2.ecddcbed.chunk.js.map",
+    "static/js/3.4dec18d1.chunk.js": "/shopping-cart/static/js/3.4dec18d1.chunk.js",
+    "static/js/3.4dec18d1.chunk.js.map": "/shopping-cart/static/js/3.4dec18d1.chunk.js.map",
+    "index.html": "/shopping-cart/index.html",
+    "static/css/main.9159512e.chunk.css.map": "/shopping-cart/static/css/main.9159512e.chunk.css.map",
+    "static/js/2.ecddcbed.chunk.js.LICENSE.txt": "/shopping-cart/static/js/2.ecddcbed.chunk.js.LICENSE.txt",
+    "static/media/golf-bag.5728cc73.svg": "/shopping-cart/static/media/golf-bag.5728cc73.svg",
+    "static/media/taylorMadeLogo.fc667c78.png": "/shopping-cart/static/media/taylorMadeLogo.fc667c78.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.64cac64e.js",
+    "static/js/2.ecddcbed.chunk.js",
+    "static/css/main.9159512e.chunk.css",
+    "static/js/main.0aa9de13.chunk.js"
+  ]
+}
