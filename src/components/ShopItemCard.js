@@ -1,32 +1,11 @@
 import React from "react";
 
-const ItemCard = (props) => {
-	const buttonRender = () => {
-		if (props.inCart === false) {
-			return (
-				<button
-					className="addToCartButton"
-					onClick={() => props.addToCart(props.data, props.index)}
-				>
-					+ Add to Cart
-				</button>
-			);
-		} else
-			return (
-				<button
-					className="deleteFromCartButton"
-					onClick={() => props.deleteFromCart(props.index)}
-				>
-					- Remove
-				</button>
-			);
-	};
-
+const ShopItemCard = (props) => {
 	return (
-		<div className="itemCard">
+		<div className="shopItemCard">
 			<h3>{props.data.name}</h3>
 			<img
-				className="productImages"
+				className="productImagesInShop"
 				src={props.data.image}
 				alt={props.data.name}
 			></img>
@@ -55,9 +34,14 @@ const ItemCard = (props) => {
 					+
 				</button>
 			</div>
-			{buttonRender()}
+			<button
+				className="addToCartButton"
+				onClick={() => props.addToCart(props.data, props.index)}
+			>
+				+ Add to Cart
+			</button>
 		</div>
 	);
 };
 
-export default ItemCard;
+export default ShopItemCard;
