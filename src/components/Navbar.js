@@ -5,7 +5,7 @@ import golfBag from "../components/golf-bag.svg";
 
 const Navbar = (props) => {
 	return (
-		<div id="navBarContainer">
+		<header id="navBarContainer">
 			<div id="navBarList">
 				<p id="homepage">
 					<Link to="">
@@ -38,7 +38,7 @@ const Navbar = (props) => {
 					</p>
 				</div>
 			</div>
-		</div>
+		</header>
 	);
 };
 
