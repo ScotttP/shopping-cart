@@ -1,11 +1,13 @@
 import "./App.css";
-import React, { useState } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+
 import Home from "./components/Home";
 import Shop from "./components/Shop";
 import Cart from "./components/Cart";
 import Navbar from "./components/Navbar";
 import itemList from "./components/itemList";
+import CheckoutComplete from "./components/CheckoutComplete";
 
 const App = () => {
 	const [cartItems, setCartItems] = useState([]);
@@ -22,6 +24,10 @@ const App = () => {
 		let copyItemListArray = JSON.parse(JSON.stringify(cartItems));
 		copyItemListArray.splice(index, 1);
 		setCartItems(copyItemListArray);
+	};
+	const clearCart = () => {
+		const reset = [];
+		setCartItems(reset);
 	};
 
 	const changeQty = (e) => {
@@ -79,8 +85,14 @@ const App = () => {
 						cartItems={cartItems}
 						onChangeQty={changeQty}
 						sumQty={sumQty}
+						clearCart={() => clearCart}
 					/>
 				</Route>
+				<Route
+					exact
+					path="/shopping-cart/checkout-complete"
+					component={CheckoutComplete}
+				></Route>
 			</Switch>
 		</BrowserRouter>
 	);

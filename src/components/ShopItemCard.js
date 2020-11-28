@@ -4,6 +4,7 @@ const ShopItemCard = (props) => {
 	return (
 		<div className="shopItemCard">
 			<h3>{props.data.name}</h3>
+
 			<img
 				className="productImagesInShop"
 				src={props.data.image}

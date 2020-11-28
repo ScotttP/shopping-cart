@@ -9,9 +9,9 @@ const Cart = (props) => {
 			return (
 				<div id="emptyCartContainer">
 					<h1 id="yourCartIsEmpty">Your Cart Is Empty</h1>
-					<a id="startShoppingElement">
+					<div id="goToShopElement">
 						<Link to="/shopping-cart/shop">Start Shopping</Link>
-					</a>
+					</div>
 				</div>
 			);
 		} else
@@ -34,7 +34,7 @@ const Cart = (props) => {
 		if (props.cartItems.length === 0) return `$0.00`;
 		else {
 			props.cartItems.map((item) => {
-				totalsArray.push(item.quantity * item.price);
+				return totalsArray.push(item.quantity * item.price);
 			});
 			let cost = totalsArray.reduce((acc, curr) => acc + curr);
 			return new Intl.NumberFormat("en-US", {
@@ -43,6 +43,18 @@ const Cart = (props) => {
 			}).format(cost);
 		}
 	};
+	const buttonRender = () => {
+		console.log("buttonRender");
+		if (props.cartItems.length <= 0) return;
+		else
+			return (
+				<Link to="/shopping-cart/checkout-complete">
+					<button onClick={props.clearCart()} id="checkoutButton">
+						CHECKOUT
+					</button>
+				</Link>
+			);
+	};
 
 	return (
 		<div id="cartContainer">
@@ -50,7 +62,7 @@ const Cart = (props) => {
 				<h3>Order Summary</h3>
 				<p>Order Quantity: {props.sumQty()}</p>
 				<p>Order Total: {sumOrder()} </p>
-				<button id="checkoutButton">CHECKOUT</button>
+				{buttonRender()}
 			</div>
 			{cartRendering()}
 		</div>

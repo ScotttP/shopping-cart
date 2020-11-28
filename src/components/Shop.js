@@ -1,8 +1,16 @@
 import React from "react";
 import uniqid from "uniqid";
 import ShopItemCard from "./ShopItemCard";
+import { useEffect } from "react";
 
 const Shop = (props) => {
+	const CustomHook = () => {
+		useEffect(() => {
+			console.log("useEffect in custom hook");
+		}, []);
+		// return shopRendering();
+	};
+
 	const shopRendering = () => {
 		return props.items.map((element, index) => (
 			<div key={uniqid()} className="itemCardContainer">

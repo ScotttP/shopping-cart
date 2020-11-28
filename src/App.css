@@ -56,6 +56,9 @@ span {
 .increaseOrDecreaseQtyContainer > button {
 	background-color: rgb(233, 238, 240);
 }
+.increaseOrDecreaseQtyContainer > button:hover {
+	background: rgb(213, 219, 221);
+}
 .increaseQty,
 .decreaseQty,
 .displayQty {
@@ -191,11 +194,15 @@ span {
 #taylorMadeLogo {
 	width: 150px;
 	height: 35px;
+	max-width: 100%;
+	height: auto;
 }
 
 #golfBagLogo {
 	width: 35px;
 	height: 35px;
+	max-width: 100%;
+	height: auto;
 }
 #golfBagLink {
 	height: 55px;
@@ -307,7 +314,8 @@ span {
 #totalsContainer * {
 	margin: 10px;
 }
-#yourCartIsEmpty {
+#yourCartIsEmpty,
+#thankYouForYourOrder {
 	margin: 2%;
 	text-align: center;
 }
@@ -323,23 +331,28 @@ span {
 #checkoutButton:hover {
 	background: #12ac01;
 }
-#emptyCartContainer {
+#emptyCartContainer,
+#checkoutComplete {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
-#startShoppingElement:hover {
+#goToShopElement:hover {
 	text-decoration: underline;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 718px) {
 	#startShoppingLink {
 		left: 40%;
 		top: 25%;
 	}
 	#home {
 		background-position-x: 17%;
+	}
+	#startShoppingButton {
+		height: 4.5em;
+		width: 10em;
 	}
 }
 @media only screen and (max-width: 350px) {
@@ -369,15 +382,7 @@ span {
 		width: 23px;
 	}
 }
-@media only screen and (max-width: 300px) {
-}
 
-@media only screen and (max-width: 800px) {
-	#startShoppingButton {
-		height: 4.5em;
-		width: 10em;
-	}
-}
 @media only screen and (max-width: 650px) {
 	#itemCardGridContainer {
 		grid-template-columns: 49% 49%;
