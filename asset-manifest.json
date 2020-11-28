@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/shopping-cart/static/css/main.c2b403bb.chunk.css",
-    "main.js": "/shopping-cart/static/js/main.16b8f184.chunk.js",
-    "main.js.map": "/shopping-cart/static/js/main.16b8f184.chunk.js.map",
+    "main.css": "/shopping-cart/static/css/main.c57b997b.chunk.css",
+    "main.js": "/shopping-cart/static/js/main.71f6a1ef.chunk.js",
+    "main.js.map": "/shopping-cart/static/js/main.71f6a1ef.chunk.js.map",
     "runtime-main.js": "/shopping-cart/static/js/runtime-main.64cac64e.js",
     "runtime-main.js.map": "/shopping-cart/static/js/runtime-main.64cac64e.js.map",
     "static/js/2.f50d73d4.chunk.js": "/shopping-cart/static/js/2.f50d73d4.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.4dec18d1.chunk.js": "/shopping-cart/static/js/3.4dec18d1.chunk.js",
     "static/js/3.4dec18d1.chunk.js.map": "/shopping-cart/static/js/3.4dec18d1.chunk.js.map",
     "index.html": "/shopping-cart/index.html",
-    "static/css/main.c2b403bb.chunk.css.map": "/shopping-cart/static/css/main.c2b403bb.chunk.css.map",
+    "static/css/main.c57b997b.chunk.css.map": "/shopping-cart/static/css/main.c57b997b.chunk.css.map",
     "static/js/2.f50d73d4.chunk.js.LICENSE.txt": "/shopping-cart/static/js/2.f50d73d4.chunk.js.LICENSE.txt",
     "static/media/golf-bag.5728cc73.svg": "/shopping-cart/static/media/golf-bag.5728cc73.svg",
     "static/media/taylorMadeLogo.fc667c78.png": "/shopping-cart/static/media/taylorMadeLogo.fc667c78.png"
@@ -18,7 +18,7 @@
   "entrypoints": [
     "static/js/runtime-main.64cac64e.js",
     "static/js/2.f50d73d4.chunk.js",
-    "static/css/main.c2b403bb.chunk.css",
-    "static/js/main.16b8f184.chunk.js"
+    "static/css/main.c57b997b.chunk.css",
+    "static/js/main.71f6a1ef.chunk.js"
   ]
 }
