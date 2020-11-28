@@ -1,6 +1,6 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home";
 import Shop from "./components/Shop";
@@ -71,15 +71,15 @@ const App = () => {
 	}
 
 	return (
-		<BrowserRouter>
+		<Router basename={process.env.PUBLIC_URL + "/"}>
 			<Navbar cartItems={cartItems} sumQty={sumQty} />
 			<Switch>
-				<Route exact path="/shopping-cart" component={Home} />
+				<Route exact path="/" component={Home} />
 
-				<Route exact path="/shopping-cart/shop">
+				<Route exact path="/shop">
 					<Shop addToCart={addToCart} onChangeQty={changeQty} items={item} />
 				</Route>
-				<Route exact path="/shopping-cart/cart">
+				<Route exact path="/cart">
 					<Cart
 						deleteFromCart={deleteFromCart}
 						cartItems={cartItems}
@@ -90,11 +90,11 @@ const App = () => {
 				</Route>
 				<Route
 					exact
-					path="/shopping-cart/checkout-complete"
+					path="/checkout-complete"
 					component={CheckoutComplete}
 				></Route>
 			</Switch>
-		</BrowserRouter>
+		</Router>
 	);
 };
 

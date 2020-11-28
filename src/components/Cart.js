@@ -10,7 +10,7 @@ const Cart = (props) => {
 				<div id="emptyCartContainer">
 					<h1 id="yourCartIsEmpty">Your Cart Is Empty</h1>
 					<div id="goToShopElement">
-						<Link to="/shopping-cart/shop">Start Shopping</Link>
+						<Link to="/shop">Start Shopping</Link>
 					</div>
 				</div>
 			);
@@ -44,11 +44,10 @@ const Cart = (props) => {
 		}
 	};
 	const buttonRender = () => {
-		console.log("buttonRender");
 		if (props.cartItems.length <= 0) return;
 		else
 			return (
-				<Link to="/shopping-cart/checkout-complete">
+				<Link to="/checkout-complete">
 					<button onClick={props.clearCart()} id="checkoutButton">
 						CHECKOUT
 					</button>

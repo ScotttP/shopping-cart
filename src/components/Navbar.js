@@ -6,26 +6,38 @@ import golfBag from "../components/golf-bag.svg";
 const Navbar = (props) => {
 	return (
 		<div id="navBarContainer">
-			<ul id="navBarList">
-				<li id="homepage">
-					<Link to="/shopping-cart">
-						<img id="taylorMadeLogo" src={Logo} alt="logo"></img>
+			<div id="navBarList">
+				<p id="homepage">
+					<Link to="">
+						<img
+							id="taylorMadeLogo"
+							src={Logo}
+							alt="logo"
+							width="150"
+							height="41.5"
+						></img>
 					</Link>
-				</li>
+				</p>
 				<div id="navBarRight">
-					<li id="shopElement">
-						<Link to="/shopping-cart/shop">Shop</Link>
-					</li>
-					<li id="shoppingCartElement">
-						<Link to="/shopping-cart/cart">
+					<p id="shopElement">
+						<Link to="/shop">Shop</Link>
+					</p>
+					<p id="shoppingCartElement">
+						<Link to="/cart">
 							<span id="inShoppingCartCount">{props.sumQty()} </span>
 							<span id="golfBagLink">
-								<img id="golfBagLogo" src={golfBag} alt="Shopping Cart"></img>
+								<img
+									id="golfBagLogo"
+									src={golfBag}
+									alt="Shopping Cart"
+									width="35"
+									height="35"
+								></img>
 							</span>
 						</Link>
-					</li>
+					</p>
 				</div>
-			</ul>
+			</div>
 		</div>
 	);
 };
