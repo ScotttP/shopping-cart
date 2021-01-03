@@ -13,4 +13,14 @@ Technologies:
 - React
 - React-Router
 
+## Homepage
+
 ![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-homepage.png?raw=true)
+
+## Shopping Page
+
+![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-shop.png?raw=true)
+
+## Cart Page
+
+![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-cart.png?raw=true)
