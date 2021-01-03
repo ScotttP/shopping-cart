@@ -12,3 +12,5 @@ Technologies:
 - CSS
 - React
 - React-Router
+
+![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-homepage.png?raw=true)
