@@ -19,9 +19,13 @@ const Navbar = (props) => {
 					</Link>
 				</p>
 				<div id="navBarRight">
+					<p id="accountElement">
+						<Link to="/">Account</Link>
+					</p>
 					<p id="shopElement">
 						<Link to="/shop">Shop</Link>
 					</p>
+
 					<p id="shoppingCartElement">
 						<Link to="/cart">
 							<span id="inShoppingCartCount">{props.sumQty()} </span>

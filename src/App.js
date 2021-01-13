@@ -8,6 +8,7 @@ import Cart from "./components/Cart";
 import Navbar from "./components/Navbar";
 import itemList from "./components/itemList";
 import CheckoutComplete from "./components/CheckoutComplete";
+import ItemDetails from "./components/ItemDetails";
 
 const App = () => {
 	const [cartItems, setCartItems] = useState([]);
@@ -93,6 +94,9 @@ const App = () => {
 					path="/checkout-complete"
 					component={CheckoutComplete}
 				></Route>
+				<Route exact path="/shop/:product">
+					<ItemDetails items={item}></ItemDetails>
+				</Route>
 			</Switch>
 		</Router>
 	);
