@@ -133,6 +133,10 @@ span {
 	align-items: center;
 }
 
+.shopItemCard:hover {
+	cursor: pointer;
+}
+
 .shopItemCard * {
 	padding: 2%;
 }
