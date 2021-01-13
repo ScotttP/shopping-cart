@@ -1,8 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+@import url("//db.onlinewebfonts.com/c/9d097da6a9a781eb3dbfd8fe6cab0066?family=DINNextW01-CondensedRegular");
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: "DINNextW01-CondensedRegular", "Montserrat";
 }
 body,
 html {
@@ -12,7 +15,7 @@ html {
 	padding: 0px;
 }
 button {
-	font-family: "Montserrat", sans-serif;
+	font-family: "DINNextW01-CondensedRegular", sans-serif;
 	font-weight: bold;
 }
 button:hover {
@@ -39,6 +42,7 @@ button:hover {
 	display: flex;
 	align-items: center;
 	min-height: 80px;
+	font-size: 1.3em;
 }
 a {
 	text-decoration: none;
@@ -139,15 +143,23 @@ span {
 
 #home {
 	width: 100%;
-	height: 90vh;
-	background-image: url(https://images.unsplash.com/photo-1562204320-a243f073adf2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80);
+	height: 65vh;
+	background-image: url(./images/bg-loyalty-desktop.jpg);
 	background-repeat: no-repeat;
 	background-position-x: 10%;
-	background-position-y: 30%;
+	background-position-y: 70%;
 	background-size: cover;
+	position: relative;
 	display: flex;
-	align-items: center;
 	justify-content: center;
+	align-items: flex-end;
+}
+
+#homepageText {
+	position: absolute;
+	color: #fff;
+	bottom: 40%;
+	left: 7%;
 }
 #startShoppingLink {
 	position: absolute;
@@ -155,41 +167,151 @@ span {
 	left: 75%;
 }
 
-#startShoppingButton {
-	height: 5em;
-	width: 11em;
-	border-radius: 10px;
-	border: 2px solid rgb(166, 175, 179);
-	background-color: rgb(233, 238, 240);
-	color: black;
-	font-size: 15px;
-	cursor: pointer;
+#informationContainer {
+	height: 60vh;
+	display: flex;
+	background-color: #f0ebeb;
 }
-#startShoppingButton span {
-	cursor: pointer;
-	display: inline;
-	position: relative;
-	transition: 0.5s;
-	font-size: 15px;
-}
-#startShoppingButton:hover span {
-	padding-right: 25px;
-}
-#startShoppingButton span:after {
-	content: "\00bb";
-	position: absolute;
-	top: 0.5;
 
-	opacity: 0;
-	right: 8px;
-	transition: 0.5s;
+#textInnerDiv {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 12%;
 }
-#startShoppingButton:hover span:after {
-	opacity: 1;
+
+#textInnerDiv > p {
+	margin-top: 30px;
+	font-size: 1.2em;
 }
+
+#buttonContainer {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+
+	background-color: #fff;
+}
+
+#buttonContainer > a {
+	height: 16vh;
+
+	width: 25%;
+	margin: 3% 5% 3% 5%;
+	transition: 0.3s;
+}
+
+#buttonContiainer > span {
+	position: absolute;
+	top: 70%;
+}
+
+#buttonContainer > a:hover {
+	cursor: pointer;
+	opacity: 50%;
+}
+
+#footer {
+	height: 10vh;
+	background: #191919;
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 0 100px 0 100px;
+}
+
+#footer > label {
+	display: flex;
+	align-items: center;
+}
+#followUsDiv {
+	text-align: center;
+}
+
+#followUsDiv > img {
+	margin: 10px;
+}
+
+#emailSignUpForm {
+	margin-left: 20px;
+	width: 200px;
+	height: 2rem;
+	border: none;
+	padding: 10px;
+	line-height: 1.2em;
+}
+
+#sendEmailSignUpButton {
+	width: 50px;
+	border: none;
+	height: 2rem;
+	font-size: 1.1em;
+	background: rgb(182, 181, 181);
+}
+
+#linkToDrivers,
+#linkToIrons,
+#linkToPutters {
+	background-size: cover;
+	background-position: 50%;
+	position: relative;
+	background-repeat: none;
+	color: #fff;
+	font-weight: 600;
+	font-size: 1.5rem;
+}
+
+#linkToDrivers {
+	background-image: url(./images/cat-drivers.jpg);
+}
+
+#linkToDrivers > span,
+#linkToIrons > span,
+#linkToPutters > span {
+	position: absolute;
+	top: 55%;
+}
+
+#linkToIrons {
+	background-position-y: -3px;
+	background-image: url(./images/cat-irons.jpg);
+}
+
+#linkToPutters {
+	background-image: url(./images/cat-putters.jpg);
+}
+
+#startShoppingButton {
+	height: 2em;
+	width: 9em;
+	margin-top: 15px;
+
+	border: none;
+	background: #fff;
+	color: #333;
+	font-size: 1.2rem;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+#startShoppingButton:hover {
+	cursor: pointer;
+	background: rgb(216, 214, 214);
+}
+
+#sloganHeader {
+	font-size: 700;
+}
+
+#clubsImage {
+	width: 50%;
+	height: auto;
+}
+
 #root {
-	font-family: "Montserrat", sans-serif;
-	font-size: 1em;
 	height: 100%;
 }
 #taylorMadeLogo {
@@ -225,11 +347,20 @@ span {
 	align-items: center;
 	margin-right: 20px;
 	height: 100%;
+	border-bottom: solid 3px rgb(233, 238, 240);
 }
+
 #shopElement {
 	height: 100%;
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	border-bottom: solid 3px rgb(233, 238, 240);
+	width: 40%;
+}
+#shopElement:hover {
+	background: rgb(216, 214, 214);
+	border-bottom: solid 3px rgb(11, 23, 56);
 }
 #homepage {
 	height: 100%;
