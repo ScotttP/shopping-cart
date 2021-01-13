@@ -3,20 +3,19 @@ import React from "react";
 const ShopItemCard = (props) => {
 	return (
 		<div className="shopItemCard">
-			<h3>{props.data.name}</h3>
-
 			<img
 				className="productImagesInShop"
 				src={props.data.image}
 				alt={props.data.name}
 			></img>
+			<h3>{props.data.name}</h3>
 			<p>
 				{new Intl.NumberFormat("en-US", {
 					style: "currency",
 					currency: "USD",
 				}).format(props.data.price)}
 			</p>
-			<div className="increaseOrDecreaseQtyContainer">
+			{/* <div className="increaseOrDecreaseQtyContainer">
 				<button
 					className="decreaseQty"
 					data-index={props.index}
@@ -40,7 +39,7 @@ const ShopItemCard = (props) => {
 				onClick={() => props.addToCart(props.data, props.index)}
 			>
 				+ Add to Cart
-			</button>
+			</button> */}
 		</div>
 	);
 };

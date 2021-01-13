@@ -330,6 +330,9 @@ span {
 #golfBagLink {
 	height: 55px;
 }
+/* #shopContainer {
+	height: 00vh;
+} */
 #inShoppingCartCount {
 	display: flex;
 	align-items: center;
@@ -392,6 +395,31 @@ span {
 	row-gap: 1%;
 	min-height: 100%;
 	margin: 2%;
+}
+#filterContainer {
+	background-color: #c0bcbc;
+	height: 12vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#filterContainer > button {
+	height: 2em;
+	width: 9em;
+	margin-top: 15px;
+	border: 2px solid #fff;
+	background: #fff;
+	color: #333;
+	font-size: 1.2rem;
+	cursor: pointer;
+	transition: 0.3s;
+	margin: 2%;
+}
+
+#filterContainer > button:hover {
+	border: 2px solid #333;
 }
 #cartContainer {
 	display: flex;
