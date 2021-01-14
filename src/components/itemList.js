@@ -64,38 +64,6 @@ const itemList = [
 		quantity: 0,
 	},
 	{
-		name: "MG2 Tiger Woods Grind Wedge",
-		category: "Wedge",
-		image:
-			"https://www.taylormadegolf.com/on/demandware.static/-/Sites-tmag-master-catalog/en_US/v1606381498114/zoom/N69730_zoom_D.jpg",
-		price: 200,
-		quantity: 0,
-	},
-	{
-		name: "Milled Grind 2 Wedge",
-		category: "Wedge",
-		image:
-			"https://www.taylormadegolf.com/on/demandware.static/-/Sites-tmag-master-catalog/en_US/v1606381498114/zoom/AL455_zoom_D.jpg",
-		price: 170,
-		quantity: 0,
-	},
-	{
-		name: "MG1 Milled Grind Wedge",
-		category: "Wedge",
-		image:
-			"https://www.taylormadegolf.com/on/demandware.static/-/Sites-tmag-master-catalog/en_US/v1606381498114/zoom/TA154_zoom_D.jpg",
-		price: 110,
-		quantity: 0,
-	},
-	{
-		name: "SIM Max OS Wedge",
-		category: "Wedge",
-		image:
-			"https://www.taylormadegolf.com/on/demandware.static/-/Sites-tmag-master-catalog/en_US/v1606381498114/vault/SIM_MAX_OS_WEDGE_1.jpg",
-		price: 113,
-		quantity: 0,
-	},
-	{
 		name: "Spider S Chalk",
 		category: "Putter",
 		image:
@@ -117,6 +85,14 @@ const itemList = [
 		image:
 			"https://www.taylormadegolf.com/on/demandware.static/-/Sites-tmag-master-catalog/en_US/v1606381498114/zoom/JIC84_zoom_D.jpg",
 		price: 300,
+		quantity: 0,
+	},
+	{
+		name: "TP Patina Collection Ardmore 1",
+		category: "Putter",
+		image:
+			"https://www.taylormadegolf.com/on/demandware.static/-/Sites-tmag-master-catalog/en_US/v1610573854968/zoom/JIC77_zoom_D.jpg",
+		price: 250,
 		quantity: 0,
 	},
 ];

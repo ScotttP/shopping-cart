@@ -22,6 +22,8 @@ const Home = () => {
 				<Link to="/shop" id="linkToIrons">
 					<span>Irons</span>
 				</Link>
+
+				{/* ****** NEED TO ADD WEDGE BUTTON ******** */}
 				<Link to="/shop" id="linkToPutters">
 					<span>Putters</span>
 				</Link>

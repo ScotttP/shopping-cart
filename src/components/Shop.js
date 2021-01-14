@@ -5,21 +5,17 @@ import ShopItemCard from "./ShopItemCard";
 import facebook from "../Icons/icons8-facebook.svg";
 import instagram from "../Icons/icons8-instagram.svg";
 import twitter from "../Icons/icons8-twitter-24.png";
-import { render } from "@testing-library/react";
-import ItemDetails from "./ItemDetails";
 
 const Shop = (props) => {
 	const [filteredArray, setFilteredArray] = useState([]);
 	const shopRendering = () => {
 		return filteredArray.map((element, index) => (
-			<Link to={`/shop/${element.name}`}>
+			<Link key={uniqid()} to={`/shop/${element.name}`}>
 				<div key={uniqid()} className="itemCardContainer">
 					<ShopItemCard
 						key={uniqid()}
 						index={index}
 						data={element}
-						onChangeQty={(e) => props.onChangeQty(e)}
-						inCart={false}
 						addToCart={() => props.addToCart(element, index)}
 					/>
 				</div>
@@ -39,12 +35,6 @@ const Shop = (props) => {
 			return setFilteredArray(
 				props.items.filter((todo) => {
 					return todo.category === "Iron";
-				})
-			);
-		} else if (e.target.id === "viewWedgesButton") {
-			return setFilteredArray(
-				props.items.filter((todo) => {
-					return todo.category === "Wedge";
 				})
 			);
 		} else {
@@ -72,9 +62,7 @@ const Shop = (props) => {
 				<button onClick={(e) => handleFilter(e)} id="viewIronsButton">
 					Irons
 				</button>
-				<button onClick={(e) => handleFilter(e)} id="viewWedgesButton">
-					Wedges
-				</button>
+
 				<button onClick={(e) => handleFilter(e)} id="viewPuttersButton">
 					Putters
 				</button>

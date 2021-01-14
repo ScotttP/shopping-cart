@@ -134,6 +134,7 @@ span {
 
 .itemCardContainer:hover {
 	cursor: pointer;
+
 	border: 1px solid rgb(11, 23, 56);
 }
 
@@ -223,7 +224,7 @@ span {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
+	margin-top: 10vh;
 	padding: 0 100px 0 100px;
 }
 
