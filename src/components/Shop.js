@@ -7,7 +7,8 @@ import instagram from "../Icons/icons8-instagram.svg";
 import twitter from "../Icons/icons8-twitter-24.png";
 
 const Shop = (props) => {
-	const [filteredArray, setFilteredArray] = useState([]);
+	const [filteredArray, setFilteredArray] = useState([{}]);
+
 	const shopRendering = () => {
 		return filteredArray.map((element, index) => (
 			<Link key={uniqid()} to={`/shop/${element.name}`}>
@@ -22,33 +23,34 @@ const Shop = (props) => {
 			</Link>
 		));
 	};
+
+	useEffect(() => {
+		setFilteredArray(props.productList);
+	}, [props.productList]);
+
 	const handleFilter = (e) => {
 		if (e.target.id === "viewAllClubsButton") {
-			setFilteredArray(props.items);
+			setFilteredArray(props.productList);
 		} else if (e.target.id === "viewDriversButton") {
 			return setFilteredArray(
-				props.items.filter((todo) => {
+				props.productList.filter((todo) => {
 					return todo.category === "Driver";
 				})
 			);
 		} else if (e.target.id === "viewIronsButton") {
 			return setFilteredArray(
-				props.items.filter((todo) => {
+				props.productList.filter((todo) => {
 					return todo.category === "Iron";
 				})
 			);
 		} else {
 			return setFilteredArray(
-				props.items.filter((todo) => {
+				props.productList.filter((todo) => {
 					return todo.category === "Putter";
 				})
 			);
 		}
 	};
-
-	useEffect(() => {
-		setFilteredArray(props.items);
-	}, [props.items]);
 
 	return (
 		<div id="shopContainer">

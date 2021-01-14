@@ -4,6 +4,11 @@ import Logo from "../components/taylorMadeLogo.png";
 import golfBag from "../components/golf-bag.svg";
 
 const Navbar = (props) => {
+	const LoginAndAccountRender = () => {
+		if (props.currentUser) return <Link to="/Account">Account</Link>;
+		else return <Link to="/Login">Login</Link>;
+	};
+
 	return (
 		<header id="navBarContainer">
 			<div id="navBarList">
@@ -19,9 +24,7 @@ const Navbar = (props) => {
 					</Link>
 				</p>
 				<div id="navBarRight">
-					<p id="accountElement">
-						<Link to="/">Account</Link>
-					</p>
+					<p id="accountElement">{LoginAndAccountRender()}</p>
 					<p id="shopElement">
 						<Link to="/shop">Shop</Link>
 					</p>
