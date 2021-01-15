@@ -113,19 +113,6 @@ const App = () => {
 		});
 	};
 
-	const updateUserAccount = async () => {
-		await usersRef.doc(currentUser.uid).update({
-			firstName: signUpFirstName,
-			lastName: signUpLastName,
-			email: signUpEmail,
-			password: "",
-			userID: currentUser.uid,
-			cardNumber: "",
-			expirationDate: "",
-			isAnonymous: false,
-		});
-	};
-
 	const loginWithEmail = (e) => {
 		e.preventDefault();
 		firebaseAuth
@@ -208,9 +195,7 @@ const App = () => {
 					path="/Login"
 					render={() =>
 						currentUser ? (
-							<Redirect to="/Account">
-								<Account currentUser={currentUser}></Account>
-							</Redirect>
+							<Redirect to="/Account"></Redirect>
 						) : (
 							<Login
 								handleChange={(e) => handleChange(e)}

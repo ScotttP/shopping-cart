@@ -4,7 +4,6 @@ import Logo from "../components/taylorMadeLogo.png";
 import golfBag from "../components/golf-bag.svg";
 
 const Navbar = (props) => {
-	console.log(props.currentUser);
 	const LoginAndAccountRender = () => {
 		if (props.currentUser) return <Link to="/Account">Account</Link>;
 		else return <Link to="/Login">Login</Link>;
