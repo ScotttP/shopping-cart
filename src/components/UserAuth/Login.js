@@ -120,6 +120,7 @@ const Login = (props) => {
 			<SignUpAndLoginContainer>
 				<FormContent>
 					<LoginHeader>Login</LoginHeader>
+
 					<FormLabels>
 						Email
 						<br></br>
@@ -152,13 +153,7 @@ const Login = (props) => {
 					<LoginButton onClick={(e) => props.loginWithEmail(e)}>
 						<b>Login</b>
 					</LoginButton>
-					<br></br>
-					<p>or sign in with</p>
-					<br></br>
-					<GoogleButton onClick={(e) => props.loginWithGoogle(e)}>
-						<GoogleLogo></GoogleLogo>
-						<b>Google</b>
-					</GoogleButton>
+
 					<br></br>
 					<DontHaveAnAccount>Don't have an account?</DontHaveAnAccount>
 					<Link style={{ textDecoration: "none" }} to="/CreateAnAccount">

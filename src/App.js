@@ -42,6 +42,8 @@ const App = () => {
 	const [loginPassword, setLoginPassword] = useState("");
 	const [signUpEmail, setSignUpEmail] = useState("");
 	const [signUpPassword, setSignUpPassword] = useState("");
+	const [signUpFirstName, setSignUpFirstName] = useState("");
+	const [signUpLastName, setSignUpLastName] = useState("");
 
 	const [errors, setErrors] = useState("");
 
@@ -74,21 +76,34 @@ const App = () => {
 		setErrors("");
 		if (e.target.type === "email" && e.target.id === "loginEmailInput")
 			return setLoginEmail(e.target.value);
-		if (e.target.type === "password" && e.target.id === "loginPasswordInput")
+		else if (
+			e.target.type === "password" &&
+			e.target.id === "loginPasswordInput"
+		)
 			return setLoginPassword(e.target.value);
-		if (e.target.type === "email" && e.target.id === "signUpEmailInput")
+		else if (e.target.type === "email" && e.target.id === "signUpEmailInput")
 			return setSignUpEmail(e.target.value);
-		if (e.target.type === "password" && e.target.id === "signUpPasswordInput")
+		else if (
+			e.target.type === "password" &&
+			e.target.id === "signUpPasswordInput"
+		)
 			return setSignUpPassword(e.target.value);
+		else if (e.target.id === "firstName")
+			return setSignUpFirstName(e.target.value);
+		else if (e.target.id === "lastName")
+			return setSignUpLastName(e.target.value);
 	};
 
 	const addUserToFirestore = async (signedInUser) => {
+		//when a user visits this website, they are automatically signed in as anonymous.
+		//once they create an account, that anonymous user is then turned into a verified account.
 		if (signedInUser.user.isAnonymous) {
 			await usersRef.doc(signedInUser.user.uid).set({
 				firstName: "",
 				lastName: "",
 				email: "",
-				phone: "",
+
+				password: "",
 				userID: signedInUser.user.uid,
 				cardNumber: "",
 				expirationDate: "",
@@ -102,23 +117,19 @@ const App = () => {
 				shaft: "",
 			});
 		}
-		// else {
-		// 	await usersRef.doc(`RegisteredUser-${signedInUser.user.uid}`).set({
-		// 		firstName: "",
-		// 		lastName: "",
-		// 		email: "",
-		// 		phone: "",
-		// 		userID: signedInUser.user.uid,
-		// 		cardNumber: "",
-		// 		expirationDate: "",
-		// 		isAnonymous: false,
-		// 	});
-		// }
 	};
 
 	const updateAnonUserInFirestore = async () => {
+		//updates the anonymous user information to the account information
 		await usersRef.doc(currentUser.uid).update({
-			//code here to update the users' information
+			firstName: signUpFirstName,
+			lastName: signUpLastName,
+			email: signUpEmail,
+			password: "",
+			userID: currentUser.uid,
+			cardNumber: "",
+			expirationDate: "",
+			isAnonymous: false,
 		});
 	};
 
@@ -139,13 +150,10 @@ const App = () => {
 			signUpEmail,
 			signUpPassword
 		);
-		// console.log(firebase.auth.EmailAuthProvider.credential);
-		// firebaseAuth
-		// 	.createUserWithEmailAndPassword(signUpEmail, signUpPassword)
 		firebaseAuth.currentUser
-			.linkWithCredential(credential)
+			.linkWithCredential(credential) // this links up the anonymous users information
 			.then(() => {
-				console.log(credential);
+				updateAnonUserInFirestore();
 			})
 			.catch((error) => {
 				setErrors(error);
@@ -153,12 +161,6 @@ const App = () => {
 			});
 
 		setErrors("");
-	};
-
-	const loginWithGoogle = (e) => {
-		let provider = new firebase.auth.GoogleAuthProvider();
-		firebaseAuth.signInWithPopup(provider);
-		setCurrentUser(firebaseAuth.currentUser);
 	};
 
 	const signOut = () => {
@@ -225,7 +227,7 @@ const App = () => {
 					path="/Account"
 					render={() =>
 						!currentUser.isAnonymous ? (
-							<Account></Account>
+							<Account currentUser={currentUser}></Account>
 						) : (
 							<Redirect to="/Login"></Redirect>
 						)

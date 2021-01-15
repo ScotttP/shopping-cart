@@ -22,14 +22,16 @@ const SignUpAndLoginContainer = styled.form`
 	border-radius: 5px;
 	align-items: center;
 	width: 25vw;
-	height: 55vh;
+	height: 100%;
 	min-width: 290px;
 	min-height: 495px;
-	max-height: 550px;
+	${"" /* max-height: 550px; */}
 	box-shadow: 0px 1px 20px 1px rgb(40, 40, 40);
-	@media only screen and (max-width: 1500px) {
+	${
+		"" /* @media only screen and (max-width: 1500px) {
 		height: 50vh;
 		max-height: 500px;
+	} */
 	}
 `;
 
@@ -41,7 +43,7 @@ const FormContent = styled.div`
 	width: 20vw;
 	height: 100%;
 	min-width: 240px;
-	max-height: 550px;
+	${"" /* max-height: 550px; */}
 `;
 
 const SignUpHeader = styled.h1`
@@ -120,6 +122,22 @@ const CreateAccount = (props) => {
 				<FormContent>
 					<SignUpHeader>Create An Account</SignUpHeader>
 					<FormLabels>
+						First Name<br></br>
+						<FormInputs
+							id="firstName"
+							type="text"
+							onChange={(e) => props.handleChange(e)}
+						></FormInputs>
+					</FormLabels>
+					<FormLabels>
+						Last Name<br></br>
+						<FormInputs
+							id="lastName"
+							type="text"
+							onChange={(e) => props.handleChange(e)}
+						></FormInputs>
+					</FormLabels>
+					<FormLabels>
 						Email
 						<br></br>
 						<FormInputs
@@ -143,13 +161,6 @@ const CreateAccount = (props) => {
 					<SignUpButton onClick={(e) => props.signUpWithEmail(e)}>
 						<b>Sign Up</b>
 					</SignUpButton>
-					<br></br>
-					<p>or sign up with</p>
-					<br></br>
-					<GoogleButton onClick={(e) => props.loginWithGoogle(e)}>
-						<GoogleLogo></GoogleLogo>
-						<b>Google</b>
-					</GoogleButton>
 					<br></br>
 					<AlreadyHaveAnAccount>Already have an account?</AlreadyHaveAnAccount>
 					<Link style={{ textDecoration: "none" }} to="/Login">
