@@ -5,7 +5,8 @@ import golfBag from "../components/golf-bag.svg";
 
 const Navbar = (props) => {
 	const LoginAndAccountRender = () => {
-		if (props.currentUser) return <Link to="/Account">Account</Link>;
+		if (!props.currentUser.isAnonymous)
+			return <Link to="/Account">Account</Link>;
 		else return <Link to="/Login">Login</Link>;
 	};
 
