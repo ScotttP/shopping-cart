@@ -94,33 +94,26 @@ const App = () => {
 			return setSignUpLastName(e.target.value);
 	};
 
-	const addUserToFirestore = async (signedInUser) => {
-		//when a user visits this website, they are automatically signed in as anonymous.
-		//once they create an account, that anonymous user is then turned into a verified account.
-		if (signedInUser.user.isAnonymous) {
-			await usersRef.doc(signedInUser.user.uid).set({
-				firstName: "",
-				lastName: "",
-				email: "",
-
-				password: "",
-				userID: signedInUser.user.uid,
-				cardNumber: "",
-				expirationDate: "",
-				isAnonymous: true,
-			});
-			await usersRef.doc(`${signedInUser.user.uid}`).collection("cart").add({
-				productName: "",
-				price: 0,
-				quantity: 0,
-				configuration: "",
-				shaft: "",
-			});
-		}
+	const addUserToFirestore = async () => {
+		await usersRef.doc(`${currentUser.uid}`).set({
+			firstName: signUpFirstName,
+			lastName: signUpLastName,
+			email: signUpEmail,
+			password: signUpPassword,
+			userID: currentUser.uid,
+			cardNumber: "",
+			expirationDate: "",
+		});
+		await usersRef.doc(`${currentUser.uid}`).collection("cart").add({
+			productName: "",
+			price: 0,
+			quantity: 0,
+			configuration: "",
+			shaft: "",
+		});
 	};
 
-	const updateAnonUserInFirestore = async () => {
-		//updates the anonymous user information to the account information
+	const updateUserAccount = async () => {
 		await usersRef.doc(currentUser.uid).update({
 			firstName: signUpFirstName,
 			lastName: signUpLastName,
@@ -146,20 +139,10 @@ const App = () => {
 	};
 	const signUpWithEmail = (e) => {
 		e.preventDefault();
-		const credential = firebase.auth.EmailAuthProvider.credential(
-			signUpEmail,
-			signUpPassword
-		);
-		firebaseAuth.currentUser
-			.linkWithCredential(credential) // this links up the anonymous users information
-			.then(() => {
-				updateAnonUserInFirestore();
-			})
-			.catch((error) => {
-				setErrors(error);
-				console.log(error);
-			});
-
+		firebaseAuth
+			.createUserWithEmailAndPassword(signUpEmail, signUpPassword)
+			.then(addUserToFirestore())
+			.catch((error) => console.log(error));
 		setErrors("");
 	};
 
@@ -181,20 +164,7 @@ const App = () => {
 
 	useEffect(() => {
 		firebaseAuth.onAuthStateChanged(authStateObserver);
-		// console.log(currentUser.uid);
 	});
-
-	useEffect(() => {
-		firebaseAuth
-			.signInAnonymously()
-			.then((signedInUser) => {
-				addUserToFirestore(signedInUser);
-			})
-			.catch((error) => {
-				console.log(error);
-				// ...
-			});
-	}, []);
 
 	return (
 		<Router basename={process.env.PUBLIC_URL + "/"}>
@@ -205,6 +175,7 @@ const App = () => {
 				<Route exact path="/shop">
 					<Shop productList={productList} />
 				</Route>
+
 				<Route exact path="/cart">
 					<Cart
 						deleteFromCart={deleteFromCart}
@@ -214,45 +185,48 @@ const App = () => {
 						clearCart={() => clearCart}
 					/>
 				</Route>
+
 				<Route
 					exact
 					path="/checkout-complete"
 					component={CheckoutComplete}
 				></Route>
+
 				<Route exact path="/shop/:productName">
 					<ItemDetails addToCart={addToCart}></ItemDetails>
 				</Route>
-				<Route
-					exact
-					path="/Account"
-					render={() =>
-						!currentUser.isAnonymous ? (
-							<Account currentUser={currentUser}></Account>
-						) : (
-							<Redirect to="/Login"></Redirect>
-						)
-					}
-				></Route>
+
 				<Route exact path="/CreateAnAccount">
 					<CreateAccount
 						handleChange={(e) => handleChange(e)}
 						signUpWithEmail={(e) => signUpWithEmail(e)}
-						loginWithGoogle={(e) => loginWithGoogle(e)}
 					></CreateAccount>
 				</Route>
+
 				<Route
 					exact
 					path="/Login"
 					render={() =>
-						currentUser.isAnonymous ? (
+						currentUser ? (
+							<Redirect to="/Account">
+								<Account currentUser={currentUser}></Account>
+							</Redirect>
+						) : (
 							<Login
-								currentUser={currentUser}
 								handleChange={(e) => handleChange(e)}
 								loginWithEmail={(e) => loginWithEmail(e)}
-								loginWithGoogle={(e) => loginWithGoogle(e)}
 							></Login>
+						)
+					}
+				></Route>
+				<Route
+					exact
+					path="/Account"
+					render={() =>
+						!currentUser ? (
+							<Redirect to="/Login"></Redirect>
 						) : (
-							<Redirect to="/Account"></Redirect>
+							<Account currentUser={currentUser} signOut={signOut}></Account>
 						)
 					}
 				></Route>

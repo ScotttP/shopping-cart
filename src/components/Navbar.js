@@ -4,9 +4,9 @@ import Logo from "../components/taylorMadeLogo.png";
 import golfBag from "../components/golf-bag.svg";
 
 const Navbar = (props) => {
+	console.log(props.currentUser);
 	const LoginAndAccountRender = () => {
-		if (!props.currentUser.isAnonymous)
-			return <Link to="/Account">Account</Link>;
+		if (props.currentUser) return <Link to="/Account">Account</Link>;
 		else return <Link to="/Login">Login</Link>;
 	};
 
@@ -14,7 +14,7 @@ const Navbar = (props) => {
 		<header id="navBarContainer">
 			<div id="navBarList">
 				<p id="homepage">
-					<Link to="">
+					<Link to="/">
 						<img
 							id="taylorMadeLogo"
 							src={Logo}
