@@ -32,28 +32,105 @@ const Account = (props) => {
 
 	const wrapper = () => {
 		setEditMode(false);
-		updateUserAccount();
+		updateUserAccountInFirestore();
+		props.currentUser
+			.updateEmail(email)
+			.then(() => {
+				props.currentUser.updateProfile({
+					displayName: `${firstName}`,
+				});
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	};
 
-	const updateUserAccount = async () => {
+	const updateUserAccountInFirestore = async () => {
 		await userRef.update({
-			firstName: "updatedFirstName",
-			lastName: "signUpLastName",
-			email: "signUpEmail",
-			password: "",
+			firstName: firstName,
+			lastName: lastName,
+			email: email,
 			userID: props.currentUser.uid,
-			cardNumber: "",
-			expirationDate: "",
-			isAnonymous: false,
+			cardNumber: cardNumber,
+			expirationDate: expirationDate,
 		});
+	};
+
+	const deleteAccount = () => {
+		props.currentUser
+			.delete()
+			.then(function () {
+				console.log("account deleted");
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
+
+	const handleChange = (e) => {
+		if (e.target.id === "firstNameInputChange") {
+			return setFirstName(e.target.value);
+		} else if (e.target.id === "lastNameInputChange") {
+			return setLastName(e.target.value);
+		} else if (e.target.id === "emailInputChange") {
+			setEmail(e.target.value);
+		} else if (e.target.id === "cardNumberInputChange") {
+			setCardNumber(e.target.value);
+		} else {
+			setExpirationDate(e.target.value);
+		}
 	};
 
 	if (editMode) {
 		return (
-			<div>
-				Edit mode
+			<div id="accountInformationEditMode">
+				<label>
+					First Name:
+					<input
+						id="firstNameInputChange"
+						onChange={(e) => handleChange(e)}
+						value={firstName}
+					></input>
+				</label>
+				<label>
+					Last Name:
+					<input
+						id="lastNameInputChange"
+						onChange={(e) => handleChange(e)}
+						value={lastName}
+					></input>
+				</label>
+				<label>
+					Email:
+					<input
+						id="emailInputChange"
+						onChange={(e) => handleChange(e)}
+						value={email}
+					></input>
+				</label>
+
+				<button>Change Password</button>
+
+				<label>
+					Card Number:
+					<input
+						id="cardNumberInputChange"
+						onChange={(e) => handleChange(e)}
+						value={cardNumber}
+					></input>
+				</label>
+				<label>
+					Expiration Date:
+					<input
+						id="expirationDateInputChange"
+						onChange={(e) => handleChange(e)}
+						value={expirationDate}
+					></input>
+				</label>
+
 				<button onClick={() => wrapper()}>Save</button>
 				<button onClick={props.signOut}> Sign Out</button>
+				<button onClick={() => deleteAccount()}>Delete Account</button>
 			</div>
 		);
 	} else
@@ -62,7 +139,6 @@ const Account = (props) => {
 				<h2>{firstName}</h2>
 				<h2>{lastName}</h2>
 				<p>{email}</p>
-				<p>Password: {password}</p>
 				<div id="cardInformation">
 					<p>Card Number: {cardNumber}</p>
 					<p>Expiration Date: {expirationDate}</p>

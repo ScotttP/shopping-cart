@@ -146,6 +146,16 @@ span {
 	padding: 2%;
 }
 
+#accountInformationEditMode {
+	display: flex;
+	flex-direction: column;
+}
+
+#accountInformationEditMode > input,
+#accountInformationEditMode > button {
+	width: 10vw;
+}
+
 #home {
 	width: 100%;
 	height: 65vh;

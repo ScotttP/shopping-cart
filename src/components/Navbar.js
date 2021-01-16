@@ -23,6 +23,7 @@ const Navbar = (props) => {
 						></img>
 					</Link>
 				</p>
+
 				<div id="navBarRight">
 					<p id="accountElement">{LoginAndAccountRender()}</p>
 					<p id="shopElement">
