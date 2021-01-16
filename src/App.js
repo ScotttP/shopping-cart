@@ -95,12 +95,12 @@ const App = () => {
 	};
 
 	const addUserToFirestore = async () => {
-		await usersRef.doc(`${currentUser.uid}`).set({
+		await usersRef.doc(`${firebaseAuth.currentUser.uid}`).set({
 			firstName: signUpFirstName,
 			lastName: signUpLastName,
 			email: signUpEmail,
 			password: signUpPassword,
-			userID: currentUser.uid,
+			userID: firebaseAuth.currentUser.uid,
 			cardNumber: "",
 			expirationDate: "",
 		});
@@ -128,7 +128,10 @@ const App = () => {
 		e.preventDefault();
 		firebaseAuth
 			.createUserWithEmailAndPassword(signUpEmail, signUpPassword)
-			.then(addUserToFirestore())
+			.then(() => {
+				addUserToFirestore();
+				console.log("add to firestore");
+			})
 			.catch((error) => console.log(error));
 		setErrors("");
 	};
@@ -183,13 +186,6 @@ const App = () => {
 					<ItemDetails addToCart={addToCart}></ItemDetails>
 				</Route>
 
-				<Route exact path="/CreateAnAccount">
-					<CreateAccount
-						handleChange={(e) => handleChange(e)}
-						signUpWithEmail={(e) => signUpWithEmail(e)}
-					></CreateAccount>
-				</Route>
-
 				<Route
 					exact
 					path="/Login"
@@ -212,6 +208,20 @@ const App = () => {
 							<Redirect to="/Login"></Redirect>
 						) : (
 							<Account currentUser={currentUser} signOut={signOut}></Account>
+						)
+					}
+				></Route>
+				<Route
+					exact
+					path="/CreateAnAccount"
+					render={() =>
+						currentUser ? (
+							<Redirect to="/Account"></Redirect>
+						) : (
+							<CreateAccount
+								handleChange={(e) => handleChange(e)}
+								signUpWithEmail={(e) => signUpWithEmail(e)}
+							></CreateAccount>
 						)
 					}
 				></Route>

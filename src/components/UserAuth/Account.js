@@ -6,6 +6,7 @@ import "firebase/auth";
 import "firebase/firestore";
 
 const firestore = firebase.firestore();
+const firebaseAuth = firebase.auth();
 
 const Account = (props) => {
 	// console.log(props.currentUser);
@@ -59,8 +60,17 @@ const Account = (props) => {
 	const deleteAccount = () => {
 		props.currentUser
 			.delete()
+			.then(userRef.delete())
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
+
+	const sendPasswordResetEmail = () => {
+		firebaseAuth
+			.sendPasswordResetEmail(email)
 			.then(function () {
-				console.log("account deleted");
+				console.log("password reset sent");
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -109,7 +119,9 @@ const Account = (props) => {
 					></input>
 				</label>
 
-				<button>Change Password</button>
+				<button onClick={() => sendPasswordResetEmail()}>
+					Change Password
+				</button>
 
 				<label>
 					Card Number:
