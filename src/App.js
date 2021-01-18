@@ -104,13 +104,6 @@ const App = () => {
 			cardNumber: "",
 			expirationDate: "",
 		});
-		await usersRef.doc(`${currentUser.uid}`).collection("cart").add({
-			productName: "",
-			price: 0,
-			quantity: 0,
-			configuration: "",
-			shaft: "",
-		});
 	};
 
 	const loginWithEmail = (e) => {
@@ -130,7 +123,6 @@ const App = () => {
 			.createUserWithEmailAndPassword(signUpEmail, signUpPassword)
 			.then(() => {
 				addUserToFirestore();
-				console.log("add to firestore");
 			})
 			.catch((error) => console.log(error));
 		setErrors("");
@@ -183,7 +175,10 @@ const App = () => {
 				></Route>
 
 				<Route exact path="/shop/:productName">
-					<ItemDetails addToCart={addToCart}></ItemDetails>
+					<ItemDetails
+						currentUser={firebaseAuth.currentUser}
+						addToCart={addToCart}
+					></ItemDetails>
 				</Route>
 
 				<Route

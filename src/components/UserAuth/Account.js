@@ -9,7 +9,6 @@ const firestore = firebase.firestore();
 const firebaseAuth = firebase.auth();
 
 const Account = (props) => {
-	// console.log(props.currentUser);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");

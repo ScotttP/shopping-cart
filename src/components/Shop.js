@@ -26,6 +26,7 @@ const Shop = (props) => {
 
 	useEffect(() => {
 		setFilteredArray(props.productList);
+		console.log(props.productList);
 	}, [props.productList]);
 
 	const handleFilter = (e) => {
