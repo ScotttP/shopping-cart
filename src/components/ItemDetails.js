@@ -41,7 +41,8 @@ const ItemDetails = (props) => {
 	const [configurationType, setConfigurationType] = useState("");
 	const [shaftType, setShaftType] = useState("");
 	const [productPrice, setProductPrice] = useState("");
-	const [quantity, setQuantity] = useState(1);
+	const [quantity, setQuantity] = useState(0);
+	const [productImage, setProductImage] = useState(0);
 
 	const product = itemList.find((product) => product.name === productName);
 	const productsRef = firestore
@@ -55,6 +56,7 @@ const ItemDetails = (props) => {
 			.get()
 			.then((doc) => {
 				setProductPrice(doc.data().price);
+				setProductImage(doc.data().image);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -64,11 +66,13 @@ const ItemDetails = (props) => {
 	const addItemToCart = async () => {
 		await userRef.collection("cart").add({
 			productName: productName,
+			image: productImage,
 			price: productPrice,
 			quantity: quantity,
 			configuration: configurationType,
 			shaft: shaftType,
 		});
+		setQuantity(0);
 	};
 
 	const changeQty = (e) => {
@@ -95,7 +99,7 @@ const ItemDetails = (props) => {
 			<ProductInformation>
 				<img
 					className="productImagesInShop"
-					src={product.image}
+					src={productImage}
 					alt={product.name}
 				></img>
 				<RightProductInformation>
@@ -118,16 +122,21 @@ const ItemDetails = (props) => {
 							<select
 								onChange={(e) => setConfigurationType(e.target.value)}
 								required
+								defaultValue="Right"
 							>
-								<option>Right</option>
-								<option>Left</option>
+								<option value="Right">Right</option>
+								<option value="Left">Left</option>
 							</select>
 						</div>
 						<div>
 							<label>Shaft: </label>
-							<select onChange={(e) => setShaftType(e.target.value)} required>
+							<select
+								onChange={(e) => setShaftType(e.target.value)}
+								defaultValue="Regular"
+								required
+							>
 								<option>Regular</option>
-								<option>Stiff</option>
+								<option value="Stiff">Stiff</option>
 							</select>
 						</div>
 						<div className="increaseOrDecreaseQtyContainer">

@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import uniqid from "uniqid";
 import CartItemCard from "./CartItemCard";
 import { Link } from "react-router-dom";
 
+import firebase from "../components/firebaseConfig";
+import "firebase/auth";
+import "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
+
+const firestore = firebase.firestore();
+const firebaseAuth = firebase.auth();
+
 const Cart = (props) => {
+	const userCartRef = firestore
+		.collection("users")
+		.doc(`Wu3fSIOQi1SqDeHqKJiLH2yxCNA3`)
+		.collection("cart");
+	const userCartQuery = userCartRef.orderBy("productName", "asc");
+
+	const [cartList] = useCollectionData(userCartQuery, { idField: "id" });
+
 	const cartRendering = () => {
-		if (props.cartItems.length === 0) {
+		if (cartList === undefined) return <div>LOADING</div>;
+		else if (cartList.length === 0) {
 			return (
 				<div id="emptyCartContainer">
 					<h1 id="yourCartIsEmpty">Your Cart Is Empty</h1>
@@ -15,10 +32,11 @@ const Cart = (props) => {
 				</div>
 			);
 		} else
-			return props.cartItems.map((element, index) => (
+			return cartList.map((element, index) => (
 				<div className="cartItemCardContainer" key={uniqid()}>
 					<CartItemCard
 						key={uniqid()}
+						id={element.id}
 						index={index}
 						data={element}
 						onChangeQty={(e) => props.onChangeQty(e)}
@@ -31,9 +49,9 @@ const Cart = (props) => {
 
 	const sumOrder = () => {
 		let totalsArray = [];
-		if (props.cartItems.length === 0) return `$0.00`;
+		if (cartList.length === 0) return `$0.00`;
 		else {
-			props.cartItems.map((item) => {
+			cartList.map((item) => {
 				return totalsArray.push(item.quantity * item.price);
 			});
 			let cost = totalsArray.reduce((acc, curr) => acc + curr);
@@ -43,8 +61,17 @@ const Cart = (props) => {
 			}).format(cost);
 		}
 	};
+
+	function sumQty() {
+		//this adds the number of items in the cart to the navbar. as well as adds total quantity in cart component
+		if (cartList.length === 0) return 0;
+		else {
+			let array = cartList.map((item) => item.quantity);
+			return array.reduce((acc, curr) => acc + curr);
+		}
+	}
 	const buttonRender = () => {
-		if (props.cartItems.length <= 0) return;
+		if (cartList.length <= 0) return;
 		else
 			return (
 				<Link to="/checkout-complete">
@@ -59,7 +86,7 @@ const Cart = (props) => {
 		<div id="cartContainer">
 			<div id="totalsContainer">
 				<h3>Order Summary</h3>
-				<p>Order Quantity: {props.sumQty()}</p>
+				<p>Order Quantity: {sumQty()}</p>
 				<p>Order Total: {sumOrder()} </p>
 				{buttonRender()}
 			</div>

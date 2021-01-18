@@ -10,23 +10,24 @@ const Shop = (props) => {
 	const [filteredArray, setFilteredArray] = useState([{}]);
 
 	const shopRendering = () => {
-		return filteredArray.map((element, index) => (
-			<Link key={uniqid()} to={`/shop/${element.name}`}>
-				<div key={uniqid()} className="itemCardContainer">
-					<ShopItemCard
-						key={uniqid()}
-						index={index}
-						data={element}
-						addToCart={() => props.addToCart(element, index)}
-					/>
-				</div>
-			</Link>
-		));
+		if (filteredArray === undefined) return <div>LOADING</div>;
+		else
+			return filteredArray.map((element, index) => (
+				<Link key={uniqid()} to={`/shop/${element.name}`}>
+					<div key={uniqid()} className="itemCardContainer">
+						<ShopItemCard
+							key={uniqid()}
+							index={index}
+							data={element}
+							addToCart={() => props.addToCart(element, index)}
+						/>
+					</div>
+				</Link>
+			));
 	};
 
 	useEffect(() => {
 		setFilteredArray(props.productList);
-		console.log(props.productList);
 	}, [props.productList]);
 
 	const handleFilter = (e) => {
