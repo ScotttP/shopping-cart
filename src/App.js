@@ -11,8 +11,7 @@ import Home from "./components/Home";
 import Shop from "./components/Shop";
 import Cart from "./components/Cart";
 import Navbar from "./components/Navbar";
-import itemList from "./components/itemList";
-import CheckoutComplete from "./components/CheckoutComplete";
+import CheckoutComplete from "./components/CheckOut/CheckoutComplete";
 import ItemDetails from "./components/ItemDetails";
 import Account from "./components/UserAuth/Account";
 import Login from "./components/UserAuth/Login";
@@ -70,6 +69,7 @@ const App = () => {
 	};
 
 	const addUserToFirestore = async () => {
+		// await convertAnonymousAccountToRegularAccount();
 		await usersRef.doc(`${currentUser.uid}`).set({
 			firstName: signUpFirstName,
 			lastName: signUpLastName,
@@ -99,6 +99,22 @@ const App = () => {
 		}
 	};
 
+	const convertAnonymousAccountToRegularAccount = () => {
+		let credential = firebase.auth.EmailAuthProvider.credential(
+			signUpEmail,
+			signUpPassword
+		);
+		firebaseAuth.currentUser
+			.linkWithCredential(credential)
+			.then((usercred) => {
+				console.log(usercred);
+				//	console.log("Anonymous account successfully upgraded", user);
+			})
+			.catch((error) => {
+				console.log("Error upgrading anonymous account", error);
+			});
+	};
+
 	const loginWithEmail = (e) => {
 		e.preventDefault();
 		firebaseAuth
@@ -112,13 +128,35 @@ const App = () => {
 	};
 	const signUpWithEmail = (e) => {
 		e.preventDefault();
-		firebaseAuth
-			.createUserWithEmailAndPassword(signUpEmail, signUpPassword)
-			.then(() => {
-				addUserToFirestore();
+		console.log(currentUser.isAnonymous);
+		// firebaseAuth
+		// 	.createUserWithEmailAndPassword(signUpEmail, signUpPassword)
+		// 	.then(() => {
+		// 		addUserToFirestore();
+		// 	})
+		// 	.catch((error) => console.log(error));
+		// setErrors("");
+		let credential = firebase.auth.EmailAuthProvider.credential(
+			signUpEmail,
+			signUpPassword
+		);
+		firebaseAuth.currentUser
+			.linkWithCredential(credential)
+			.then((usercred) => {
+				const userRef = firestore.collection("users").doc(`${currentUser.uid}`);
+				userRef.update({
+					firstName: signUpFirstName,
+					lastName: signUpLastName,
+					email: signUpEmail,
+					password: signUpPassword,
+					userID: currentUser.uid,
+					cardNumber: "",
+					expirationDate: "",
+				});
 			})
-			.catch((error) => console.log(error));
-		setErrors("");
+			.catch((error) => {
+				console.log("Error upgrading anonymous account", error);
+			});
 	};
 
 	const signOut = () => {
@@ -128,7 +166,7 @@ const App = () => {
 	const authStateObserver = (user) => {
 		if (user) {
 			setCurrentUser(firebaseAuth.currentUser);
-			console.log("logged in");
+			console.log(`Logged in ${firebaseAuth.currentUser.uid}`);
 		} else {
 			setCurrentUser("");
 			console.log("logged out");
@@ -213,6 +251,7 @@ const App = () => {
 							<Redirect to="/Account"></Redirect>
 						) : (
 							<CreateAccount
+								currentUser={currentUser}
 								handleChange={(e) => handleChange(e)}
 								signUpWithEmail={(e) => signUpWithEmail(e)}
 							></CreateAccount>

@@ -18,6 +18,7 @@ const Account = (props) => {
 	const [editMode, setEditMode] = useState(false);
 
 	const userRef = firestore.collection("users").doc(`${props.currentUser.uid}`);
+	console.log(props.currentUser.uid);
 
 	useEffect(() => {
 		userRef.get().then((doc) => {

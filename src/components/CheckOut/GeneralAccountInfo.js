@@ -29,7 +29,10 @@ const GeneralAccountInfo = (props) => {
 			</div>
 			<label>
 				Use Same Address for Billing?
-				<input type="radio"></input>
+				<select>
+					<option>Yes</option>
+					<option>No</option>
+				</select>
 			</label>
 		</div>
 	);
