@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const GeneralAccountInfo = (props) => {
 	return (
-		<div id="navBarContainer">
+		<div>
 			<label>
 				First Name:
 				<input type="text"></input>

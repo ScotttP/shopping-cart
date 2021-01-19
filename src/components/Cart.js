@@ -86,7 +86,7 @@ const Cart = (props) => {
 		if (cartList === undefined || cartList.length <= 0) return;
 		else
 			return (
-				<Link to="/checkout-complete">
+				<Link to="/LoginOrGuestCheckout">
 					<button id="checkoutButton">CHECKOUT</button>
 				</Link>
 			);

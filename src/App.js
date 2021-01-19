@@ -16,11 +16,13 @@ import ItemDetails from "./components/ItemDetails";
 import Account from "./components/UserAuth/Account";
 import Login from "./components/UserAuth/Login";
 import CreateAccount from "./components/UserAuth/CreateAccount";
+import LoginOrGuestCheckout from "./components/CheckOut/LoginOrGuestCheckout";
 
 import firebase from "./components/firebaseConfig";
 import "firebase/auth";
 import "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import GeneralAccountInfo from "./components/CheckOut/GeneralAccountInfo";
 
 const firestore = firebase.firestore();
 const firebaseAuth = firebase.auth();
@@ -68,19 +70,6 @@ const App = () => {
 			return setSignUpLastName(e.target.value);
 	};
 
-	const addUserToFirestore = async () => {
-		// await convertAnonymousAccountToRegularAccount();
-		await usersRef.doc(`${currentUser.uid}`).set({
-			firstName: signUpFirstName,
-			lastName: signUpLastName,
-			email: signUpEmail,
-			password: signUpPassword,
-			userID: currentUser.uid,
-			cardNumber: "",
-			expirationDate: "",
-		});
-	};
-
 	const addAnonUserToFirestore = async () => {
 		const anonUid = localStorage.getItem("uid");
 		if (anonUid === null || anonUid === undefined) {
@@ -99,22 +88,6 @@ const App = () => {
 		}
 	};
 
-	const convertAnonymousAccountToRegularAccount = () => {
-		let credential = firebase.auth.EmailAuthProvider.credential(
-			signUpEmail,
-			signUpPassword
-		);
-		firebaseAuth.currentUser
-			.linkWithCredential(credential)
-			.then((usercred) => {
-				console.log(usercred);
-				//	console.log("Anonymous account successfully upgraded", user);
-			})
-			.catch((error) => {
-				console.log("Error upgrading anonymous account", error);
-			});
-	};
-
 	const loginWithEmail = (e) => {
 		e.preventDefault();
 		firebaseAuth
@@ -128,14 +101,6 @@ const App = () => {
 	};
 	const signUpWithEmail = (e) => {
 		e.preventDefault();
-		console.log(currentUser.isAnonymous);
-		// firebaseAuth
-		// 	.createUserWithEmailAndPassword(signUpEmail, signUpPassword)
-		// 	.then(() => {
-		// 		addUserToFirestore();
-		// 	})
-		// 	.catch((error) => console.log(error));
-		// setErrors("");
 		let credential = firebase.auth.EmailAuthProvider.credential(
 			signUpEmail,
 			signUpPassword
@@ -150,6 +115,14 @@ const App = () => {
 					email: signUpEmail,
 					password: signUpPassword,
 					userID: currentUser.uid,
+					shipStreetAddress: "",
+					shipCity: "",
+					shipState: "",
+					shipZipcode: "",
+					billingStreetAddress: "",
+					billingCity: "",
+					billingState: "",
+					billingZipcode: "",
 					cardNumber: "",
 					expirationDate: "",
 				});
@@ -193,6 +166,8 @@ const App = () => {
 			})
 			.catch((error) => console.log(error));
 	}, []);
+
+	console.log(firebaseAuth.currentUser);
 
 	return (
 		<Router basename={process.env.PUBLIC_URL + "/"}>
@@ -258,6 +233,24 @@ const App = () => {
 						)
 					}
 				></Route>
+				<Route
+					exact
+					path="/LoginOrGuestCheckout"
+					render={() =>
+						currentUser && !currentUser.isAnonymous ? (
+							<Redirect to="/GeneralAccountInfo"></Redirect>
+						) : (
+							<LoginOrGuestCheckout
+								currentUser={currentUser}
+							></LoginOrGuestCheckout>
+						)
+					}
+				></Route>
+				<Route
+					exact
+					path="/GeneralAccountInfo"
+					component={GeneralAccountInfo}
+				/>
 			</Switch>
 		</Router>
 	);
