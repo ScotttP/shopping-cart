@@ -12,9 +12,17 @@ const firestore = firebase.firestore();
 const firebaseAuth = firebase.auth();
 
 const Cart = (props) => {
+	const [uid, setUid] = useState(() => {
+		if (firebaseAuth.currentUser === null) {
+			return localStorage.getItem("uid");
+		} else {
+			return firebaseAuth.currentUser.uid;
+		}
+	});
+
 	const userCartRef = firestore
 		.collection("users")
-		.doc(`${firebaseAuth.currentUser.uid}`)
+		.doc(`${uid}`)
 		.collection("cart");
 	const userCartQuery = userCartRef.orderBy("productName", "asc");
 
@@ -39,6 +47,7 @@ const Cart = (props) => {
 						key={uniqid()}
 						id={element.id}
 						index={index}
+						uid={uid}
 						data={element}
 						onChangeQty={(e) => props.onChangeQty(e)}
 						inCart={true}
@@ -78,9 +87,7 @@ const Cart = (props) => {
 		else
 			return (
 				<Link to="/checkout-complete">
-					<button onClick={props.clearCart()} id="checkoutButton">
-						CHECKOUT
-					</button>
+					<button id="checkoutButton">CHECKOUT</button>
 				</Link>
 			);
 	};

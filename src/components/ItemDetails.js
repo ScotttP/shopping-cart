@@ -74,8 +74,6 @@ const ItemDetails = (props) => {
 				configuration: configurationType,
 				shaft: shaftType,
 			});
-		} else {
-			console.log("add to guest cart");
 		}
 
 		setQuantity(0);

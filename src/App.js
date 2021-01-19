@@ -47,31 +47,6 @@ const App = () => {
 
 	const [errors, setErrors] = useState("");
 
-	const addToCart = (product) => {
-		const copyOfCartItemsArray = JSON.parse(JSON.stringify(cartItems));
-		if (copyOfCartItemsArray.includes(product)) {
-			product.quantity = ++product.quantity;
-		} else setCartItems([...cartItems, product]);
-
-		console.log("add to cart");
-	};
-
-	const deleteFromCart = () => {
-		console.log("delete from cart");
-	};
-
-	const changeQty = () => {
-		console.log("change qty");
-	};
-
-	const sumQty = () => {
-		return 0;
-	};
-
-	const clearCart = () => {
-		setCartItems([]);
-	};
-
 	const handleChange = (e) => {
 		setErrors("");
 		if (e.target.type === "email" && e.target.id === "loginEmailInput")
@@ -120,6 +95,7 @@ const App = () => {
 				cardNumber: "",
 				expirationDate: "",
 			});
+			await usersRef.doc(`${anonUid}`).collection("cart").add({});
 		}
 	};
 
@@ -152,8 +128,10 @@ const App = () => {
 	const authStateObserver = (user) => {
 		if (user) {
 			setCurrentUser(firebaseAuth.currentUser);
+			console.log("logged in");
 		} else {
 			setCurrentUser("");
+			console.log("logged out");
 		}
 	};
 
@@ -180,7 +158,7 @@ const App = () => {
 
 	return (
 		<Router basename={process.env.PUBLIC_URL + "/"}>
-			<Navbar cartItems={cartItems} sumQty={sumQty} currentUser={currentUser} />
+			<Navbar cartItems={cartItems} currentUser={currentUser} />
 			<Switch>
 				<Route exact path="/" component={Home} />
 
@@ -189,14 +167,7 @@ const App = () => {
 				</Route>
 
 				<Route exact path="/cart">
-					<Cart
-						deleteFromCart={deleteFromCart}
-						cartItems={cartItems}
-						onChangeQty={changeQty}
-						sumQty={sumQty}
-						clearCart={() => clearCart}
-						currentUser={currentUser}
-					/>
+					<Cart cartItems={cartItems} currentUser={currentUser} />
 				</Route>
 
 				<Route
@@ -206,10 +177,7 @@ const App = () => {
 				></Route>
 
 				<Route exact path="/shop/:productName">
-					<ItemDetails
-						currentUser={firebaseAuth.currentUser}
-						addToCart={addToCart}
-					></ItemDetails>
+					<ItemDetails currentUser={firebaseAuth.currentUser}></ItemDetails>
 				</Route>
 
 				<Route

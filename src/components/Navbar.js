@@ -33,7 +33,7 @@ const Navbar = (props) => {
 
 					<p id="shoppingCartElement">
 						<Link to="/cart">
-							<span id="inShoppingCartCount">{props.sumQty()} </span>
+							<span id="inShoppingCartCount"></span>
 							<span id="golfBagLink">
 								<img
 									id="golfBagLogo"

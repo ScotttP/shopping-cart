@@ -12,7 +12,7 @@ const CartItemCard = (props) => {
 
 	const userCartRef = firestore
 		.collection("users")
-		.doc(`${firebaseAuth.currentUser.uid}`)
+		.doc(`${props.uid}`)
 		.collection("cart");
 
 	const deleteItemFromCart = () => {
