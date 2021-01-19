@@ -49,8 +49,6 @@ const ItemDetails = (props) => {
 		.collection("products")
 		.doc(`${productName.replace(/\s+/g, "-")}`);
 
-	const userRef = firestore.collection("users").doc(`${props.currentUser.uid}`);
-
 	const getPrice = () => {
 		productsRef
 			.get()
@@ -64,14 +62,22 @@ const ItemDetails = (props) => {
 	};
 
 	const addItemToCart = async () => {
-		await userRef.collection("cart").add({
-			productName: productName,
-			image: productImage,
-			price: productPrice,
-			quantity: quantity,
-			configuration: configurationType,
-			shaft: shaftType,
-		});
+		if (firebaseAuth.currentUser) {
+			const userRef = firestore
+				.collection("users")
+				.doc(`${firebaseAuth.currentUser.uid}`);
+			await userRef.collection("cart").add({
+				productName: productName,
+				image: productImage,
+				price: productPrice,
+				quantity: quantity,
+				configuration: configurationType,
+				shaft: shaftType,
+			});
+		} else {
+			console.log("add to guest cart");
+		}
+
 		setQuantity(0);
 	};
 

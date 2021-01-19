@@ -12,7 +12,7 @@ const CartItemCard = (props) => {
 
 	const userCartRef = firestore
 		.collection("users")
-		.doc(`Wu3fSIOQi1SqDeHqKJiLH2yxCNA3`)
+		.doc(`${firebaseAuth.currentUser.uid}`)
 		.collection("cart");
 
 	const deleteItemFromCart = () => {
@@ -37,9 +37,13 @@ const CartItemCard = (props) => {
 	};
 
 	const updateItemToCart = async () => {
-		await userCartRef.doc(`${props.data.id}`).update({
-			quantity: quantity,
-		});
+		await userCartRef
+			.doc(`${props.data.id}`)
+			.update({
+				quantity: quantity,
+			})
+			.catch((error) => console.error(error));
+		console.log(props.data.id);
 	};
 	useEffect(() => {
 		updateItemToCart();

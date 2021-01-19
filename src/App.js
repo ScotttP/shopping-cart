@@ -95,15 +95,32 @@ const App = () => {
 	};
 
 	const addUserToFirestore = async () => {
-		await usersRef.doc(`${firebaseAuth.currentUser.uid}`).set({
+		await usersRef.doc(`${currentUser.uid}`).set({
 			firstName: signUpFirstName,
 			lastName: signUpLastName,
 			email: signUpEmail,
 			password: signUpPassword,
-			userID: firebaseAuth.currentUser.uid,
+			userID: currentUser.uid,
 			cardNumber: "",
 			expirationDate: "",
 		});
+	};
+
+	const addAnonUserToFirestore = async () => {
+		const anonUid = localStorage.getItem("uid");
+		if (anonUid === null || anonUid === undefined) {
+			console.log("dont do anything.");
+		} else {
+			await usersRef.doc(`${anonUid}`).set({
+				firstName: "",
+				lastName: "",
+				email: "",
+				password: "",
+				userID: anonUid,
+				cardNumber: "",
+				expirationDate: "",
+			});
+		}
 	};
 
 	const loginWithEmail = (e) => {
@@ -148,6 +165,19 @@ const App = () => {
 		firebaseAuth.onAuthStateChanged(authStateObserver);
 	});
 
+	useEffect(() => {
+		firebaseAuth
+			.signInAnonymously()
+			.then(() => {
+				localStorage.setItem("uid", firebaseAuth.currentUser.uid);
+				setCurrentUser(firebaseAuth.currentUser);
+			})
+			.then(() => {
+				addAnonUserToFirestore();
+			})
+			.catch((error) => console.log(error));
+	}, []);
+
 	return (
 		<Router basename={process.env.PUBLIC_URL + "/"}>
 			<Navbar cartItems={cartItems} sumQty={sumQty} currentUser={currentUser} />
@@ -165,6 +195,7 @@ const App = () => {
 						onChangeQty={changeQty}
 						sumQty={sumQty}
 						clearCart={() => clearCart}
+						currentUser={currentUser}
 					/>
 				</Route>
 
@@ -185,7 +216,7 @@ const App = () => {
 					exact
 					path="/Login"
 					render={() =>
-						currentUser ? (
+						currentUser && !currentUser.isAnonymous ? (
 							<Redirect to="/Account"></Redirect>
 						) : (
 							<Login
@@ -199,7 +230,7 @@ const App = () => {
 					exact
 					path="/Account"
 					render={() =>
-						!currentUser ? (
+						!currentUser || currentUser.isAnonymous ? (
 							<Redirect to="/Login"></Redirect>
 						) : (
 							<Account currentUser={currentUser} signOut={signOut}></Account>
@@ -210,7 +241,7 @@ const App = () => {
 					exact
 					path="/CreateAnAccount"
 					render={() =>
-						currentUser ? (
+						currentUser && !currentUser.isAnonymous ? (
 							<Redirect to="/Account"></Redirect>
 						) : (
 							<CreateAccount
