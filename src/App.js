@@ -11,12 +11,15 @@ import Home from "./components/Home";
 import Shop from "./components/Shop";
 import Cart from "./components/Cart";
 import Navbar from "./components/Navbar";
-import CheckoutComplete from "./components/CheckOut/CheckoutComplete";
 import ItemDetails from "./components/ItemDetails";
 import Account from "./components/UserAuth/Account";
 import Login from "./components/UserAuth/Login";
 import CreateAccount from "./components/UserAuth/CreateAccount";
 import LoginOrGuestCheckout from "./components/CheckOut/LoginOrGuestCheckout";
+import ShipOptions from "./components/CheckOut/ShipOptions";
+import Payment from "./components/CheckOut/Payment";
+import Review from "./components/CheckOut/Review";
+import CheckoutComplete from "./components/CheckOut/CheckoutComplete";
 
 import firebase from "./components/firebaseConfig";
 import "firebase/auth";
@@ -183,12 +186,6 @@ const App = () => {
 					<Cart cartItems={cartItems} currentUser={currentUser} />
 				</Route>
 
-				<Route
-					exact
-					path="/checkout-complete"
-					component={CheckoutComplete}
-				></Route>
-
 				<Route exact path="/shop/:productName">
 					<ItemDetails currentUser={firebaseAuth.currentUser}></ItemDetails>
 				</Route>
@@ -246,11 +243,23 @@ const App = () => {
 						)
 					}
 				></Route>
+				<Route exact path="/GeneralAccountInfo">
+					<GeneralAccountInfo currentUser={currentUser}></GeneralAccountInfo>
+				</Route>
+				<Route exact path="/ShipOptions">
+					<ShipOptions currentUser={currentUser}></ShipOptions>
+				</Route>
+				<Route exact path="/Payment">
+					<Payment currentUser={currentUser}></Payment>
+				</Route>
+				<Route exact path="/Review">
+					<Review currentUser={currentUser}></Review>
+				</Route>
 				<Route
 					exact
-					path="/GeneralAccountInfo"
-					component={GeneralAccountInfo}
-				/>
+					path="/checkout-complete"
+					component={CheckoutComplete}
+				></Route>
 			</Switch>
 		</Router>
 	);

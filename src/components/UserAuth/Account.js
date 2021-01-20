@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import firebase from "../../components/firebaseConfig";
-import { Link } from "react-router-dom";
 
 import "firebase/auth";
 import "firebase/firestore";
@@ -17,22 +16,29 @@ const Account = (props) => {
 	const [expirationDate, setExpirationDate] = useState("");
 	const [shipStreetAddress, setShipStreetAddress] = useState("");
 	const [shipCity, setShipCity] = useState("");
-	const [shipStateAddress, setShipStateAddress] = useState("");
+	const [shipState, setShipState] = useState("");
 	const [shipZipcode, setShipZipcode] = useState("");
 	const [billingStreetAddress, setBillingStreetAddress] = useState("");
 	const [billingCity, setBillingCity] = useState("");
-	const [billingStateAddress, setBillingStateAddress] = useState("");
+	const [billingState, setBillingState] = useState("");
 	const [billingZipcode, setBillingZipcode] = useState("");
 	const [editMode, setEditMode] = useState(false);
 
 	const userRef = firestore.collection("users").doc(`${props.currentUser.uid}`);
-	console.log(props.currentUser.uid);
 
 	useEffect(() => {
 		userRef.get().then((doc) => {
 			setFirstName(doc.data().firstName);
 			setLastName(doc.data().lastName);
 			setEmail(doc.data().email);
+			setShipStreetAddress(doc.data().shipStreetAddress);
+			setShipCity(doc.data().shipCity);
+			setShipState(doc.data().shipState);
+			setShipZipcode(doc.data().shipZipcode);
+			setBillingStreetAddress(doc.data().billingStreetAddress);
+			setBillingCity(doc.data().billingCity);
+			setBillingState(doc.data().billingState);
+			setBillingZipcode(doc.data().billingZipcode);
 			setPassword(doc.data().password);
 			setCardNumber(doc.data().cardNumber);
 			setExpirationDate(doc.data().expirationDate);
@@ -64,11 +70,11 @@ const Account = (props) => {
 			expirationDate: expirationDate,
 			shipStreetAddress: shipStreetAddress,
 			shipCity: shipCity,
-			shipState: shipStateAddress,
+			shipState: shipState,
 			shipZipcode: shipZipcode,
 			billingStreetAddress: billingStreetAddress,
 			billingCity: billingCity,
-			billingState: billingStateAddress,
+			billingState: billingState,
 			billingZipcode: billingZipcode,
 		});
 	};
@@ -146,8 +152,8 @@ const Account = (props) => {
 						<input
 							id="stateInputChange"
 							type="text"
-							onChange={(e) => setShipStateAddress(e.target.value)}
-							value={shipStateAddress}
+							onChange={(e) => setShipState(e.target.value)}
+							value={shipState}
 						></input>
 						Zip:
 						<input
@@ -196,8 +202,8 @@ const Account = (props) => {
 						<input
 							id="stateInputChange"
 							type="text"
-							onChange={(e) => setBillingStateAddress(e.target.value)}
-							value={billingStateAddress}
+							onChange={(e) => setBillingState(e.target.value)}
+							value={billingState}
 						></input>
 						Zip:
 						<input
@@ -230,7 +236,7 @@ const Account = (props) => {
 						<b>City:</b> {shipCity}
 					</p>
 					<p>
-						<b>State:</b> {shipStateAddress}
+						<b>State:</b> {shipState}
 					</p>
 					<p>
 						<b>Zip:</b> {shipZipcode}
@@ -251,7 +257,7 @@ const Account = (props) => {
 						<b>City:</b> {billingCity}
 					</p>
 					<p>
-						<b>State:</b> {billingStateAddress}
+						<b>State:</b> {billingState}
 					</p>
 					<p>
 						<b>Zip:</b> {billingZipcode}
