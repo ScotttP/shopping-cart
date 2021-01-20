@@ -48,6 +48,7 @@ const App = () => {
 	const [signUpPassword, setSignUpPassword] = useState("");
 	const [signUpFirstName, setSignUpFirstName] = useState("");
 	const [signUpLastName, setSignUpLastName] = useState("");
+	const [isInReview, setIsInReview] = useState(false);
 
 	const [errors, setErrors] = useState("");
 
@@ -149,6 +150,14 @@ const App = () => {
 		}
 	};
 
+	const setAsInReview = () => {
+		setIsInReview((prevState) => {
+			console.log(prevState);
+			if (prevState === false) return true;
+			else return true;
+		});
+	};
+
 	useEffect(() => {
 		setProductList(products);
 	}, [products]);
@@ -170,8 +179,6 @@ const App = () => {
 			.catch((error) => console.log(error));
 	}, []);
 
-	console.log(firebaseAuth.currentUser);
-
 	return (
 		<Router basename={process.env.PUBLIC_URL + "/"}>
 			<Navbar cartItems={cartItems} currentUser={currentUser} />
@@ -183,7 +190,12 @@ const App = () => {
 				</Route>
 
 				<Route exact path="/cart">
-					<Cart cartItems={cartItems} currentUser={currentUser} />
+					<Cart
+						cartItems={cartItems}
+						currentUser={currentUser}
+						isInReview={isInReview}
+						setAsInReview={() => setAsInReview()}
+					/>
 				</Route>
 
 				<Route exact path="/shop/:productName">
@@ -253,7 +265,12 @@ const App = () => {
 					<Payment currentUser={currentUser}></Payment>
 				</Route>
 				<Route exact path="/Review">
-					<Review currentUser={currentUser}></Review>
+					<Cart
+						cartItems={cartItems}
+						currentUser={currentUser}
+						isInReview={isInReview}
+						setAsInReview={() => setAsInReview()}
+					/>
 				</Route>
 				<Route
 					exact

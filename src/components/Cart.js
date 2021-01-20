@@ -40,6 +40,9 @@ const Cart = (props) => {
 					</div>
 				</div>
 			);
+		}
+		if (props.isInReview) {
+			return <div>Review Item card</div>;
 		} else {
 			return cartList.map((element, index) => (
 				<div className="cartItemCardContainer" key={uniqid()}>
@@ -57,6 +60,8 @@ const Cart = (props) => {
 			));
 		}
 	};
+
+	console.log(props.isInReview);
 
 	const sumOrder = () => {
 		let totalsArray = [];

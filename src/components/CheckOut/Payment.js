@@ -48,7 +48,7 @@ const Payment = (props) => {
 				></input>
 			</label>
 			<Link to="/Review">
-				<button>Review Order</button>
+				<button onClick={props.setAsInReview}>Review Order</button>
 			</Link>
 		</div>
 	);
