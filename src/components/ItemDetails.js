@@ -66,14 +66,18 @@ const ItemDetails = (props) => {
 			const userRef = firestore
 				.collection("users")
 				.doc(`${firebaseAuth.currentUser.uid}`);
-			await userRef.collection("cart").add({
-				productName: productName,
-				image: productImage,
-				price: productPrice,
-				quantity: quantity,
-				configuration: configurationType,
-				shaft: shaftType,
-			});
+			try {
+				userRef.collection("cart").add({
+					productName: productName,
+					image: productImage,
+					price: productPrice,
+					quantity: quantity,
+					configuration: configurationType,
+					shaft: shaftType,
+				});
+			} catch (error) {
+				console.log(error);
+			}
 		}
 
 		setQuantity(0);

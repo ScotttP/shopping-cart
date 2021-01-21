@@ -143,10 +143,10 @@ const App = () => {
 	const authStateObserver = (user) => {
 		if (user) {
 			setCurrentUser(firebaseAuth.currentUser);
-			console.log(`Logged in ${firebaseAuth.currentUser.uid}`);
+			// console.log(`Logged in ${firebaseAuth.currentUser.uid}`);
 		} else {
 			setCurrentUser("");
-			console.log("logged out");
+			// console.log("logged out");
 		}
 	};
 
@@ -154,7 +154,7 @@ const App = () => {
 		setIsInReview((prevState) => {
 			console.log(prevState);
 			if (prevState === false) return true;
-			else return true;
+			else return false;
 		});
 	};
 

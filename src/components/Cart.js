@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import uniqid from "uniqid";
 import CartItemCard from "./CartItemCard";
+import CheckoutReviewItemCard from "./CheckoutReviewItemCard";
 import { Link } from "react-router-dom";
 
 import firebase from "../components/firebaseConfig";
@@ -42,7 +43,20 @@ const Cart = (props) => {
 			);
 		}
 		if (props.isInReview) {
-			return <div>Review Item card</div>;
+			return cartList.map((element, index) => (
+				<div className="cartItemCardContainer" key={uniqid()}>
+					<CheckoutReviewItemCard
+						key={uniqid()}
+						id={element.id}
+						index={index}
+						uid={uid}
+						data={element}
+						onChangeQty={(e) => props.onChangeQty(e)}
+						inCart={true}
+						deleteFromCart={() => props.deleteFromCart(element, index)}
+					/>
+				</div>
+			));
 		} else {
 			return cartList.map((element, index) => (
 				<div className="cartItemCardContainer" key={uniqid()}>
@@ -61,7 +75,27 @@ const Cart = (props) => {
 		}
 	};
 
-	console.log(props.isInReview);
+	const clearCart = async () => {
+		await userCartRef.onSnapshot((snapshot) => {
+			snapshot.docs.forEach((doc) => {
+				userCartRef.doc(doc.id).delete();
+			});
+		});
+		await addANewCart();
+	};
+
+	const submitOrderWrapper = () => {
+		props.setAsInReview();
+		clearCart();
+	};
+
+	const addANewCart = () => {
+		firestore
+			.collection("users")
+			.doc(`${firebaseAuth.currentUser.uid}`)
+			.collection("cart")
+			.add({});
+	};
 
 	const sumOrder = () => {
 		let totalsArray = [];
@@ -89,10 +123,20 @@ const Cart = (props) => {
 	}
 	const buttonRender = () => {
 		if (cartList === undefined || cartList.length <= 0) return;
+		else if (props.isInReview)
+			return (
+				<Link to="/checkout-complete">
+					<button id="checkoutButton" onClick={() => submitOrderWrapper()}>
+						SUBMIT ORDER
+					</button>
+				</Link>
+			);
 		else
 			return (
 				<Link to="/LoginOrGuestCheckout">
-					<button id="checkoutButton">CHECKOUT</button>
+					<button id="checkoutButton" onClick={props.setAsInReview}>
+						CHECKOUT
+					</button>
 				</Link>
 			);
 	};
