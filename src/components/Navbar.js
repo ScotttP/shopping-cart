@@ -29,7 +29,11 @@ const Navbar = (props) => {
 	};
 
 	const LoginAndAccountRender = () => {
-		if (props.currentUser && !props.currentUser.isAnonymous)
+		if (
+			props.currentUser.isAnonymous === false &&
+			props.currentUser !== null &&
+			props.currentUser !== ""
+		)
 			return <Link to="/Account">Account</Link>;
 		else return <Link to="/Login">Login</Link>;
 	};

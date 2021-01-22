@@ -31,8 +31,6 @@ const firestore = firebase.firestore();
 const firebaseAuth = firebase.auth();
 
 const App = () => {
-	const [cartItems, setCartItems] = useState([]);
-
 	const productsRef = firestore.collection("products");
 	const productsQuery = productsRef.orderBy("category", "asc");
 
@@ -76,7 +74,7 @@ const App = () => {
 
 	const addAnonUserToFirestore = async () => {
 		const anonUid = localStorage.getItem("uid");
-		console.log(`currentUser in addAnonUserToFirestore: ${currentUser.uid}`);
+
 		if (anonUid !== null || anonUid !== undefined) {
 			try {
 				usersRef.doc(`${anonUid}`).set({
@@ -106,57 +104,80 @@ const App = () => {
 		setErrors("");
 	};
 	const signUpWithEmail = (e) => {
-		e.preventDefault();
-		let credential = firebase.auth.EmailAuthProvider.credential(
-			signUpEmail,
-			signUpPassword
-		);
-		firebaseAuth.currentUser
-			.linkWithCredential(credential)
-			.then(() => {
-				const userRef = firestore.collection("users").doc(`${currentUser.uid}`);
+		// let credential = firebase.auth.EmailAuthProvider.credential(
+		// 	signUpEmail,
+		// 	signUpPassword
+		// );
 
-				userRef
-					.update({
-						firstName: signUpFirstName,
-						lastName: signUpLastName,
-						email: signUpEmail,
-						password: signUpPassword,
-						userID: currentUser.uid,
-						shipStreetAddress: "",
-						shipCity: "",
-						shipState: "",
-						shipZipcode: "",
-						billingStreetAddress: "",
-						billingCity: "",
-						billingState: "",
-						billingZipcode: "",
-						cardNumber: "",
-						expirationDate: "",
-					})
-					.catch((error) => console.log(error));
-			})
-			.then(() => {
-				firebaseAuth.onAuthStateChanged(authStateObserver);
+		// if (firebaseAuth.currentUser !== null) {
+		// 	firebaseAuth.currentUser
+		// 		.linkWithCredential(credential)
+		// 		.then(() => {
+		// 			const userRef = firestore
+		// 				.collection("users")
+		// 				.doc(`${currentUser.uid}`);
 
-				console.log(currentUser && !currentUser.isAnonymous);
-			})
-			.catch((error) => {
-				console.log("Error upgrading anonymous account", error);
-			});
+		// 			userRef
+		// 				.update({
+		// 					firstName: signUpFirstName,
+		// 					lastName: signUpLastName,
+		// 					email: signUpEmail,
+
+		// 					userID: currentUser.uid,
+		// 					shipStreetAddress: "",
+		// 					shipCity: "",
+		// 					shipState: "",
+		// 					shipZipcode: "",
+		// 					billingStreetAddress: "",
+		// 					billingCity: "",
+		// 					billingState: "",
+		// 					billingZipcode: "",
+		// 					cardNumber: "",
+		// 					expirationDate: "",
+		// 				})
+		// 				.catch((error) => console.log(error));
+		// 		})
+		// 		.then(() => {
+		// 			firebaseAuth
+		// 				.signInWithEmailAndPassword(signUpEmail, signUpPassword)
+		// 				.catch((error) => {
+		// 					setErrors(error);
+		// 					console.log(error);
+		// 				});
+		// 			setCurrentUser(firebaseAuth.currentUser);
+		// 			setErrors("");
+		// 		})
+		// 		.catch((error) => {
+		// 			console.log("Error upgrading anonymous account", error);
+		// 		});
+		// } else {
+		// 	console.log("no anon account to link to");
+		// }
+		console.log("need to re work this sign in process");
 	};
 
 	const signOut = () => {
 		firebaseAuth.signOut();
+		signInAnonymously();
+	};
+
+	const signInAnonymously = () => {
+		firebaseAuth
+			.signInAnonymously()
+			.then(() => {
+				localStorage.setItem("uid", firebaseAuth.currentUser.uid);
+				// setCurrentUser(firebaseAuth.currentUser);
+			})
+			.then(() => {
+				addAnonUserToFirestore();
+			})
+			.catch((error) => console.log(error));
 	};
 
 	const authStateObserver = (user) => {
 		if (user) {
 			setCurrentUser(firebaseAuth.currentUser);
-		} else {
-			setCurrentUser("");
 		}
-		console.log(currentUser.uid);
 	};
 
 	const setAsInReview = () => {
@@ -172,32 +193,16 @@ const App = () => {
 	}, [products]);
 
 	useEffect(() => {
-		console.log("authstatechange");
 		firebaseAuth.onAuthStateChanged(authStateObserver);
 	}, [currentUser]);
 
 	useEffect(() => {
-		console.log(currentUser);
-		firebaseAuth
-			.signInAnonymously()
-			.then(() => {
-				localStorage.setItem("uid", firebaseAuth.currentUser.uid);
-				setCurrentUser(firebaseAuth.currentUser);
-				console.log(
-					`currentUser in .then of signin Anonymous: ${currentUser.uid}`
-				);
-			})
-			.then(() => {
-				addAnonUserToFirestore();
-			})
-			.catch((error) => console.log(error));
-	}, []);
-
-	console.log(currentUser && !currentUser.isAnonymous);
+		signInAnonymously();
+	}, [currentUser]);
 
 	return (
 		<Router basename={process.env.PUBLIC_URL + "/"}>
-			<Navbar cartItems={cartItems} currentUser={currentUser} />
+			<Navbar currentUser={currentUser} />
 			<Switch>
 				<Route exact path="/" component={Home} />
 
@@ -207,7 +212,6 @@ const App = () => {
 
 				<Route exact path="/cart">
 					<Cart
-						cartItems={cartItems}
 						currentUser={currentUser}
 						isInReview={isInReview}
 						setAsInReview={() => setAsInReview()}
@@ -215,14 +219,18 @@ const App = () => {
 				</Route>
 
 				<Route exact path="/shop/:productName">
-					<ItemDetails currentUser={firebaseAuth.currentUser}></ItemDetails>
+					<ItemDetails
+						currentUser={firebaseAuth.currentUser}
+						signInAnonymously={() => signInAnonymously()}
+					></ItemDetails>
 				</Route>
 
 				<Route
 					exact
 					path="/Login"
 					render={() =>
-						currentUser && !currentUser.isAnonymous ? (
+						currentUser.isAnonymous === false &&
+						currentUser.isAnonymous !== undefined ? (
 							<Redirect to="/Account"></Redirect>
 						) : (
 							<Login
@@ -236,7 +244,7 @@ const App = () => {
 					exact
 					path="/Account"
 					render={() =>
-						!currentUser && currentUser.isAnonymous ? (
+						currentUser === "" || currentUser.isAnonymous === true ? (
 							<Redirect to="/Login"></Redirect>
 						) : (
 							<Account currentUser={currentUser} signOut={signOut}></Account>
@@ -247,8 +255,8 @@ const App = () => {
 					exact
 					path="/CreateAnAccount"
 					render={() =>
-						currentUser && !currentUser.isAnonymous ? (
-							<Redirect to="/AccountTest"></Redirect>
+						currentUser.isAnonymous === false ? (
+							<Redirect to="/Account"></Redirect>
 						) : (
 							<CreateAccount
 								currentUser={currentUser}
@@ -262,7 +270,7 @@ const App = () => {
 					exact
 					path="/LoginOrGuestCheckout"
 					render={() =>
-						currentUser && !currentUser.isAnonymous ? (
+						currentUser.isAnonymous === false ? (
 							<Redirect to="/GeneralAccountInfo"></Redirect>
 						) : (
 							<LoginOrGuestCheckout
@@ -282,7 +290,6 @@ const App = () => {
 				</Route>
 				<Route exact path="/Review">
 					<Cart
-						cartItems={cartItems}
 						currentUser={currentUser}
 						isInReview={isInReview}
 						setAsInReview={() => setAsInReview()}

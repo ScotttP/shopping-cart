@@ -94,7 +94,7 @@ const AlreadyHaveAnAccount = styled.p`
 const CreateAccount = (props) => {
 	return (
 		<FormDiv>
-			<SignUpAndLoginContainer>
+			<SignUpAndLoginContainer onSubmit={(e) => props.signUpWithEmail(e)}>
 				<FormContent>
 					<SignUpHeader>Create An Account</SignUpHeader>
 					<FormLabels>
@@ -133,8 +133,8 @@ const CreateAccount = (props) => {
 					</FormLabels>
 					{/* <Error errors={props.errors} /> */}
 					<br></br>
-					{/* <Link to="/Account"> */}
-					<SignUpButton onClick={(e) => props.signUpWithEmail(e)}>
+					{/* <Link to="/Shop"> */}
+					<SignUpButton type="submit">
 						<b>Sign Up</b>
 					</SignUpButton>
 					{/* </Link> */}
