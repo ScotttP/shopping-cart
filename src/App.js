@@ -50,6 +50,8 @@ const App = () => {
 
 	const [errors, setErrors] = useState("");
 
+	const [filteredArray, setFilteredArray] = useState(products);
+
 	const handleChange = (e) => {
 		setErrors("");
 		if (e.target.type === "email" && e.target.id === "loginEmailInput")
@@ -72,17 +74,54 @@ const App = () => {
 			return setSignUpLastName(e.target.value);
 	};
 
-	const addAnonUserToFirestore = async () => {
-		const anonUid = localStorage.getItem("uid");
+	const handleFilter = (e) => {
+		if (e.target.className === "viewAllClubsButton") {
+			setFilteredArray(productList);
+		} else if (e.target.className === "viewDriversButton") {
+			return setFilteredArray(
+				productList.filter((todo) => {
+					return todo.category === "Driver";
+				})
+			);
+		} else if (e.target.className === "viewIronsButton") {
+			return setFilteredArray(
+				productList.filter((todo) => {
+					return todo.category === "Iron";
+				})
+			);
+		} else {
+			return setFilteredArray(
+				productList.filter((todo) => {
+					return todo.category === "Putter";
+				})
+			);
+		}
+	};
 
-		if (anonUid !== null || anonUid !== undefined) {
+	const signInAnonymously = () => {
+		firebaseAuth
+			.signInAnonymously()
+			.then(() => {
+				addAnonUserToFirestore();
+			})
+			.then(() => {
+				localStorage.setItem("uid", firebaseAuth.currentUser.uid);
+			})
+			.catch((error) => console.log(error));
+	};
+
+	const addAnonUserToFirestore = async () => {
+		if (
+			firebaseAuth.currentUser.uid !== null ||
+			firebaseAuth.currentUser.uid !== undefined
+		) {
 			try {
-				usersRef.doc(`${anonUid}`).set({
+				usersRef.doc(`${firebaseAuth.currentUser.uid}`).set({
 					firstName: "",
 					lastName: "",
 					email: "",
 					password: "",
-					userID: anonUid,
+					userID: firebaseAuth.currentUser.uid,
 					cardNumber: "",
 					expirationDate: "",
 				});
@@ -93,15 +132,16 @@ const App = () => {
 	};
 
 	const loginWithEmail = (e) => {
-		e.preventDefault();
-		firebaseAuth
-			.signInWithEmailAndPassword(loginEmail, loginPassword)
-			.catch((error) => {
-				setErrors(error);
-				console.log(error);
-			});
+		// e.preventDefault();
+		// firebaseAuth
+		// 	.signInWithEmailAndPassword(loginEmail, loginPassword)
+		// 	.catch((error) => {
+		// 		setErrors(error);
+		// 		console.log(error);
+		// 	});
 
-		setErrors("");
+		// setErrors("");
+		console.log("need to re work this when guest checkout is implemented");
 	};
 	const signUpWithEmail = (e) => {
 		// let credential = firebase.auth.EmailAuthProvider.credential(
@@ -158,20 +198,7 @@ const App = () => {
 
 	const signOut = () => {
 		firebaseAuth.signOut();
-		signInAnonymously();
-	};
-
-	const signInAnonymously = () => {
-		firebaseAuth
-			.signInAnonymously()
-			.then(() => {
-				localStorage.setItem("uid", firebaseAuth.currentUser.uid);
-				// setCurrentUser(firebaseAuth.currentUser);
-			})
-			.then(() => {
-				addAnonUserToFirestore();
-			})
-			.catch((error) => console.log(error));
+		// signInAnonymously();
 	};
 
 	const authStateObserver = (user) => {
@@ -197,17 +224,29 @@ const App = () => {
 	}, [currentUser]);
 
 	useEffect(() => {
-		signInAnonymously();
+		if (!localStorage.getItem("uid")) {
+			signInAnonymously();
+		}
 	}, [currentUser]);
+
+	useEffect(() => {
+		setFilteredArray(productList);
+	}, [productList]);
 
 	return (
 		<Router basename={process.env.PUBLIC_URL + "/"}>
 			<Navbar currentUser={currentUser} />
 			<Switch>
-				<Route exact path="/" component={Home} />
+				<Route exact path="/">
+					<Home handleFilter={(e) => handleFilter(e)}></Home>
+				</Route>
 
 				<Route exact path="/shop">
-					<Shop productList={productList} />
+					<Shop
+						productList={productList}
+						filteredArray={filteredArray}
+						handleFilter={(e) => handleFilter(e)}
+					/>
 				</Route>
 
 				<Route exact path="/cart">

@@ -75,26 +75,18 @@ const Cart = (props) => {
 		}
 	};
 
-	const clearCart = async () => {
-		await userCartRef.onSnapshot((snapshot) => {
-			snapshot.docs.forEach((doc) => {
-				userCartRef.doc(doc.id).delete();
-			});
+	const clearCart = () => {
+		cartList.map((cartItemId) => {
+			userCartRef
+				.doc(`${cartItemId.id}`)
+				.delete()
+				.catch((error) => console.log(error));
 		});
-		await addANewCart();
 	};
 
 	const submitOrderWrapper = () => {
 		props.setAsInReview();
 		clearCart();
-	};
-
-	const addANewCart = () => {
-		firestore
-			.collection("users")
-			.doc(`${firebaseAuth.currentUser.uid}`)
-			.collection("cart")
-			.add({});
 	};
 
 	const sumOrder = () => {

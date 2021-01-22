@@ -4,7 +4,7 @@ import facebook from "../Icons/icons8-facebook.svg";
 import instagram from "../Icons/icons8-instagram.svg";
 import twitter from "../Icons/icons8-twitter-24.png";
 
-const Home = () => {
+const Home = (props) => {
 	return (
 		<div>
 			<div id="home">
@@ -16,15 +16,29 @@ const Home = () => {
 				</div>
 			</div>
 			<div id="buttonContainer">
-				<Link to="/shop" id="linkToDrivers">
+				<Link
+					to="/shop"
+					id="linkToDrivers"
+					className="viewDriversButton"
+					onClick={(e) => props.handleFilter(e)}
+				>
 					<span>Drivers</span>
 				</Link>
-				<Link to="/shop" id="linkToIrons">
+				<Link
+					to="/shop"
+					id="linkToIrons"
+					className="viewIronsButton"
+					onClick={(e) => props.handleFilter(e)}
+				>
 					<span>Irons</span>
 				</Link>
 
-				{/* ****** NEED TO ADD WEDGE BUTTON ******** */}
-				<Link to="/shop" id="linkToPutters">
+				<Link
+					to="/shop"
+					id="linkToPutters"
+					className="viewPuttersButton"
+					onClick={(e) => props.handleFilter(e)}
+				>
 					<span>Putters</span>
 				</Link>
 			</div>
@@ -44,6 +58,7 @@ const Home = () => {
 					</p>
 				</div>
 				<img
+					alt="clubs"
 					id="clubsImage"
 					src="https://www.taylormadegolf.com/on/demandware.static/-/Sites-TMaG-Library/en_US/v1610442348251/TaylorMade/homepage_test/images/custom-desktop.jpg"
 				></img>
@@ -60,9 +75,9 @@ const Home = () => {
 				</label>
 				<div id="followUsDiv">
 					<h2>Follow Us</h2>
-					<img src={facebook}></img>
-					<img src={instagram}></img>
-					<img src={twitter}></img>
+					<img alt="facebook" src={facebook}></img>
+					<img alt="instagram" src={instagram}></img>
+					<img alt="twitter" src={twitter}></img>
 				</div>
 			</footer>
 		</div>

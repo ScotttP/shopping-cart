@@ -5,7 +5,7 @@ const CheckoutComplete = () => {
 	return (
 		<div id="checkoutComplete">
 			<h1 id="thankYouForYourOrder">Thank You For Your Order!</h1>
-			<p>A Confirmation Email Will Be Sent To You Soon!</p>
+
 			<div id="goToShopElement">
 				<Link to="/shop">Go Back To Shop</Link>
 			</div>
