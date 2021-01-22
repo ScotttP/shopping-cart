@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?familysans-serifwght@100;200;300&display=swap");
+@import url("https://fonts.googleapis.com/css2?familysans-serifwght@400;500;600;700&display=swap"); */
 @import url("//db.onlinewebfonts.com/c/9d097da6a9a781eb3dbfd8fe6cab0066?family=DINNextW01-CondensedRegular");
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: "DINNextW01-CondensedRegular", "Montserrat";
+	font-family: "DINNextW01-CondensedRegular", sans-serif;
 }
 body,
 html {
@@ -56,6 +56,7 @@ span {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin: 2% 0 2% 0;
 }
 .increaseOrDecreaseQtyContainer > button {
 	background-color: rgb(233, 238, 240);
@@ -106,7 +107,19 @@ span {
 	border: solid 1px transparent;
 	color: white;
 }
-
+.itemDetailsButtonDiv {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 2% 0 2% 0;
+}
+.qtyChangeandAddToCartContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 15%;
+}
 .displayQty {
 	display: flex;
 	justify-content: center;
@@ -123,6 +136,10 @@ span {
 	height: 100%;
 	border: 1px solid #c4bdbd;
 	transition: 0.2s;
+}
+.config,
+.shaft {
+	margin: 5% 0 5% 0;
 }
 
 .shopItemCard {
@@ -388,6 +405,15 @@ span {
 	align-items: center;
 }
 
+#featured {
+	max-width: 500px;
+	max-height: 600px;
+	object-fit: cover;
+	cursor: pointer;
+	opacity: 1;
+	border: 1px solid #c4bdbd;
+	transition: 0.3s;
+}
 .productImagesInShop,
 .productImagesInCart {
 	max-width: 100%;
@@ -398,6 +424,28 @@ span {
 }
 .productImagesInShop {
 	max-height: 400px;
+}
+.sliderWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.thumbnailImages {
+	object-fit: cover;
+	max-width: 180px;
+	max-height: 100px;
+	cursor: pointer;
+	opacity: 0.5;
+	margin: 5px 1px 5px 3px;
+}
+.thumbnailImages:hover {
+	opacity: 1;
+}
+.active {
+	opacity: 1;
+	border: 2px solid #c4bdbd;
 }
 .cartImageDiv {
 	width: 35%;

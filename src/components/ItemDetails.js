@@ -18,17 +18,18 @@ const ItemDetailsDiv = styled.div`
 const ProductInformation = styled.div`
 	margin: 5%;
 	display: flex;
-
+	padding: 2% 2% 2% 0;
 	border: 1px solid #c4bdbd;
-	height: 40vh;
-	width: 50vw;
+	height: 60vh;
+	width: 65vw;
+	max-width: 900px;
 `;
 
 const RightProductInformation = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-
+	padding: 2%;
 	& > * {
 		margin: 2% 0 2% 0;
 	}
@@ -42,7 +43,10 @@ const ItemDetails = (props) => {
 	const [shaftType, setShaftType] = useState("");
 	const [productPrice, setProductPrice] = useState("");
 	const [quantity, setQuantity] = useState(0);
-	const [productImage, setProductImage] = useState(0);
+	const [productImage1, setProductImage1] = useState("");
+	const [productImage2, setProductImage2] = useState("");
+	const [productImage3, setProductImage3] = useState("");
+	const [productImage4, setProductImage4] = useState("");
 
 	const product = itemList.find((product) => product.name === productName);
 	const productsRef = firestore
@@ -54,7 +58,10 @@ const ItemDetails = (props) => {
 			.get()
 			.then((doc) => {
 				setProductPrice(doc.data().price);
-				setProductImage(doc.data().image);
+				setProductImage1(doc.data().image);
+				setProductImage2(doc.data().image2);
+				setProductImage3(doc.data().image3);
+				setProductImage4(doc.data().image4);
 			})
 			.catch((error) => {
 				console.log(error);
@@ -69,7 +76,7 @@ const ItemDetails = (props) => {
 			try {
 				userRef.collection("cart").add({
 					productName: productName,
-					image: productImage,
+					image: productImage1,
 					price: productPrice,
 					quantity: quantity,
 					configuration: configurationType,
@@ -98,6 +105,16 @@ const ItemDetails = (props) => {
 		}
 	};
 
+	const updatingActiveImage = (e) => {
+		let activeImages = document.getElementsByClassName("active");
+
+		if (activeImages.length > 0) {
+			activeImages[0].classList.remove("active");
+		}
+		e.target.classList.add("active");
+		document.getElementById("featured").src = e.target.src;
+	};
+
 	useEffect(() => {
 		getPrice();
 	}, []);
@@ -105,11 +122,39 @@ const ItemDetails = (props) => {
 	return (
 		<ItemDetailsDiv>
 			<ProductInformation>
+				<div className="sliderWrapper">
+					<img
+						className="thumbnailImages active"
+						src={productImage1}
+						alt={product.name}
+						onMouseOver={(e) => updatingActiveImage(e)}
+					></img>
+					<img
+						className="thumbnailImages"
+						src={productImage2}
+						alt={product.name}
+						onMouseOver={(e) => updatingActiveImage(e)}
+					></img>
+					<img
+						className="thumbnailImages"
+						src={productImage3}
+						alt={product.name}
+						onMouseOver={(e) => updatingActiveImage(e)}
+					></img>
+					<img
+						className="thumbnailImages"
+						src={productImage4}
+						alt={product.name}
+						onMouseOver={(e) => updatingActiveImage(e)}
+					></img>
+				</div>
 				<img
-					className="productImagesInShop"
-					src={productImage}
+					className="thumbnailImages"
+					id="featured"
+					src={productImage1}
 					alt={product.name}
 				></img>
+
 				<RightProductInformation>
 					<h1>{product.name}</h1>
 					<p>
@@ -125,7 +170,7 @@ const ItemDetails = (props) => {
 					</p>
 
 					<OptionsDiv>
-						<div>
+						<div className="config">
 							<label>Configuration: </label>
 							<select
 								onChange={(e) => setConfigurationType(e.target.value)}
@@ -136,7 +181,7 @@ const ItemDetails = (props) => {
 								<option value="Left">Left</option>
 							</select>
 						</div>
-						<div>
+						<div className="shaft">
 							<label>Shaft: </label>
 							<select
 								onChange={(e) => setShaftType(e.target.value)}
@@ -147,18 +192,25 @@ const ItemDetails = (props) => {
 								<option value="Stiff">Stiff</option>
 							</select>
 						</div>
-						<div className="increaseOrDecreaseQtyContainer">
-							<button className="decreaseQty" onClick={(e) => changeQty(e)}>
-								-
-							</button>
-							<p className="displayQty">{quantity}</p>
-							<button className="increaseQty" onClick={(e) => changeQty(e)}>
-								+
-							</button>
+						<div className="qtyChangeandAddToCartContainer">
+							<div className="increaseOrDecreaseQtyContainer">
+								<button className="decreaseQty" onClick={(e) => changeQty(e)}>
+									-
+								</button>
+								<p className="displayQty">{quantity}</p>
+								<button className="increaseQty" onClick={(e) => changeQty(e)}>
+									+
+								</button>
+							</div>
+							<div className="itemDetailsButtonDiv">
+								<button
+									className="addToCartButton"
+									onClick={() => addItemToCart()}
+								>
+									+ Add to Cart
+								</button>
+							</div>
 						</div>
-						<button className="addToCartButton" onClick={() => addItemToCart()}>
-							+ Add to Cart
-						</button>
 					</OptionsDiv>
 				</RightProductInformation>
 			</ProductInformation>
