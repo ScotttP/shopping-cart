@@ -67,6 +67,7 @@ const ItemDetails = (props) => {
 				.collection("users")
 				.doc(`${firebaseAuth.currentUser.uid}`);
 			try {
+				console.log("addCartCollection");
 				userRef.collection("cart").add({
 					productName: productName,
 					image: productImage,

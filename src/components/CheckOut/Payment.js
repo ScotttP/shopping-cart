@@ -14,8 +14,10 @@ const Payment = (props) => {
 	const userRef = firestore.collection("users").doc(`${props.currentUser.uid}`);
 	useEffect(() => {
 		userRef.get().then((doc) => {
-			setCardNumber(doc.data().cardNumber);
-			setExpirationDate(doc.data().expirationDate);
+			if (!props.currentUser.isAnonymous) {
+				setCardNumber(doc.data().cardNumber);
+				setExpirationDate(doc.data().expirationDate);
+			}
 		});
 	}, []);
 	return (

@@ -18,7 +18,7 @@ import CreateAccount from "./components/UserAuth/CreateAccount";
 import LoginOrGuestCheckout from "./components/CheckOut/LoginOrGuestCheckout";
 import ShipOptions from "./components/CheckOut/ShipOptions";
 import Payment from "./components/CheckOut/Payment";
-import Review from "./components/CheckOut/Review";
+
 import CheckoutComplete from "./components/CheckOut/CheckoutComplete";
 
 import firebase from "./components/firebaseConfig";
@@ -76,19 +76,21 @@ const App = () => {
 
 	const addAnonUserToFirestore = async () => {
 		const anonUid = localStorage.getItem("uid");
-		if (anonUid === null || anonUid === undefined) {
-			console.log("dont do anything.");
-		} else {
-			await usersRef.doc(`${anonUid}`).set({
-				firstName: "",
-				lastName: "",
-				email: "",
-				password: "",
-				userID: anonUid,
-				cardNumber: "",
-				expirationDate: "",
-			});
-			await usersRef.doc(`${anonUid}`).collection("cart").add({});
+		console.log(`currentUser in addAnonUserToFirestore: ${currentUser.uid}`);
+		if (anonUid !== null || anonUid !== undefined) {
+			try {
+				usersRef.doc(`${anonUid}`).set({
+					firstName: "",
+					lastName: "",
+					email: "",
+					password: "",
+					userID: anonUid,
+					cardNumber: "",
+					expirationDate: "",
+				});
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	};
 
@@ -111,25 +113,33 @@ const App = () => {
 		);
 		firebaseAuth.currentUser
 			.linkWithCredential(credential)
-			.then((usercred) => {
+			.then(() => {
 				const userRef = firestore.collection("users").doc(`${currentUser.uid}`);
-				userRef.update({
-					firstName: signUpFirstName,
-					lastName: signUpLastName,
-					email: signUpEmail,
-					password: signUpPassword,
-					userID: currentUser.uid,
-					shipStreetAddress: "",
-					shipCity: "",
-					shipState: "",
-					shipZipcode: "",
-					billingStreetAddress: "",
-					billingCity: "",
-					billingState: "",
-					billingZipcode: "",
-					cardNumber: "",
-					expirationDate: "",
-				});
+
+				userRef
+					.update({
+						firstName: signUpFirstName,
+						lastName: signUpLastName,
+						email: signUpEmail,
+						password: signUpPassword,
+						userID: currentUser.uid,
+						shipStreetAddress: "",
+						shipCity: "",
+						shipState: "",
+						shipZipcode: "",
+						billingStreetAddress: "",
+						billingCity: "",
+						billingState: "",
+						billingZipcode: "",
+						cardNumber: "",
+						expirationDate: "",
+					})
+					.catch((error) => console.log(error));
+			})
+			.then(() => {
+				firebaseAuth.onAuthStateChanged(authStateObserver);
+
+				console.log(currentUser && !currentUser.isAnonymous);
 			})
 			.catch((error) => {
 				console.log("Error upgrading anonymous account", error);
@@ -143,11 +153,10 @@ const App = () => {
 	const authStateObserver = (user) => {
 		if (user) {
 			setCurrentUser(firebaseAuth.currentUser);
-			// console.log(`Logged in ${firebaseAuth.currentUser.uid}`);
 		} else {
 			setCurrentUser("");
-			// console.log("logged out");
 		}
+		console.log(currentUser.uid);
 	};
 
 	const setAsInReview = () => {
@@ -163,21 +172,28 @@ const App = () => {
 	}, [products]);
 
 	useEffect(() => {
+		console.log("authstatechange");
 		firebaseAuth.onAuthStateChanged(authStateObserver);
-	});
+	}, [currentUser]);
 
 	useEffect(() => {
+		console.log(currentUser);
 		firebaseAuth
 			.signInAnonymously()
 			.then(() => {
 				localStorage.setItem("uid", firebaseAuth.currentUser.uid);
 				setCurrentUser(firebaseAuth.currentUser);
+				console.log(
+					`currentUser in .then of signin Anonymous: ${currentUser.uid}`
+				);
 			})
 			.then(() => {
 				addAnonUserToFirestore();
 			})
 			.catch((error) => console.log(error));
 	}, []);
+
+	console.log(currentUser && !currentUser.isAnonymous);
 
 	return (
 		<Router basename={process.env.PUBLIC_URL + "/"}>
@@ -220,7 +236,7 @@ const App = () => {
 					exact
 					path="/Account"
 					render={() =>
-						!currentUser || currentUser.isAnonymous ? (
+						!currentUser && currentUser.isAnonymous ? (
 							<Redirect to="/Login"></Redirect>
 						) : (
 							<Account currentUser={currentUser} signOut={signOut}></Account>
@@ -232,7 +248,7 @@ const App = () => {
 					path="/CreateAnAccount"
 					render={() =>
 						currentUser && !currentUser.isAnonymous ? (
-							<Redirect to="/Account"></Redirect>
+							<Redirect to="/AccountTest"></Redirect>
 						) : (
 							<CreateAccount
 								currentUser={currentUser}
@@ -277,6 +293,9 @@ const App = () => {
 					path="/checkout-complete"
 					component={CheckoutComplete}
 				></Route>
+				<Route exact path="/AccountTest">
+					<div>HI</div>
+				</Route>
 			</Switch>
 		</Router>
 	);

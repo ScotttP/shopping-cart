@@ -10,28 +10,26 @@ const FormDiv = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	color: rgb(11, 23, 56);
 	@media only screen and (max-width: 350px) {
 		margin-top: 14px;
 	}
 `;
 
 const SignUpAndLoginContainer = styled.form`
-	background-color: #272626;
+	background-color: rgb(216, 214, 214);
 	display: flex;
 	flex-direction: column;
 	border-radius: 5px;
 	align-items: center;
 	width: 25vw;
-	height: 100%;
+	height: 60vh;
 	min-width: 290px;
-	min-height: 495px;
-	${"" /* max-height: 550px; */}
-	box-shadow: 0px 1px 20px 1px rgb(40, 40, 40);
-	${
-		"" /* @media only screen and (max-width: 1500px) {
-		height: 50vh;
-		max-height: 500px;
-	} */
+	min-height: 560px;
+	max-height: 600px;
+
+	box-shadow: 0px 2px 15px 2px rgba(0, 0, 0, 0.75);
+	@media only screen and (max-width: 1500px) {
 	}
 `;
 
@@ -43,17 +41,18 @@ const FormContent = styled.div`
 	width: 20vw;
 	height: 100%;
 	min-width: 240px;
-	${"" /* max-height: 550px; */}
+	max-width: 300px;
+	max-height: 550px;
 `;
 
 const SignUpHeader = styled.h1`
-	margin: 5%;
+	margin: 2%;
 `;
 
 const FormLabels = styled.label`
 	width: 20vw;
 	min-width: 231px;
-	margin: 5%;
+	margin: 5% 0 5% 0;
 	font-size: 13px;
 `;
 
@@ -62,7 +61,7 @@ const FormInputs = styled.input`
 	height: 2rem;
 	margin-top: 10px;
 	padding: 2%;
-	border: none;
+	border: 1px solid rgb(11, 23, 56);
 	border-radius: 5px;
 `;
 
@@ -74,41 +73,18 @@ const PasswordTextDiv = styled.div`
 const SignUpButton = styled.button`
 	&:hover {
 		cursor: pointer;
-		background-color: #272626;
-		color: #1da930;
+		background-color: rgb(216, 214, 214);
+		color: rgb(11, 23, 56);
+		border: 2px solid rgb(11, 23, 56);
 	}
 	width: 100%;
 	height: 2rem;
-	border: none;
+	border: 2px solid rgb(11, 23, 56);
 	border-radius: 5px;
-	background-color: #1da930;
+	background-color: rgb(11, 23, 56);
 	color: #fff;
-	border: 1px #1da930 solid;
-	transition: 0.3s;
-`;
 
-const GoogleButton = styled.button`
-	&:hover {
-		cursor: pointer;
-		background-color: #272626;
-		color: #fff;
-	}
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 2rem;
-	border: none;
-	border-radius: 5px;
-	color: #272626;
-	border: 1px #fff solid;
 	transition: 0.3s;
-`;
-
-const GoogleLogo = styled.img`
-	width: 20px;
-	height: 20px;
-	margin-right: 5px;
 `;
 
 const AlreadyHaveAnAccount = styled.p`
@@ -157,16 +133,17 @@ const CreateAccount = (props) => {
 					</FormLabels>
 					{/* <Error errors={props.errors} /> */}
 					<br></br>
-
+					{/* <Link to="/Account"> */}
 					<SignUpButton onClick={(e) => props.signUpWithEmail(e)}>
 						<b>Sign Up</b>
 					</SignUpButton>
+					{/* </Link> */}
 					<br></br>
 					<AlreadyHaveAnAccount>Already have an account?</AlreadyHaveAnAccount>
 					<Link style={{ textDecoration: "none" }} to="/Login">
 						<p
 							onClick={props.resetErrors}
-							style={{ textDecoration: "none", color: "#1DB954" }}
+							style={{ textDecoration: "underline", color: "rgb(11, 23, 56)" }}
 						>
 							Login
 						</p>
