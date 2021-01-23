@@ -13,25 +13,49 @@ const ItemDetailsDiv = styled.div`
 	height: 100vh;
 	display: flex;
 	justify-content: center;
+	@media only screen and (max-width: 884px) {
+		height: 110vh;
+	}
+	@media only screen and (max-width: 730px) {
+		height: 150vh;
+	}
+	@media only screen and (max-width: 500px) {
+		height: 130vh;
+	}
+	@media only screen and (max-width: 320px) {
+		height: 180vh;
+	}
 `;
 
 const ProductInformation = styled.div`
-	margin: 5%;
+	margin-top: 4%;
+
 	display: flex;
-	padding: 2% 2% 2% 0;
+	padding: 2%;
 	border: 1px solid #c4bdbd;
-	height: 60vh;
+	height: fit-content;
+
 	width: 65vw;
 	max-width: 900px;
+
+	@media only screen and (max-width: 1275px) {
+		width: 85vw;
+	}
+	@media only screen and (max-width: 884px) {
+		flex-direction: column;
+	}
 `;
 
 const RightProductInformation = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 2%;
+	padding: 2% 2% 2% 5%;
 	& > * {
 		margin: 2% 0 2% 0;
+	}
+	@media only screen and (max-width: 884px) {
+		padding: 2% 10% 2% 10%;
 	}
 `;
 
@@ -122,38 +146,40 @@ const ItemDetails = (props) => {
 	return (
 		<ItemDetailsDiv>
 			<ProductInformation>
-				<div className="sliderWrapper">
+				<div className="productImageDiv">
 					<img
-						className="thumbnailImages active"
+						className="thumbnailImages"
+						id="featured"
 						src={productImage1}
 						alt={product.name}
-						onMouseOver={(e) => updatingActiveImage(e)}
 					></img>
-					<img
-						className="thumbnailImages"
-						src={productImage2}
-						alt={product.name}
-						onMouseOver={(e) => updatingActiveImage(e)}
-					></img>
-					<img
-						className="thumbnailImages"
-						src={productImage3}
-						alt={product.name}
-						onMouseOver={(e) => updatingActiveImage(e)}
-					></img>
-					<img
-						className="thumbnailImages"
-						src={productImage4}
-						alt={product.name}
-						onMouseOver={(e) => updatingActiveImage(e)}
-					></img>
+					<div className="sliderWrapper">
+						<img
+							className="thumbnailImages active"
+							src={productImage1}
+							alt={product.name}
+							onMouseOver={(e) => updatingActiveImage(e)}
+						></img>
+						<img
+							className="thumbnailImages"
+							src={productImage2}
+							alt={product.name}
+							onMouseOver={(e) => updatingActiveImage(e)}
+						></img>
+						<img
+							className="thumbnailImages"
+							src={productImage3}
+							alt={product.name}
+							onMouseOver={(e) => updatingActiveImage(e)}
+						></img>
+						<img
+							className="thumbnailImages"
+							src={productImage4}
+							alt={product.name}
+							onMouseOver={(e) => updatingActiveImage(e)}
+						></img>
+					</div>
 				</div>
-				<img
-					className="thumbnailImages"
-					id="featured"
-					src={productImage1}
-					alt={product.name}
-				></img>
 
 				<RightProductInformation>
 					<h1>{product.name}</h1>
@@ -171,7 +197,7 @@ const ItemDetails = (props) => {
 
 					<OptionsDiv>
 						<div className="config">
-							<label>Configuration: </label>
+							<label>Configuration </label>
 							<select
 								onChange={(e) => setConfigurationType(e.target.value)}
 								required
@@ -182,7 +208,7 @@ const ItemDetails = (props) => {
 							</select>
 						</div>
 						<div className="shaft">
-							<label>Shaft: </label>
+							<label>Shaft </label>
 							<select
 								onChange={(e) => setShaftType(e.target.value)}
 								defaultValue="Regular"

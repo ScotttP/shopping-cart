@@ -56,7 +56,8 @@ span {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 2% 0 2% 0;
+	/* margin: 2% 0 2% 0; */
+	width: 100%;
 }
 .increaseOrDecreaseQtyContainer > button {
 	background-color: rgb(233, 238, 240);
@@ -68,7 +69,8 @@ span {
 .decreaseQty,
 .displayQty {
 	height: 3vh;
-	width: 2.5vw;
+	width: 5vw;
+	max-width: 61px;
 	border: none;
 	text-align: center;
 	border: solid 1px #9c9c9c;
@@ -78,7 +80,7 @@ span {
 
 .addToCartButton,
 .deleteFromCartButton {
-	width: 7.5vw;
+	width: 100%;
 	min-width: 100px;
 	min-height: 38px;
 	height: 4vh;
@@ -89,7 +91,6 @@ span {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-top: 8px;
 }
 .addToCartButton,
 .deleteFromCartButton {
@@ -111,14 +112,21 @@ span {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 2% 0 2% 0;
+	margin: 10% 0 0 0;
+	width: 100%;
 }
 .qtyChangeandAddToCartContainer {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	margin-top: 15%;
+	margin-top: 10%;
+}
+@media only screen and (max-width: 884px) {
+	.qtyChangeandAddToCartContainer,
+	.itemDetailsButtonDiv {
+		margin-top: 5%;
+	}
 }
 .displayQty {
 	display: flex;
@@ -139,14 +147,46 @@ span {
 }
 .config,
 .shaft {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: flex-start;
+	padding: 2%;
+	height: fit-content;
+	max-height: 50px;
 	margin: 5% 0 5% 0;
+	border: 1px solid #c4bdbd;
+}
+.config > select,
+.shaft > select {
+	width: 100%;
+
+	border: none;
+	font-size: 1.3em;
 }
 
-.shopItemCard {
+select:hover {
+	cursor: pointer;
+}
+
+.config > .shopItemCard {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+.config > label,
+.shaft > label {
+	font-size: 0.8em;
+	margin-left: 2px;
+	color: #757272;
+}
+@media only screen and (max-width: 884px) {
+	.config,
+	.shaft {
+		margin: 2% 0 2% 0;
+	}
 }
 
 .itemCardContainer:hover {
@@ -159,8 +199,8 @@ span {
 	padding: 2%;
 }
 .addToCartButton {
-	margin: 2%;
 	padding: 2%;
+	width: 100%;
 }
 
 #accountInformationEditMode {
@@ -406,6 +446,8 @@ span {
 }
 
 #featured {
+	width: 100%;
+	height: auto;
 	max-width: 500px;
 	max-height: 600px;
 	object-fit: cover;
@@ -427,13 +469,26 @@ span {
 }
 .sliderWrapper {
 	display: flex;
-	flex-direction: column;
+
 	justify-content: space-around;
+	align-items: center;
+}
+@media only screen and (max-width: 500px) {
+	.sliderWrapper {
+		display: block;
+	}
+}
+
+.productImageDiv {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 }
 
 .thumbnailImages {
 	object-fit: cover;
+
 	max-width: 180px;
 	max-height: 100px;
 	cursor: pointer;
