@@ -1,5 +1,3 @@
-/* @import url("https://fonts.googleapis.com/css2?familysans-serifwght@100;200;300&display=swap");
-@import url("https://fonts.googleapis.com/css2?familysans-serifwght@400;500;600;700&display=swap"); */
 @import url("//db.onlinewebfonts.com/c/9d097da6a9a781eb3dbfd8fe6cab0066?family=DINNextW01-CondensedRegular");
 * {
 	margin: 0;
@@ -13,6 +11,7 @@ html {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
+	scroll-behavior: smooth;
 }
 button {
 	font-family: "DINNextW01-CondensedRegular", sans-serif;
@@ -365,8 +364,14 @@ select:hover {
 	#followUsDiv {
 		margin-top: 10px;
 		display: flex;
-
+		justify-content: center;
 		align-items: center;
+	}
+}
+
+@media only screen and (max-width: 380px) {
+	#followUsDiv {
+		width: 100%;
 	}
 }
 

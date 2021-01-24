@@ -48,8 +48,6 @@ const CartItemCard = (props) => {
 		updateItemToCart();
 	}, [quantity]);
 
-	console.log(props.data);
-
 	return (
 		<div className="cartItemCard">
 			<div className="cartImageDiv">

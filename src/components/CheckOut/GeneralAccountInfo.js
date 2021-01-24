@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { render } from "react-dom";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import firebase from "../../components/firebaseConfig";
 const firestore = firebase.firestore();
 
@@ -38,21 +37,26 @@ const GeneralAccountInfo = (props) => {
 		}
 	}, []);
 
+	const submit = () => {
+		console.log("Submitted!");
+		props.history.push("/ShipOptions");
+	};
+
 	const renderInputOrHeading = () => {
 		if (props.currentUser.isAnonymous) {
 			return (
 				<div>
 					<label>
 						First Name:
-						<input type="text"></input>
+						<input type="text" required></input>
 					</label>
 					<label>
 						Last Name:
-						<input type="text"></input>
+						<input type="text" required></input>
 					</label>
 					<label>
 						Email:
-						<input type="email"></input>
+						<input type="email" required></input>
 					</label>
 				</div>
 			);
@@ -75,7 +79,7 @@ const GeneralAccountInfo = (props) => {
 	};
 
 	return (
-		<div>
+		<form onSubmit={() => submit()}>
 			{renderInputOrHeading()}
 			<div>
 				<label>
@@ -85,6 +89,7 @@ const GeneralAccountInfo = (props) => {
 						type="text"
 						onChange={(e) => setShipStreetAddress(e.target.value)}
 						value={shipStreetAddress}
+						required
 					></input>
 					City:
 					<input
@@ -92,6 +97,7 @@ const GeneralAccountInfo = (props) => {
 						type="text"
 						onChange={(e) => setShipCity(e.target.value)}
 						value={shipCity}
+						required
 					></input>
 					State:
 					<input
@@ -99,6 +105,7 @@ const GeneralAccountInfo = (props) => {
 						type="text"
 						onChange={(e) => setShipState(e.target.value)}
 						value={shipState}
+						required
 					></input>
 					Zip:
 					<input
@@ -106,6 +113,7 @@ const GeneralAccountInfo = (props) => {
 						type="text"
 						onChange={(e) => setShipZipcode(e.target.value)}
 						value={shipZipcode}
+						required
 					></input>
 				</label>
 			</div>
@@ -117,6 +125,7 @@ const GeneralAccountInfo = (props) => {
 						type="text"
 						onChange={(e) => setBillingStreetAddress(e.target.value)}
 						value={billingStreetAddress}
+						required
 					></input>
 					City:
 					<input
@@ -124,6 +133,7 @@ const GeneralAccountInfo = (props) => {
 						type="text"
 						onChange={(e) => setBillingCity(e.target.value)}
 						value={billingCity}
+						required
 					></input>
 					State:
 					<input
@@ -131,6 +141,7 @@ const GeneralAccountInfo = (props) => {
 						type="text"
 						onChange={(e) => setBillingState(e.target.value)}
 						value={billingState}
+						required
 					></input>
 					Zip:
 					<input
@@ -138,15 +149,14 @@ const GeneralAccountInfo = (props) => {
 						type="text"
 						onChange={(e) => setBillingZipcode(e.target.value)}
 						value={billingZipcode}
+						required
 					></input>
 				</label>
 			</div>
 
-			<Link to="/ShipOptions">
-				<button>Shipping Options</button>
-			</Link>
-		</div>
+			<button type="submit">Shipping Options</button>
+		</form>
 	);
 };
 
-export default GeneralAccountInfo;
+export default withRouter(GeneralAccountInfo);

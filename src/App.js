@@ -207,9 +207,8 @@ const App = () => {
 		}
 	};
 
-	const setAsInReview = () => {
+	const setAsInReview = (e) => {
 		setIsInReview((prevState) => {
-			console.log(prevState);
 			if (prevState === false) return true;
 			else return false;
 		});
@@ -253,7 +252,7 @@ const App = () => {
 					<Cart
 						currentUser={currentUser}
 						isInReview={isInReview}
-						setAsInReview={() => setAsInReview()}
+						setAsInReview={(e) => setAsInReview(e)}
 					/>
 				</Route>
 
@@ -331,7 +330,7 @@ const App = () => {
 					<Cart
 						currentUser={currentUser}
 						isInReview={isInReview}
-						setAsInReview={() => setAsInReview()}
+						setAsInReview={(e) => setAsInReview(e)}
 					/>
 				</Route>
 				<Route

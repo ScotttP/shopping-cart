@@ -84,8 +84,8 @@ const Cart = (props) => {
 		});
 	};
 
-	const submitOrderWrapper = () => {
-		props.setAsInReview();
+	const submitOrderWrapper = (e) => {
+		props.setAsInReview(e);
 		clearCart();
 	};
 
@@ -117,16 +117,26 @@ const Cart = (props) => {
 		if (cartList === undefined || cartList.length <= 0) return;
 		else if (props.isInReview)
 			return (
-				<Link to="/checkout-complete">
-					<button id="checkoutButton" onClick={() => submitOrderWrapper()}>
-						SUBMIT ORDER
+				<div>
+					<Link to="/checkout-complete">
+						<button id="checkoutButton" onClick={(e) => submitOrderWrapper(e)}>
+							SUBMIT ORDER
+						</button>
+					</Link>
+					<button
+						class="deleteFromCartButton"
+						onClick={(e) => {
+							props.setAsInReview(e);
+						}}
+					>
+						CANCEL
 					</button>
-				</Link>
+				</div>
 			);
 		else
 			return (
-				<Link to="/LoginOrGuestCheckout">
-					<button id="checkoutButton" onClick={props.setAsInReview}>
+				<Link to="/GeneralAccountInfo">
+					<button id="checkoutButton" onClick={(e) => props.setAsInReview(e)}>
 						CHECKOUT
 					</button>
 				</Link>
