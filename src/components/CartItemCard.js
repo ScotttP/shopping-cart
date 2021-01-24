@@ -43,11 +43,12 @@ const CartItemCard = (props) => {
 				quantity: quantity,
 			})
 			.catch((error) => console.error(error));
-		console.log(props.data.id);
 	};
 	useEffect(() => {
 		updateItemToCart();
 	}, [quantity]);
+
+	console.log(props.data);
 
 	return (
 		<div className="cartItemCard">
@@ -55,12 +56,12 @@ const CartItemCard = (props) => {
 				<img
 					className="productImagesInCart"
 					src={props.data.image}
-					alt={props.data.name}
+					alt={props.data.productName}
 				></img>
 			</div>
 			<div className="cartItemInfoDiv">
 				<div className="itemNameAndPriceContainer">
-					<h3>{props.data.name}</h3>
+					<h3>{props.data.productName}</h3>
 					<p>
 						{new Intl.NumberFormat("en-US", {
 							style: "currency",

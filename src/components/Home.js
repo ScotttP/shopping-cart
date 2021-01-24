@@ -66,12 +66,14 @@ const Home = (props) => {
 			<footer id="footer">
 				<label>
 					<h2>EMAIL SIGNUP</h2>
-					<input
-						placeholder="Email Address"
-						id="emailSignUpForm"
-						type="email"
-					></input>
-					<button id="sendEmailSignUpButton">Send</button>
+					<div id="inputAndSendButtonDiv">
+						<input
+							placeholder="Email Address"
+							id="emailSignUpForm"
+							type="email"
+						></input>
+						<button id="sendEmailSignUpButton">Send</button>
+					</div>
 				</label>
 				<div id="followUsDiv">
 					<h2>Follow Us</h2>

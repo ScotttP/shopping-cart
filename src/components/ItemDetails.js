@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import itemList from "./itemList";
 import styled from "styled-components";
 import firebase from "../components/firebaseConfig";
 import "firebase/auth";
@@ -36,7 +35,7 @@ const ProductInformation = styled.div`
 	height: fit-content;
 
 	width: 65vw;
-	max-width: 900px;
+	max-width: 1000px;
 
 	@media only screen and (max-width: 1275px) {
 		width: 85vw;
@@ -72,7 +71,6 @@ const ItemDetails = (props) => {
 	const [productImage3, setProductImage3] = useState("");
 	const [productImage4, setProductImage4] = useState("");
 
-	const product = itemList.find((product) => product.name === productName);
 	const productsRef = firestore
 		.collection("products")
 		.doc(`${productName.replace(/\s+/g, "-")}`);
@@ -111,7 +109,7 @@ const ItemDetails = (props) => {
 			}
 		}
 
-		//setQuantity(0);
+		setQuantity(0);
 	};
 
 	const changeQty = (e) => {
@@ -141,7 +139,7 @@ const ItemDetails = (props) => {
 
 	useEffect(() => {
 		getPrice();
-	}, []);
+	}, [productName]);
 
 	return (
 		<ItemDetailsDiv>
@@ -151,43 +149,43 @@ const ItemDetails = (props) => {
 						className="thumbnailImages"
 						id="featured"
 						src={productImage1}
-						alt={product.name}
+						alt={productName}
 					></img>
 					<div className="sliderWrapper">
 						<img
 							className="thumbnailImages active"
 							src={productImage1}
-							alt={product.name}
+							alt={productName}
 							onMouseOver={(e) => updatingActiveImage(e)}
 						></img>
 						<img
 							className="thumbnailImages"
 							src={productImage2}
-							alt={product.name}
+							alt={productName}
 							onMouseOver={(e) => updatingActiveImage(e)}
 						></img>
 						<img
 							className="thumbnailImages"
 							src={productImage3}
-							alt={product.name}
+							alt={productName}
 							onMouseOver={(e) => updatingActiveImage(e)}
 						></img>
 						<img
 							className="thumbnailImages"
 							src={productImage4}
-							alt={product.name}
+							alt={productName}
 							onMouseOver={(e) => updatingActiveImage(e)}
 						></img>
 					</div>
 				</div>
 
 				<RightProductInformation>
-					<h1>{product.name}</h1>
+					<h1>{productName}</h1>
 					<p>
 						{new Intl.NumberFormat("en-US", {
 							style: "currency",
 							currency: "USD",
-						}).format(product.price)}
+						}).format(productPrice)}
 					</p>
 					<p>
 						Our obsession with helping golfers improve has driven us beyond the
@@ -201,8 +199,9 @@ const ItemDetails = (props) => {
 							<select
 								onChange={(e) => setConfigurationType(e.target.value)}
 								required
-								defaultValue="Right"
+								defaultValue="Select"
 							>
+								<option value="">Select</option>
 								<option value="Right">Right</option>
 								<option value="Left">Left</option>
 							</select>
@@ -211,9 +210,10 @@ const ItemDetails = (props) => {
 							<label>Shaft </label>
 							<select
 								onChange={(e) => setShaftType(e.target.value)}
-								defaultValue="Regular"
+								defaultValue="Select"
 								required
 							>
+								<option value="">Select</option>
 								<option>Regular</option>
 								<option value="Stiff">Stiff</option>
 							</select>

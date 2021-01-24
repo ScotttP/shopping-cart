@@ -29,13 +29,14 @@ const Navbar = (props) => {
 	};
 
 	const LoginAndAccountRender = () => {
-		if (
-			props.currentUser.isAnonymous === false &&
-			props.currentUser !== null &&
-			props.currentUser !== ""
-		)
-			return <Link to="/Account">Account</Link>;
-		else return <Link to="/Login">Login</Link>;
+		// if (
+		// 	props.currentUser.isAnonymous === false &&
+		// 	props.currentUser !== null &&
+		// 	props.currentUser !== ""
+		// )
+		// 	return <Link to="/Account">Account</Link>;
+		// else return <Link to="/Login">Login</Link>;
+		return null;
 	};
 
 	return (
@@ -54,7 +55,7 @@ const Navbar = (props) => {
 				</p>
 
 				<div id="navBarRight">
-					<p id="accountElement">{LoginAndAccountRender()}</p>
+					{/* <p id="accountElement">{LoginAndAccountRender()}</p> */}
 					<p id="shopElement">
 						<Link to="/shop">Shop</Link>
 					</p>

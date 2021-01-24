@@ -108,6 +108,9 @@ span {
 	border: solid 1px transparent;
 	color: white;
 }
+.deleteFromCartButton {
+	margin-top: 10px;
+}
 .itemDetailsButtonDiv {
 	display: flex;
 	align-items: center;
@@ -244,6 +247,11 @@ select:hover {
 	display: flex;
 	background-color: #f0ebeb;
 }
+@media only screen and (max-width: 500px) {
+	#informationContainer {
+		height: fit-content;
+	}
+}
 
 #textInnerDiv {
 	display: flex;
@@ -256,6 +264,17 @@ select:hover {
 #textInnerDiv > p {
 	margin-top: 30px;
 	font-size: 1.2em;
+}
+
+@media only screen and (max-width: 840px) {
+	#textInnerDiv {
+		padding: 5%;
+	}
+}
+@media only screen and (max-width: 500px) {
+	#textInnerDiv {
+		font-size: 0.8em;
+	}
 }
 
 #buttonContainer {
@@ -284,6 +303,15 @@ select:hover {
 	opacity: 50%;
 }
 
+@media only screen and (max-width: 600px) {
+	#buttonContainer {
+		flex-direction: column;
+	}
+	#buttonContainer > a {
+		width: auto;
+	}
+}
+
 #footer {
 	height: 10vh;
 	background: #191919;
@@ -299,12 +327,47 @@ select:hover {
 	display: flex;
 	align-items: center;
 }
+@media only screen and (max-width: 840px) {
+	#footer {
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		height: 15vh;
+		padding: 0 0 0 5%;
+	}
+}
+@media only screen and (max-width: 500px) {
+	#footer {
+		margin-top: 5vh;
+		font-size: 0.8em;
+		height: 20vh;
+	}
+	#footer > label {
+		flex-direction: column;
+		justify-content: center;
+	}
+}
+@media only screen and (max-width: 350px) {
+	#footer {
+		height: 25vh;
+	}
+}
+
 #followUsDiv {
 	text-align: center;
 }
 
 #followUsDiv > img {
 	margin: 10px;
+}
+
+@media only screen and (max-width: 840px) {
+	#followUsDiv {
+		margin-top: 10px;
+		display: flex;
+
+		align-items: center;
+	}
 }
 
 #emailSignUpForm {
@@ -322,6 +385,11 @@ select:hover {
 	height: 2rem;
 	font-size: 1.1em;
 	background: rgb(182, 181, 181);
+}
+
+#inputAndSendButtonDiv {
+	display: flex;
+	align-items: center;
 }
 
 #linkToDrivers,
@@ -350,6 +418,11 @@ select:hover {
 #linkToIrons {
 	background-position-y: -3px;
 	background-image: url(./images/cat-irons.jpg);
+}
+@media only screen and (max-width: 1223px) {
+	#linkToIrons {
+		background-position-y: 0;
+	}
 }
 
 #linkToPutters {
@@ -381,6 +454,7 @@ select:hover {
 #clubsImage {
 	width: 50%;
 	height: auto;
+	background-position: cover;
 }
 
 #root {
@@ -584,6 +658,10 @@ select:hover {
 	align-items: flex-end;
 }
 
+.qtyAndRemoveButtonContainer {
+	align-items: flex-end;
+}
+
 #totalsContainer {
 	display: flex;
 	align-items: center;
@@ -632,11 +710,8 @@ select:hover {
 	#home {
 		background-position-x: 17%;
 	}
-	#startShoppingButton {
-		height: 4.5em;
-		width: 10em;
-	}
 }
+
 @media only screen and (max-width: 350px) {
 	#startShoppingLink {
 		left: 50%;
