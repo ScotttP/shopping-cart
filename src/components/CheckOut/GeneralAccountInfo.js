@@ -59,7 +59,7 @@ const GeneralAccountInfo = (props) => {
 							<input
 								type="text"
 								onChange={(e) => setFirstName(e.target.value)}
-								placeholder={"John"}
+								placeholder="John"
 								required
 							></input>
 						</label>
@@ -70,7 +70,7 @@ const GeneralAccountInfo = (props) => {
 							<input
 								type="text"
 								onChange={(e) => setLastName(e.target.value)}
-								placeholder={"Smith"}
+								placeholder="Smith"
 								required
 							></input>
 						</label>
@@ -81,7 +81,7 @@ const GeneralAccountInfo = (props) => {
 							<input
 								type="email"
 								onChange={(e) => setEmail(e.target.value)}
-								placeholder={"JohnSmith@email.com"}
+								placeholder="JohnSmith@email.com"
 								required
 							></input>
 						</label>

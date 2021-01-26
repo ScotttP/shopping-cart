@@ -91,6 +91,22 @@ span {
 	justify-content: center;
 	align-items: center;
 }
+.cancelOrderButton {
+	width: 172px;
+	line-height: 1.5em;
+
+	font-size: 1.5em;
+
+	padding: 5px;
+	background: #bd0808;
+	border: solid 1px transparent;
+	color: white;
+
+	transition: 300ms;
+}
+.cancelOrderButton:hover {
+	background: #e91b1b;
+}
 .addToCartButton,
 .deleteFromCartButton {
 	background: white;
@@ -835,7 +851,7 @@ select:hover {
 	flex-direction: column;
 	background-color: rgb(183, 187, 189);
 	padding: 3%;
-	max-height: 231px;
+	height: fit-content;
 }
 #totalsContainer * {
 	margin: 10px;
@@ -853,9 +869,16 @@ select:hover {
 	color: white;
 	padding: 5px;
 	line-height: 1.5em;
+	transition: 300ms;
 }
 #checkoutButton:hover {
 	background: #12ac01;
+}
+#buttonDiv {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 #emptyCartContainer,
 #checkoutComplete {

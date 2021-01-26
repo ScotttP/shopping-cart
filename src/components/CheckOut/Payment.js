@@ -60,7 +60,9 @@ const Payment = (props) => {
 				</label>
 			</div>
 
-			<button className="nextSectionButton">Review Order</button>
+			<button className="nextSectionButton" type="submit">
+				Review Order
+			</button>
 		</form>
 	);
 };

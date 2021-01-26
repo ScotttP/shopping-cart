@@ -208,6 +208,7 @@ const App = () => {
 	};
 
 	const setAsInReview = (e) => {
+		console.log(isInReview);
 		setIsInReview((prevState) => {
 			if (prevState === false) return true;
 			else return false;

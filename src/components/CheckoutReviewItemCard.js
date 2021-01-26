@@ -28,7 +28,7 @@ const CartItemCard = (props) => {
 
 				<div className="qtyAndRemoveButtonContainer">
 					<div className="increaseOrDecreaseQtyContainer">
-						<p className="displayQty">{props.data.quantity}</p>
+						<p>Quantity: {props.data.quantity}</p>
 					</div>
 				</div>
 			</div>

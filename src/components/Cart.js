@@ -117,14 +117,14 @@ const Cart = (props) => {
 		if (cartList === undefined || cartList.length <= 0) return;
 		else if (props.isInReview)
 			return (
-				<div>
+				<div id="buttonDiv">
 					<Link to="/checkout-complete">
 						<button id="checkoutButton" onClick={(e) => submitOrderWrapper(e)}>
 							SUBMIT ORDER
 						</button>
 					</Link>
 					<button
-						class="deleteFromCartButton"
+						className="cancelOrderButton"
 						onClick={(e) => {
 							props.setAsInReview(e);
 						}}
@@ -136,9 +136,7 @@ const Cart = (props) => {
 		else
 			return (
 				<Link to="/GeneralAccountInfo">
-					<button id="checkoutButton" onClick={(e) => props.setAsInReview(e)}>
-						CHECKOUT
-					</button>
+					<button id="checkoutButton">CHECKOUT</button>
 				</Link>
 			);
 	};
@@ -149,6 +147,8 @@ const Cart = (props) => {
 				<h3>Order Summary</h3>
 				<p>Order Quantity: {sumQty()}</p>
 				<p>Order Total: {sumOrder()} </p>
+				<p>Shipping Charge: {"something"} </p>
+				<p>Grand Total: {"something"} </p>
 				{buttonRender()}
 			</div>
 			{cartRendering()}
