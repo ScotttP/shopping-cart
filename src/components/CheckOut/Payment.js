@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import firebase from "../../components/firebaseConfig";
 
@@ -20,40 +20,49 @@ const Payment = (props) => {
 			}
 		});
 	}, []);
+
+	const submit = () => {
+		props.setAsInReview();
+
+		props.history.push("/Review");
+	};
+
 	return (
-		<div>
-			<label>
-				Card Number:
-				<input
-					id="cardNumberInputChange"
-					onChange={(e) => setCardNumber(e.target.value)}
-					value={cardNumber}
-					required
-				></input>
-			</label>
-			<label>
-				Expiration Date:
-				<input
-					id="expirationDateInputChange"
-					onChange={(e) => setExpirationDate(e.target.value)}
-					value={expirationDate}
-					required
-				></input>
-			</label>
-			<label>
-				3 to 4 Digit Code:
-				<input
-					id="codeInputChange"
-					onChange={(e) => setCardCode(e.target.value)}
-					value={cardCode}
-					required
-				></input>
-			</label>
-			<Link to="/Review">
-				<button onClick={props.setAsInReview}>Review Order</button>
-			</Link>
-		</div>
+		<form id="paymentDiv" onSubmit={() => submit()}>
+			<h2>Payment</h2>
+			<div id="paymentInputField">
+				<label>
+					Card Number:
+					<input
+						id="cardNumberInputChange"
+						onChange={(e) => setCardNumber(e.target.value)}
+						value={cardNumber}
+						required
+					></input>
+				</label>
+				<label>
+					Expiration Date:
+					<input
+						id="expirationDateInputChange"
+						onChange={(e) => setExpirationDate(e.target.value)}
+						value={expirationDate}
+						required
+					></input>
+				</label>
+				<label>
+					3 to 4 Digit Code:
+					<input
+						id="codeInputChange"
+						onChange={(e) => setCardCode(e.target.value)}
+						value={cardCode}
+						required
+					></input>
+				</label>
+			</div>
+
+			<button className="nextSectionButton">Review Order</button>
+		</form>
 	);
 };
 
-export default Payment;
+export default withRouter(Payment);

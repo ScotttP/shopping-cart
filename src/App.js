@@ -324,7 +324,11 @@ const App = () => {
 					<ShipOptions currentUser={currentUser}></ShipOptions>
 				</Route>
 				<Route exact path="/Payment">
-					<Payment currentUser={currentUser}></Payment>
+					<Payment
+						currentUser={currentUser}
+						isInReview={isInReview}
+						setAsInReview={(e) => setAsInReview(e)}
+					></Payment>
 				</Route>
 				<Route exact path="/Review">
 					<Cart

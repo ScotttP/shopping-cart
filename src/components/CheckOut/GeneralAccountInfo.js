@@ -38,7 +38,8 @@ const GeneralAccountInfo = (props) => {
 
 	const submit = () => {
 		console.log("Submitted!");
-		props.history.push("/ShipOptions");
+		console.log(props);
+		props.history.push("/Payment");
 	};
 
 	const renderInputOrHeading = () => {
@@ -212,7 +213,28 @@ const GeneralAccountInfo = (props) => {
 					</div>
 				</div>
 			</div>
-			<button type="submit">Shipping Options</button>
+			<div id="shippingOptionsDiv">
+				<h2>Shipping Options: </h2>
+				<div id="shippingOptionsInput">
+					<div>
+						{" "}
+						Free - $0.00
+						<input type="radio" name="shippingOption" required></input>
+					</div>
+					<div>
+						Standard - $4.99
+						<input name="shippingOption" type="radio"></input>
+					</div>
+					<div>
+						Express - $9.99
+						<input name="shippingOption" type="radio"></input>
+					</div>
+				</div>
+			</div>
+
+			<button className="nextSectionButton" onSubmit={() => submit()}>
+				Payment Options
+			</button>
 		</form>
 	);
 };
