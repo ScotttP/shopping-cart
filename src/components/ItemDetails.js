@@ -58,8 +58,6 @@ const RightProductInformation = styled.div`
 	}
 `;
 
-const OptionsDiv = styled.div``;
-
 const ItemDetails = (props) => {
 	const { productName } = useParams();
 	const [configurationType, setConfigurationType] = useState("");
@@ -90,7 +88,10 @@ const ItemDetails = (props) => {
 			});
 	};
 
-	const addItemToCart = async () => {
+	const addItemToCart = async (e) => {
+		e.preventDefault();
+
+		if (quantity <= 0) return;
 		if (firebaseAuth.currentUser) {
 			const userRef = firestore
 				.collection("users")
@@ -140,6 +141,16 @@ const ItemDetails = (props) => {
 	useEffect(() => {
 		getPrice();
 	}, [productName]);
+
+	useEffect(() => {
+		if (quantity !== 0 && shaftType !== "" && configurationType !== "") {
+			document.getElementsByClassName("addToCartButton").disabled = false;
+		} else {
+			document.getElementsByClassName("addToCartButton").disabled = true;
+		}
+	});
+
+	console.log(document.getElementsByClassName("addToCartButton").disabled);
 
 	return (
 		<ItemDetailsDiv>
@@ -193,7 +204,7 @@ const ItemDetails = (props) => {
 						new level of Speed and Forgiveness...
 					</p>
 
-					<OptionsDiv>
+					<form onSubmit={(e) => addItemToCart(e)}>
 						<div className="config">
 							<label>Configuration </label>
 							<select
@@ -214,30 +225,35 @@ const ItemDetails = (props) => {
 								required
 							>
 								<option value="">Select</option>
-								<option>Regular</option>
+								<option value="Regular">Regular</option>
 								<option value="Stiff">Stiff</option>
 							</select>
 						</div>
 						<div className="qtyChangeandAddToCartContainer">
 							<div className="increaseOrDecreaseQtyContainer">
-								<button className="decreaseQty" onClick={(e) => changeQty(e)}>
+								<button
+									type="button"
+									className="decreaseQty"
+									onClick={(e) => changeQty(e)}
+								>
 									-
 								</button>
 								<p className="displayQty">{quantity}</p>
-								<button className="increaseQty" onClick={(e) => changeQty(e)}>
+								<button
+									type="button"
+									className="increaseQty"
+									onClick={(e) => changeQty(e)}
+								>
 									+
 								</button>
 							</div>
 							<div className="itemDetailsButtonDiv">
-								<button
-									className="addToCartButton"
-									onClick={() => addItemToCart()}
-								>
+								<button className="addToCartButton" type="submit">
 									+ Add to Cart
 								</button>
 							</div>
 						</div>
-					</OptionsDiv>
+					</form>
 				</RightProductInformation>
 			</ProductInformation>
 		</ItemDetailsDiv>

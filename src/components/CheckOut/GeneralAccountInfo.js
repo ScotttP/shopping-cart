@@ -38,7 +38,6 @@ const GeneralAccountInfo = (props) => {
 
 	const submit = () => {
 		console.log("Submitted!");
-		console.log(props);
 		props.history.push("/Payment");
 	};
 
@@ -219,15 +218,33 @@ const GeneralAccountInfo = (props) => {
 					<div>
 						{" "}
 						Free - $0.00
-						<input type="radio" name="shippingOption" required></input>
+						<input
+							onChange={(e) => props.selectShippingCharge(e)}
+							type="radio"
+							name="shippingOption"
+							value={0}
+							required
+						></input>
 					</div>
 					<div>
-						Standard - $4.99
-						<input name="shippingOption" type="radio"></input>
+						Standard - $5.00
+						<input
+							onChange={(e) => props.selectShippingCharge(e)}
+							name="shippingOption"
+							type="radio"
+							value={5}
+							required
+						></input>
 					</div>
 					<div>
-						Express - $9.99
-						<input name="shippingOption" type="radio"></input>
+						Express - $10.00
+						<input
+							onChange={(e) => props.selectShippingCharge(e)}
+							name="shippingOption"
+							type="radio"
+							value={10}
+							required
+						></input>
 					</div>
 				</div>
 			</div>

@@ -118,6 +118,10 @@ span {
 	border: solid 1px transparent;
 	color: white;
 }
+.addToCartButton:disabled,
+.addToCartButton[disabled] {
+	background-color: red;
+}
 .deleteFromCartButton:hover {
 	background: #ce0909;
 	border: solid 1px transparent;

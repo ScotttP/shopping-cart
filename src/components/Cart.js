@@ -92,16 +92,12 @@ const Cart = (props) => {
 	const sumOrder = () => {
 		let totalsArray = [];
 
-		if (cartList === undefined || cartList.length <= 0) return `$0.00`;
+		if (cartList === undefined || cartList.length <= 0) return 0;
 		else {
 			cartList.map((item) => {
 				return totalsArray.push(item.quantity * item.price);
 			});
-			let cost = totalsArray.reduce((acc, curr) => acc + curr);
-			return new Intl.NumberFormat("en-US", {
-				style: "currency",
-				currency: "USD",
-			}).format(cost);
+			return totalsArray.reduce((acc, curr) => acc + curr);
 		}
 	};
 
@@ -113,6 +109,28 @@ const Cart = (props) => {
 			return array.reduce((acc, curr) => acc + curr);
 		}
 	}
+
+	const displayShippingCharge = () => {
+		if (props.shippingCharge === undefined) return "TBD";
+		else
+			return new Intl.NumberFormat("en-US", {
+				style: "currency",
+				currency: "USD",
+			}).format(props.shippingCharge);
+	};
+
+	const grandTotal = () => {
+		let grandTotalCost = sumOrder() + props.shippingCharge;
+
+		if (props.shippingCharge === NaN || props.shippingCharge === undefined) {
+			grandTotalCost = sumOrder();
+		}
+		return new Intl.NumberFormat("en-US", {
+			style: "currency",
+			currency: "USD",
+		}).format(grandTotalCost);
+	};
+
 	const buttonRender = () => {
 		if (cartList === undefined || cartList.length <= 0) return;
 		else if (props.isInReview)
@@ -146,9 +164,15 @@ const Cart = (props) => {
 			<div id="totalsContainer">
 				<h3>Order Summary</h3>
 				<p>Order Quantity: {sumQty()}</p>
-				<p>Order Total: {sumOrder()} </p>
-				<p>Shipping Charge: {"something"} </p>
-				<p>Grand Total: {"something"} </p>
+				<p>
+					Order Total:{" "}
+					{new Intl.NumberFormat("en-US", {
+						style: "currency",
+						currency: "USD",
+					}).format(sumOrder())}{" "}
+				</p>
+				<p>Shipping Charge: {displayShippingCharge()} </p>
+				<p>Grand Total: {grandTotal()} </p>
 				{buttonRender()}
 			</div>
 			{cartRendering()}

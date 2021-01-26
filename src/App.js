@@ -47,6 +47,7 @@ const App = () => {
 	const [signUpFirstName, setSignUpFirstName] = useState("");
 	const [signUpLastName, setSignUpLastName] = useState("");
 	const [isInReview, setIsInReview] = useState(false);
+	const [shippingCharge, setShippingCharge] = useState(0);
 
 	const [errors, setErrors] = useState("");
 
@@ -215,6 +216,10 @@ const App = () => {
 		});
 	};
 
+	const selectShippingCharge = (e) => {
+		setShippingCharge(Number(e.target.value));
+	};
+
 	useEffect(() => {
 		setProductList(products);
 	}, [products]);
@@ -319,11 +324,12 @@ const App = () => {
 					}
 				></Route>
 				<Route exact path="/GeneralAccountInfo">
-					<GeneralAccountInfo currentUser={currentUser}></GeneralAccountInfo>
+					<GeneralAccountInfo
+						currentUser={currentUser}
+						selectShippingCharge={(e) => selectShippingCharge(e)}
+					></GeneralAccountInfo>
 				</Route>
-				<Route exact path="/ShipOptions">
-					<ShipOptions currentUser={currentUser}></ShipOptions>
-				</Route>
+
 				<Route exact path="/Payment">
 					<Payment
 						currentUser={currentUser}
@@ -336,6 +342,7 @@ const App = () => {
 						currentUser={currentUser}
 						isInReview={isInReview}
 						setAsInReview={(e) => setAsInReview(e)}
+						shippingCharge={shippingCharge}
 					/>
 				</Route>
 				<Route
