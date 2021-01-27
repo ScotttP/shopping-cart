@@ -104,6 +104,7 @@ const ItemDetails = (props) => {
 					quantity: quantity,
 					configuration: configurationType,
 					shaft: shaftType,
+					userID: firebaseAuth.currentUser.uid,
 				});
 			} catch (error) {
 				console.log(error);
@@ -141,16 +142,6 @@ const ItemDetails = (props) => {
 	useEffect(() => {
 		getPrice();
 	}, [productName]);
-
-	useEffect(() => {
-		if (quantity !== 0 && shaftType !== "" && configurationType !== "") {
-			document.getElementsByClassName("addToCartButton").disabled = false;
-		} else {
-			document.getElementsByClassName("addToCartButton").disabled = true;
-		}
-	});
-
-	console.log(document.getElementsByClassName("addToCartButton").disabled);
 
 	return (
 		<ItemDetailsDiv>
@@ -248,7 +239,7 @@ const ItemDetails = (props) => {
 								</button>
 							</div>
 							<div className="itemDetailsButtonDiv">
-								<button className="addToCartButton" type="submit">
+								<button id="test123" className="addToCartButton" type="submit">
 									+ Add to Cart
 								</button>
 							</div>

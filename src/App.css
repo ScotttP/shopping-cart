@@ -91,6 +91,9 @@ span {
 	justify-content: center;
 	align-items: center;
 }
+.addToCartButton {
+	font-size: 1.1em;
+}
 .cancelOrderButton {
 	width: 172px;
 	line-height: 1.5em;
@@ -107,6 +110,7 @@ span {
 .cancelOrderButton:hover {
 	background: #e91b1b;
 }
+
 .addToCartButton,
 .deleteFromCartButton {
 	background: white;
@@ -118,10 +122,7 @@ span {
 	border: solid 1px transparent;
 	color: white;
 }
-.addToCartButton:disabled,
-.addToCartButton[disabled] {
-	background-color: red;
-}
+
 .deleteFromCartButton:hover {
 	background: #ce0909;
 	border: solid 1px transparent;
@@ -273,6 +274,10 @@ select:hover {
 .inputFields > label {
 	width: 100%;
 	font-size: 0.9em;
+}
+
+#expirationMonth {
+	width: 25%;
 }
 
 .inputFields > label > input {

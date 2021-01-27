@@ -16,7 +16,6 @@ import Account from "./components/UserAuth/Account";
 import Login from "./components/UserAuth/Login";
 import CreateAccount from "./components/UserAuth/CreateAccount";
 import LoginOrGuestCheckout from "./components/CheckOut/LoginOrGuestCheckout";
-import ShipOptions from "./components/CheckOut/ShipOptions";
 import Payment from "./components/CheckOut/Payment";
 
 import CheckoutComplete from "./components/CheckOut/CheckoutComplete";
@@ -25,7 +24,7 @@ import firebase from "./components/firebaseConfig";
 import "firebase/auth";
 import "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import GeneralAccountInfo from "./components/CheckOut/GeneralAccountInfo";
+import UserGeneralInfoAndShippingOptions from "./components/CheckOut/UserGeneralInfoAndShippingOptions";
 
 const firestore = firebase.firestore();
 const firebaseAuth = firebase.auth();
@@ -49,12 +48,17 @@ const App = () => {
 	const [isInReview, setIsInReview] = useState(false);
 	const [shippingCharge, setShippingCharge] = useState(0);
 
-	const [errors, setErrors] = useState("");
-
 	const [filteredArray, setFilteredArray] = useState(products);
 
+	const userCartRef = firestore
+		.collection("users")
+		.doc(`${currentUser.uid}`)
+		.collection("cart");
+	const userCartQuery = userCartRef.orderBy("productName", "asc");
+
+	const [cartList] = useCollectionData(userCartQuery, { idField: "id" });
+
 	const handleChange = (e) => {
-		setErrors("");
 		if (e.target.type === "email" && e.target.id === "loginEmailInput")
 			return setLoginEmail(e.target.value);
 		else if (
@@ -111,6 +115,15 @@ const App = () => {
 			.catch((error) => console.log(error));
 	};
 
+	const sumQty = () => {
+		//this adds the number of items in the cart to the navbar. as well as adds total quantity in cart component
+		if (cartList === undefined || cartList.length <= 0) return 0;
+		else {
+			let array = cartList.map((item) => item.quantity);
+			return array.reduce((acc, curr) => acc + curr);
+		}
+	};
+
 	const addAnonUserToFirestore = async () => {
 		if (
 			firebaseAuth.currentUser.uid !== null ||
@@ -137,11 +150,11 @@ const App = () => {
 		// firebaseAuth
 		// 	.signInWithEmailAndPassword(loginEmail, loginPassword)
 		// 	.catch((error) => {
-		// 		setErrors(error);
+		// 		(error);
 		// 		console.log(error);
 		// 	});
 
-		// setErrors("");
+		// ("");
 		console.log("need to re work this when guest checkout is implemented");
 	};
 	const signUpWithEmail = (e) => {
@@ -182,11 +195,11 @@ const App = () => {
 		// 			firebaseAuth
 		// 				.signInWithEmailAndPassword(signUpEmail, signUpPassword)
 		// 				.catch((error) => {
-		// 					setErrors(error);
+		// 					(error);
 		// 					console.log(error);
 		// 				});
 		// 			setCurrentUser(firebaseAuth.currentUser);
-		// 			setErrors("");
+		// 			("");
 		// 		})
 		// 		.catch((error) => {
 		// 			console.log("Error upgrading anonymous account", error);
@@ -209,7 +222,6 @@ const App = () => {
 	};
 
 	const setAsInReview = (e) => {
-		console.log(isInReview);
 		setIsInReview((prevState) => {
 			if (prevState === false) return true;
 			else return false;
@@ -240,7 +252,7 @@ const App = () => {
 
 	return (
 		<Router basename={process.env.PUBLIC_URL + "/"}>
-			<Navbar currentUser={currentUser} />
+			<Navbar currentUser={currentUser} sumQty={sumQty()} />
 			<Switch>
 				<Route exact path="/">
 					<Home handleFilter={(e) => handleFilter(e)}></Home>
@@ -259,6 +271,7 @@ const App = () => {
 						currentUser={currentUser}
 						isInReview={isInReview}
 						setAsInReview={(e) => setAsInReview(e)}
+						sumQty={sumQty()}
 					/>
 				</Route>
 
@@ -315,19 +328,25 @@ const App = () => {
 					path="/LoginOrGuestCheckout"
 					render={() =>
 						currentUser.isAnonymous === false ? (
-							<Redirect to="/GeneralAccountInfo"></Redirect>
+							<Redirect to="/GeneralInfo"></Redirect>
 						) : (
 							<LoginOrGuestCheckout
 								currentUser={currentUser}
+								loginEmail={loginEmail}
+								loginPassword={loginPassword}
+								signUpEmail={signUpEmail}
+								signUpPassword={signUpPassword}
+								signUpFirstName={signUpFirstName}
+								signUpLastName={signUpLastName}
 							></LoginOrGuestCheckout>
 						)
 					}
 				></Route>
-				<Route exact path="/GeneralAccountInfo">
-					<GeneralAccountInfo
+				<Route exact path="/GeneralInfo">
+					<UserGeneralInfoAndShippingOptions
 						currentUser={currentUser}
 						selectShippingCharge={(e) => selectShippingCharge(e)}
-					></GeneralAccountInfo>
+					></UserGeneralInfoAndShippingOptions>
 				</Route>
 
 				<Route exact path="/Payment">
@@ -350,9 +369,6 @@ const App = () => {
 					path="/checkout-complete"
 					component={CheckoutComplete}
 				></Route>
-				<Route exact path="/AccountTest">
-					<div>HI</div>
-				</Route>
 			</Switch>
 		</Router>
 	);

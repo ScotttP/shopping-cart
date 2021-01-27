@@ -3,31 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../components/taylorMadeLogo.png";
 import golfBag from "../components/golf-bag.svg";
 
-import firebase from "../components/firebaseConfig";
-import "firebase/auth";
-import "firebase/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-
-const firestore = firebase.firestore();
-
 const Navbar = (props) => {
-	const userCartRef = firestore
-		.collection("users")
-		.doc(`${props.currentUser.uid}`)
-		.collection("cart");
-	const userCartQuery = userCartRef.orderBy("productName", "asc");
-
-	const [cartList] = useCollectionData(userCartQuery, { idField: "id" });
-
-	const sumQty = () => {
-		//this adds the number of items in the cart to the navbar. as well as adds total quantity in cart component
-		if (cartList === undefined || cartList.length <= 0) return 0;
-		else {
-			let array = cartList.map((item) => item.quantity);
-			return array.reduce((acc, curr) => acc + curr);
-		}
-	};
-
 	const LoginAndAccountRender = () => {
 		// if (
 		// 	props.currentUser.isAnonymous === false &&
@@ -62,7 +38,7 @@ const Navbar = (props) => {
 
 					<p id="shoppingCartElement">
 						<Link to="/cart">
-							<span id="inShoppingCartCount">{sumQty()}</span>
+							<span id="inShoppingCartCount">{props.sumQty}</span>
 							<span id="golfBagLink">
 								<img
 									id="golfBagLogo"

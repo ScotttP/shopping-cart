@@ -77,7 +77,7 @@ const Cart = (props) => {
 
 	const clearCart = () => {
 		cartList.map((cartItemId) => {
-			userCartRef
+			return userCartRef
 				.doc(`${cartItemId.id}`)
 				.delete()
 				.catch((error) => console.log(error));
@@ -101,15 +101,6 @@ const Cart = (props) => {
 		}
 	};
 
-	function sumQty() {
-		//this adds the number of items in the cart to the navbar. as well as adds total quantity in cart component
-		if (cartList === undefined || cartList.length <= 0) return 0;
-		else {
-			let array = cartList.map((item) => item.quantity);
-			return array.reduce((acc, curr) => acc + curr);
-		}
-	}
-
 	const displayShippingCharge = () => {
 		if (props.shippingCharge === undefined) return "TBD";
 		else
@@ -122,7 +113,7 @@ const Cart = (props) => {
 	const grandTotal = () => {
 		let grandTotalCost = sumOrder() + props.shippingCharge;
 
-		if (props.shippingCharge === NaN || props.shippingCharge === undefined) {
+		if (isNaN(props.shippingCharge) || props.shippingCharge === undefined) {
 			grandTotalCost = sumOrder();
 		}
 		return new Intl.NumberFormat("en-US", {
@@ -153,7 +144,7 @@ const Cart = (props) => {
 			);
 		else
 			return (
-				<Link to="/GeneralAccountInfo">
+				<Link to="/GeneralInfo">
 					<button id="checkoutButton">CHECKOUT</button>
 				</Link>
 			);
@@ -163,7 +154,7 @@ const Cart = (props) => {
 		<div id="cartContainer">
 			<div id="totalsContainer">
 				<h3>Order Summary</h3>
-				<p>Order Quantity: {sumQty()}</p>
+				<p>Order Quantity: {props.sumQty}</p>
 				<p>
 					Order Total:{" "}
 					{new Intl.NumberFormat("en-US", {
