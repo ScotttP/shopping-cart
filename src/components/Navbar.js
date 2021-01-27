@@ -24,8 +24,8 @@ const Navbar = (props) => {
 							id="taylorMadeLogo"
 							src={Logo}
 							alt="logo"
-							width="150"
-							height="41.5"
+							// width="150px"
+							// height="41.5px"
 						></img>
 					</Link>
 				</p>
@@ -44,8 +44,8 @@ const Navbar = (props) => {
 									id="golfBagLogo"
 									src={golfBag}
 									alt="Shopping Cart"
-									width="35"
-									height="35"
+									width="35px"
+									height="35px"
 								></img>
 							</span>
 						</Link>

@@ -77,9 +77,9 @@ const Home = (props) => {
 				</label>
 				<div id="followUsDiv">
 					<h2>Follow Us</h2>
-					<img alt="facebook" src={facebook}></img>
-					<img alt="instagram" src={instagram}></img>
-					<img alt="twitter" src={twitter}></img>
+					<img className="socialIcons" alt="facebook" src={facebook}></img>
+					<img className="socialIcons" alt="instagram" src={instagram}></img>
+					<img className="socialIcons" alt="twitter" src={twitter}></img>
 				</div>
 			</footer>
 		</div>
