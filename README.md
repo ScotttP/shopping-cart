@@ -1,8 +1,6 @@
 # Shopping Cart App
 
-This is a simple app to mimic an eCommerce website.
-
-I plan to build a checkout process at a later date.
+An eCommerce website using React for the frontend and firebase for the backend
 
 Click [here](https://scotttp.github.io/shopping-cart/#/) to view the demo.
 
@@ -12,6 +10,7 @@ Technologies:
 - CSS
 - React
 - React-Router
+- Firebase
 
 ## Homepage
 
@@ -21,6 +20,18 @@ Technologies:
 
 ![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-shop.png?raw=true)
 
-## Cart Page
+## Product Card
 
-![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-cart.png?raw=true)
+![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-productCart.png?raw=true)
+
+## Customer Information Form
+
+![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-customerInfo.png?raw=true)
+
+## Payment Form
+
+![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-payment.png?raw=true)
+
+## Order Review
+
+![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-orderReivew.png?raw=true)
