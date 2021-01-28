@@ -22,7 +22,7 @@ Technologies:
 
 ## Product Card
 
-![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-productCart.png?raw=true)
+![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-productCard.png?raw=true)
 
 ## Customer Information Form
 
@@ -34,4 +34,4 @@ Technologies:
 
 ## Order Review
 
-![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-orderReivew.png?raw=true)
+![Alt text](https://github.com/ScotttP/shopping-cart/blob/master/shoppingCart-orderReview.png?raw=true)
