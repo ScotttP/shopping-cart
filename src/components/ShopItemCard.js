@@ -7,6 +7,8 @@ const ShopItemCard = (props) => {
 				className="productImagesInShop"
 				src={props.data.image}
 				alt={props.data.name}
+				height="332px"
+				width="332px"
 			></img>
 			<h2>{props.data.name}</h2>
 			<p>

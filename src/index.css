@@ -2,6 +2,7 @@
 	font-family: "DINNextW01-CondensedRegular";
 	src: local("DINNextW01-CondensedRegular"),
 		url(./DINNextW01-CondensedRegular.woff2) format("woff");
+	font-display: swap;
 }
 å body {
 	margin: 0;

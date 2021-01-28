@@ -24,8 +24,8 @@ const Navbar = (props) => {
 							id="taylorMadeLogo"
 							src={Logo}
 							alt="logo"
-							// width="150px"
-							// height="41.5px"
+							width="150"
+							height="41.5"
 						></img>
 					</Link>
 				</p>

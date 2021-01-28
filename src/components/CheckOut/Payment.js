@@ -51,6 +51,8 @@ const Payment = (props) => {
 						min="10"
 						required
 					></input>
+					<br></br>
+					<p style={{ margin: "2px" }}>(must be 10 digits long)</p>
 				</label>
 				<label>
 					Expiration Date:

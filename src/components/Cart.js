@@ -123,7 +123,8 @@ const Cart = (props) => {
 	};
 
 	const buttonRender = () => {
-		if (cartList === undefined || cartList.length <= 0) return;
+		if (cartList === undefined || cartList.length <= 0 || props.sumQty <= 0)
+			return null;
 		else if (props.isInReview)
 			return (
 				<div id="buttonDiv">

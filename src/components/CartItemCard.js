@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import firebase from "../components/firebaseConfig";
-import "firebase/auth";
+
 import "firebase/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const firestore = firebase.firestore();
-const firebaseAuth = firebase.auth();
 
 const CartItemCard = (props) => {
+	console.log(props.data.quantity);
 	const [quantity, setQuantity] = useState(props.data.quantity);
 
 	const userCartRef = firestore
@@ -27,11 +26,10 @@ const CartItemCard = (props) => {
 				return ++prevState;
 			});
 		} else {
-			if (quantity <= 0) return;
+			if (quantity < 0) return;
 			else
 				setQuantity((prevState) => {
-					if (prevState <= 0) return;
-					else return --prevState;
+					return --prevState;
 				});
 		}
 	};
@@ -47,6 +45,10 @@ const CartItemCard = (props) => {
 	useEffect(() => {
 		updateItemToCart();
 	}, [quantity]);
+
+	useEffect(() => {
+		console.log("card re renders");
+	});
 
 	return (
 		<div className="cartItemCard">
@@ -76,23 +78,7 @@ const CartItemCard = (props) => {
 
 				<div className="qtyAndRemoveButtonContainer">
 					<div className="increaseOrDecreaseQtyContainer">
-						<button
-							className="decreaseQty"
-							data-index={props.index}
-							data-incart={props.inCart}
-							onClick={(e) => changeQty(e)}
-						>
-							-
-						</button>
-						<p className="displayQty">{props.data.quantity}</p>
-						<button
-							className="increaseQty"
-							data-index={props.index}
-							data-incart={props.inCart}
-							onClick={(e) => changeQty(e)}
-						>
-							+
-						</button>
+						<p>Quantity: {props.data.quantity}</p>
 					</div>
 					<button
 						className="deleteFromCartButton"

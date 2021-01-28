@@ -46,22 +46,12 @@ const Home = (props) => {
 				<div id="textInnerDiv">
 					<h1>Better Everything Is What We Do.</h1>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-						a lectus tortor. Aliquam congue magna et leo convallis molestie.
-						Suspendisse sed erat id lectus blandit faucibus. Suspendisse
-						ultrices fermentum diam et tristique. Cras fringilla ornare mattis.
-						Vestibulum quis tellus et orci bibendum commodo. Suspendisse ac odio
-						maximus nisl efficitur finibus eget et lorem. Etiam volutpat tortor
-						ut laoreet tincidunt. Ut dignissim justo eu efficitur pellentesque.
-						Donec aliquet faucibus eros vitae sagittis. Integer fermentum orci
-						in faucibus imperdiet.
+						Turn your passion for the game into rewards. Join now to earn points
+						on every dollar you spend, get free shipping on all orders and be
+						the first to know about special offers and exclusive opportunities.
+						Points can be redeemed for dollars off future purchases.
 					</p>
 				</div>
-				<img
-					alt="clubs"
-					id="clubsImage"
-					src="https://www.taylormadegolf.com/on/demandware.static/-/Sites-TMaG-Library/en_US/v1610442348251/TaylorMade/homepage_test/images/custom-desktop.jpg"
-				></img>
 			</div>
 			<footer id="footer">
 				<label>
@@ -77,9 +67,27 @@ const Home = (props) => {
 				</label>
 				<div id="followUsDiv">
 					<h2>Follow Us</h2>
-					<img className="socialIcons" alt="facebook" src={facebook}></img>
-					<img className="socialIcons" alt="instagram" src={instagram}></img>
-					<img className="socialIcons" alt="twitter" src={twitter}></img>
+					<img
+						className="socialIcons"
+						alt="facebook"
+						width="26"
+						height="26"
+						src={facebook}
+					></img>
+					<img
+						className="socialIcons"
+						alt="instagram"
+						width="26"
+						height="26"
+						src={instagram}
+					></img>
+					<img
+						className="socialIcons"
+						alt="twitter"
+						width="26"
+						height="26"
+						src={twitter}
+					></img>
 				</div>
 			</footer>
 		</div>

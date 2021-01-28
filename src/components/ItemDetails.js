@@ -92,7 +92,7 @@ const ItemDetails = (props) => {
 		e.preventDefault();
 
 		if (quantity <= 0) return;
-		if (firebaseAuth.currentUser) {
+		else if (firebaseAuth.currentUser) {
 			const userRef = firestore
 				.collection("users")
 				.doc(`${firebaseAuth.currentUser.uid}`);
@@ -120,11 +120,10 @@ const ItemDetails = (props) => {
 				return ++prevState;
 			});
 		} else {
-			if (quantity <= 0) return;
+			if (quantity < 0) return;
 			else
 				setQuantity((prevState) => {
-					if (prevState <= 0) return;
-					else return --prevState;
+					return --prevState;
 				});
 		}
 	};
@@ -152,30 +151,40 @@ const ItemDetails = (props) => {
 						id="featured"
 						src={productImage1}
 						alt={productName}
+						height="416"
+						width="416"
 					></img>
 					<div className="sliderWrapper">
 						<img
 							className="thumbnailImages active"
 							src={productImage1}
 							alt={productName}
+							height="100"
+							width="100"
 							onMouseOver={(e) => updatingActiveImage(e)}
 						></img>
 						<img
 							className="thumbnailImages"
 							src={productImage2}
 							alt={productName}
+							height="100"
+							width="100"
 							onMouseOver={(e) => updatingActiveImage(e)}
 						></img>
 						<img
 							className="thumbnailImages"
 							src={productImage3}
 							alt={productName}
+							height="100"
+							width="100"
 							onMouseOver={(e) => updatingActiveImage(e)}
 						></img>
 						<img
 							className="thumbnailImages"
 							src={productImage4}
 							alt={productName}
+							height="100"
+							width="100"
 							onMouseOver={(e) => updatingActiveImage(e)}
 						></img>
 					</div>

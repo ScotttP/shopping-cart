@@ -69,9 +69,27 @@ const Shop = (props) => {
 				</label>
 				<div id="followUsDiv">
 					<h2>Follow Us</h2>
-					<img alt="facebook" src={facebook}></img>
-					<img alt="instagram" src={instagram}></img>
-					<img alt="twitter" src={twitter}></img>
+					<img
+						className="socialIcons"
+						alt="facebook"
+						width="26"
+						height="26"
+						src={facebook}
+					></img>
+					<img
+						className="socialIcons"
+						alt="instagram"
+						width="26"
+						height="26"
+						src={instagram}
+					></img>
+					<img
+						className="socialIcons"
+						alt="twitter"
+						width="26"
+						height="26"
+						src={twitter}
+					></img>
 				</div>
 			</footer>
 		</div>
