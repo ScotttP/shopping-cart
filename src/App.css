@@ -76,6 +76,15 @@ span {
 	min-height: 29px;
 }
 
+@media only screen and (max-width: 375px) {
+	.increaseQty,
+	.decreaseQty,
+	.displayQty {
+		height: 4vh;
+		width: 10vw;
+	}
+}
+
 .addToCartButton,
 .deleteFromCartButton {
 	width: 100%;
@@ -214,14 +223,21 @@ select:hover {
 #generalAccountInfoForm {
 	display: flex;
 	flex-direction: column;
-
 	height: 120vh;
 	padding: 0 6% 0 6%;
 }
 @media only screen and (max-width: 600px) {
 	#generalAccountInfoForm {
-		height: 120vh;
-		/* padding: 50px 0 50px 0; */
+		height: 140vh;
+	}
+}
+@media only screen and (max-width: 450px) {
+	#generalAccountInfoForm {
+		height: 180vh;
+	}
+	.nextSectionButton {
+		margin: 10px 0 15px 0;
+		padding: 5px;
 	}
 }
 
@@ -267,6 +283,7 @@ select:hover {
 	width: 25%;
 	height: fit-content;
 	min-width: 230px;
+	min-height: 74px;
 	padding: 6px;
 }
 
@@ -305,8 +322,18 @@ select:hover {
 	width: 50%;
 	margin: 5px;
 }
+
+@media only screen and (max-width: 450px) {
+	#shippingOptionsInput {
+		width: 60%;
+	}
+	#shippingOptionsInput > div {
+		width: 80%;
+	}
+}
+
 .nextSectionButton {
-	width: 15%;
+	width: 142px;
 	height: 45px;
 	border: 2px solid rgb(11, 23, 56);
 	color: rgb(11, 23, 56);
@@ -537,6 +564,12 @@ select:hover {
 		justify-content: center;
 	}
 }
+@media only screen and (max-width: 375px) {
+	#footer {
+		padding: 0;
+		align-items: center;
+	}
+}
 @media only screen and (max-width: 350px) {
 	#footer {
 		height: 25vh;
@@ -573,6 +606,7 @@ select:hover {
 	border: none;
 	padding: 10px;
 	line-height: 1.2em;
+	border-radius: 0%;
 }
 
 #sendEmailSignUpButton {
