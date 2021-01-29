@@ -241,19 +241,23 @@ select:hover {
 	}
 }
 
+@media only screen and (max-width: 321px) {
+	#generalAccountInfoForm {
+		height: 250vh;
+	}
+}
+
 #nameAndEmailDiv {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: space-around;
 
-	height: 40%;
+	height: fit-content;
 }
 
-@media only screen and (max-width: 600px) {
-	#nameAndEmailDiv {
-		height: 30%;
-	}
+#nameAndEmailDiv > div {
+	margin: 10px 0 10px 0;
 }
 
 #shippingAndBillingAddressContainer {
@@ -266,7 +270,7 @@ select:hover {
 		flex-direction: column;
 		height: fit-content;
 		justify-content: space-around;
-		padding: 10% 0 10% 0;
+		padding: 5% 0 5% 0;
 	}
 }
 
@@ -330,6 +334,7 @@ select:hover {
 	justify-content: space-between;
 	width: 50%;
 	margin: 5px;
+	max-width: 400px;
 }
 
 @media only screen and (max-width: 450px) {
@@ -866,7 +871,9 @@ select:hover {
 #cartContainer {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: flex-start;
+	height: fit-content;
+	min-height: 70vh;
 }
 .cartItemCardContainer {
 	display: flex;
@@ -953,6 +960,10 @@ select:hover {
 }
 #goToShopElement:hover {
 	text-decoration: underline;
+}
+
+#checkoutComplete {
+	height: 70vh;
 }
 
 @media only screen and (max-width: 718px) {

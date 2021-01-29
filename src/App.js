@@ -17,6 +17,7 @@ import Login from "./components/UserAuth/Login";
 import CreateAccount from "./components/UserAuth/CreateAccount";
 import LoginOrGuestCheckout from "./components/CheckOut/LoginOrGuestCheckout";
 import Payment from "./components/CheckOut/Payment";
+import Footer from "./components/Footer";
 
 import CheckoutComplete from "./components/CheckOut/CheckoutComplete";
 
@@ -370,6 +371,7 @@ const App = () => {
 					component={CheckoutComplete}
 				></Route>
 			</Switch>
+			<Footer></Footer>
 		</Router>
 	);
 };
