@@ -7,7 +7,7 @@
 body,
 html {
 	width: 100vw;
-	height: 100%;
+	height: auto;
 	margin: 0px;
 	padding: 0px;
 	scroll-behavior: smooth;
@@ -184,7 +184,7 @@ span {
 	align-items: flex-start;
 	padding: 2%;
 	height: fit-content;
-	max-height: 50px;
+	min-height: 50px;
 	margin: 5% 0 5% 0;
 	border: 1px solid #c4bdbd;
 }
@@ -216,7 +216,7 @@ select:hover {
 @media only screen and (max-width: 884px) {
 	.config,
 	.shaft {
-		margin: 2% 0 2% 0;
+		margin: 5% 0 5% 0;
 	}
 }
 
@@ -228,12 +228,12 @@ select:hover {
 }
 @media only screen and (max-width: 600px) {
 	#generalAccountInfoForm {
-		height: 140vh;
+		height: 150vh;
 	}
 }
 @media only screen and (max-width: 450px) {
 	#generalAccountInfoForm {
-		height: 180vh;
+		height: 210vh;
 	}
 	.nextSectionButton {
 		margin: 10px 0 15px 0;
@@ -250,6 +250,12 @@ select:hover {
 	height: 40%;
 }
 
+@media only screen and (max-width: 600px) {
+	#nameAndEmailDiv {
+		height: 30%;
+	}
+}
+
 #shippingAndBillingAddressContainer {
 	display: flex;
 
@@ -258,8 +264,9 @@ select:hover {
 @media only screen and (max-width: 600px) {
 	#shippingAndBillingAddressContainer {
 		flex-direction: column;
-		height: 100%;
+		height: fit-content;
 		justify-content: space-around;
+		padding: 10% 0 10% 0;
 	}
 }
 
@@ -269,10 +276,12 @@ select:hover {
 	flex-direction: column;
 	width: 50%;
 	justify-content: center;
+	margin-bottom: 15px;
 }
 
 #shippingOptionsDiv {
-	height: 20%;
+	height: fit-content;
+	margin: 15px 0 15px 0;
 }
 .inputFields {
 	border: 1px solid #a8a3a3;
@@ -283,7 +292,7 @@ select:hover {
 	width: 25%;
 	height: fit-content;
 	min-width: 230px;
-	min-height: 74px;
+	min-height: 78px;
 	padding: 6px;
 }
 
@@ -340,6 +349,7 @@ select:hover {
 	font-size: 1.2em;
 	min-width: 102px;
 	max-width: 142px;
+	margin-bottom: 25px;
 	background: transparent;
 	transition: 0.3s;
 }
@@ -689,7 +699,7 @@ select:hover {
 }
 
 #root {
-	height: 140vh;
+	height: 100vh;
 }
 #taylorMadeLogo {
 	width: 150px;
@@ -707,9 +717,9 @@ select:hover {
 #golfBagLink {
 	height: 55px;
 }
-/* #shopContainer {
-	height: 00vh;
-} */
+#shopContainer {
+	min-height: 100vh;
+}
 
 .socialIcons {
 	width: 26px;
@@ -822,7 +832,7 @@ select:hover {
 	align-items: center;
 	justify-content: center;
 	grid-template-columns: 22% 22% 22% 22%;
-	grid-template-rows: repeat(4, minmax(20%, 1fr));
+	grid-template-rows: repeat(3, minmax(20%, 1fr));
 	column-gap: 2%;
 	row-gap: 1%;
 	min-height: 100%;
@@ -987,13 +997,13 @@ select:hover {
 @media only screen and (max-width: 650px) {
 	#itemCardGridContainer {
 		grid-template-columns: 49% 49%;
-		grid-template-rows: repeat(5, minmax(13%, 1fr));
+		grid-template-rows: repeat(auto-fill, minmax(13%, 1fr));
 	}
 }
 @media only screen and (max-width: 650px) {
 	#itemCardGridContainer {
 		grid-template-columns: 100%;
-		grid-template-rows: repeat(5, minmax(7%, 1fr));
+		grid-template-rows: repeat(auto-fill, minmax(7%, 1fr));
 		column-gap: 1%;
 		row-gap: 30px;
 		margin: 5%;

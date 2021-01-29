@@ -21,6 +21,9 @@ const ItemDetailsDiv = styled.div`
 	@media only screen and (max-width: 500px) {
 		height: 130vh;
 	}
+	@media only screen and (max-width: 430px) {
+		height: 150vh;
+	}
 	@media only screen and (max-width: 320px) {
 		height: 180vh;
 	}
@@ -55,6 +58,9 @@ const RightProductInformation = styled.div`
 	}
 	@media only screen and (max-width: 884px) {
 		padding: 2% 10% 2% 10%;
+	}
+	@media only screen and (max-width: 375px) {
+		height: 450px;
 	}
 `;
 

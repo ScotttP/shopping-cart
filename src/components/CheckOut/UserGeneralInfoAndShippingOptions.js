@@ -7,6 +7,7 @@ const UserGeneralInfoAndShippingOptions = (props) => {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
+	const [sameAsShippingAddress, setSameAsShippingAddress] = useState("flext");
 	// keeping this for future implementation of user accounts
 	// const [shipStreetAddress, setShipStreetAddress] = useState("");
 	// const [shipCity, setShipCity] = useState("");
@@ -158,7 +159,8 @@ const UserGeneralInfoAndShippingOptions = (props) => {
 						</label>
 					</div>
 				</div>
-				<div id="billingAddressDiv">
+
+				<div id="billingAddressDiv" style={{ display: sameAsShippingAddress }}>
 					<h2>Billing Address:</h2>
 					<div className="inputFields">
 						<label>
@@ -167,7 +169,6 @@ const UserGeneralInfoAndShippingOptions = (props) => {
 								className="streetAddressInputChange"
 								type="text"
 								// onChange={(e) => setBillingStreetAddress(e.target.value)}
-								required
 							></input>
 						</label>
 					</div>
@@ -178,7 +179,6 @@ const UserGeneralInfoAndShippingOptions = (props) => {
 								className="cityInputChange"
 								type="text"
 								// onChange={(e) => setBillingCity(e.target.value)}
-								required
 							></input>
 						</label>
 					</div>
@@ -189,7 +189,6 @@ const UserGeneralInfoAndShippingOptions = (props) => {
 								className="stateInputChange"
 								type="text"
 								// onChange={(e) => setBillingState(e.target.value)}
-								required
 							></input>
 						</label>
 					</div>
@@ -200,11 +199,21 @@ const UserGeneralInfoAndShippingOptions = (props) => {
 								className="zipcodeInputChange"
 								type="text"
 								// onChange={(e) => setBillingZipcode(e.target.value)}
-								required
 							></input>
 						</label>
 					</div>
 				</div>
+			</div>
+			<div style={{ margin: "0 0 15px 0" }}>
+				<input
+					type="checkbox"
+					onClick={() =>
+						setSameAsShippingAddress((prevstate) =>
+							prevstate === "none" ? "flex" : "none"
+						)
+					}
+				></input>
+				<span>Same As Shipping?</span>
 			</div>
 			<div id="shippingOptionsDiv">
 				<h2>Shipping Options: </h2>
