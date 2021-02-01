@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import firebase from "../components/firebaseConfig";
 
 import "firebase/firestore";
@@ -6,9 +6,6 @@ import "firebase/firestore";
 const firestore = firebase.firestore();
 
 const CartItemCard = (props) => {
-	console.log(props.data.quantity);
-	const [quantity, setQuantity] = useState(props.data.quantity);
-
 	const userCartRef = firestore
 		.collection("users")
 		.doc(`${props.uid}`)
@@ -20,35 +17,6 @@ const CartItemCard = (props) => {
 			.delete()
 			.catch((error) => console.log(error));
 	};
-	const changeQty = (e) => {
-		if (e.target.className === "increaseQty") {
-			setQuantity((prevState) => {
-				return ++prevState;
-			});
-		} else {
-			if (quantity < 0) return;
-			else
-				setQuantity((prevState) => {
-					return --prevState;
-				});
-		}
-	};
-
-	const updateItemToCart = async () => {
-		await userCartRef
-			.doc(`${props.data.id}`)
-			.update({
-				quantity: quantity,
-			})
-			.catch((error) => console.error(error));
-	};
-	useEffect(() => {
-		updateItemToCart();
-	}, [quantity]);
-
-	useEffect(() => {
-		console.log("card re renders");
-	});
 
 	return (
 		<div className="cartItemCard">
