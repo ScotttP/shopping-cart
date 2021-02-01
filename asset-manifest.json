@@ -1,28 +1,28 @@
 {
   "files": {
     "main.css": "/shopping-cart/static/css/main.ad572ed2.chunk.css",
-    "main.js": "/shopping-cart/static/js/main.5028fcb9.chunk.js",
-    "main.js.map": "/shopping-cart/static/js/main.5028fcb9.chunk.js.map",
+    "main.js": "/shopping-cart/static/js/main.cd50b9a6.chunk.js",
+    "main.js.map": "/shopping-cart/static/js/main.cd50b9a6.chunk.js.map",
     "runtime-main.js": "/shopping-cart/static/js/runtime-main.8cb2c0cc.js",
     "runtime-main.js.map": "/shopping-cart/static/js/runtime-main.8cb2c0cc.js.map",
-    "static/js/2.56a912c4.chunk.js": "/shopping-cart/static/js/2.56a912c4.chunk.js",
-    "static/js/2.56a912c4.chunk.js.map": "/shopping-cart/static/js/2.56a912c4.chunk.js.map",
+    "static/js/2.6d882a96.chunk.js": "/shopping-cart/static/js/2.6d882a96.chunk.js",
+    "static/js/2.6d882a96.chunk.js.map": "/shopping-cart/static/js/2.6d882a96.chunk.js.map",
     "static/js/3.0316ef6c.chunk.js": "/shopping-cart/static/js/3.0316ef6c.chunk.js",
     "static/js/3.0316ef6c.chunk.js.map": "/shopping-cart/static/js/3.0316ef6c.chunk.js.map",
     "index.html": "/shopping-cart/index.html",
     "static/css/main.ad572ed2.chunk.css.map": "/shopping-cart/static/css/main.ad572ed2.chunk.css.map",
-    "static/js/2.56a912c4.chunk.js.LICENSE.txt": "/shopping-cart/static/js/2.56a912c4.chunk.js.LICENSE.txt",
+    "static/js/2.6d882a96.chunk.js.LICENSE.txt": "/shopping-cart/static/js/2.6d882a96.chunk.js.LICENSE.txt",
     "static/media/index.css": "/shopping-cart/static/media/DINNextW01-CondensedRegular.d1ce5a75.woff2",
+    "static/media/Scottmade.36022c35.png": "/shopping-cart/static/media/Scottmade.36022c35.png",
     "static/media/App.css": "/shopping-cart/static/media/cat-putters.feefa021.jpg",
     "static/media/golf-bag.5728cc73.svg": "/shopping-cart/static/media/golf-bag.5728cc73.svg",
     "static/media/icons8-facebook.d8ecc4d9.svg": "/shopping-cart/static/media/icons8-facebook.d8ecc4d9.svg",
-    "static/media/icons8-instagram.9e3ad4e1.svg": "/shopping-cart/static/media/icons8-instagram.9e3ad4e1.svg",
-    "static/media/taylorMadeLogo.fc667c78.png": "/shopping-cart/static/media/taylorMadeLogo.fc667c78.png"
+    "static/media/icons8-instagram.9e3ad4e1.svg": "/shopping-cart/static/media/icons8-instagram.9e3ad4e1.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.8cb2c0cc.js",
-    "static/js/2.56a912c4.chunk.js",
+    "static/js/2.6d882a96.chunk.js",
     "static/css/main.ad572ed2.chunk.css",
-    "static/js/main.5028fcb9.chunk.js"
+    "static/js/main.cd50b9a6.chunk.js"
   ]
 }
