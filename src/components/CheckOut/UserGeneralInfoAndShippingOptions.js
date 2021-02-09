@@ -1,42 +1,11 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-// import firebase from "../../components/firebaseConfig";
-// const firestore = firebase.firestore();
 
 const UserGeneralInfoAndShippingOptions = (props) => {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
-	const [sameAsShippingAddress, setSameAsShippingAddress] = useState("flext");
-	// keeping this for future implementation of user accounts
-	// const [shipStreetAddress, setShipStreetAddress] = useState("");
-	// const [shipCity, setShipCity] = useState("");
-	// const [shipState, setShipState] = useState("");
-	// const [shipZipcode, setShipZipcode] = useState("");
-	// const [billingStreetAddress, setBillingStreetAddress] = useState("");
-	// const [billingCity, setBillingCity] = useState("");
-	// const [billingState, setBillingState] = useState("");
-	// const [billingZipcode, setBillingZipcode] = useState("");
-
-	// const userRef = firestore.collection("users").doc(`${props.currentUser.uid}`);
-
-	// useEffect(() => { // keeping this for future implementation of user accounts
-	// 	if (props.currentUser !== "") {
-	// 		userRef.get().then((doc) => {
-	// 			setFirstName(doc.data().firstName);
-	// 			setLastName(doc.data().lastName);
-	// 			setEmail(doc.data().email);
-	// 			setShipStreetAddress(doc.data().shipStreetAddress);
-	// 			setShipCity(doc.data().shipCity);
-	// 			setShipState(doc.data().shipState);
-	// 			setShipZipcode(doc.data().shipZipcode);
-	// 			setBillingStreetAddress(doc.data().billingStreetAddress);
-	// 			setBillingCity(doc.data().billingCity);
-	// 			setBillingState(doc.data().billingState);
-	// 			setBillingZipcode(doc.data().billingZipcode);
-	// 		});
-	// 	}
-	// }, [props.currentUser, userRef]);
+	const [sameAsShippingAddress, setSameAsShippingAddress] = useState("flex");
 
 	const submit = () => {
 		console.log("Submitted!");
@@ -119,8 +88,6 @@ const UserGeneralInfoAndShippingOptions = (props) => {
 							<input
 								className="streetAddressInputChange"
 								type="text"
-								// onChange={(e) => setShipStreetAddress(e.target.value)}
-
 								required
 							></input>
 						</label>
@@ -128,23 +95,13 @@ const UserGeneralInfoAndShippingOptions = (props) => {
 					<div className="inputFields">
 						<label>
 							City:
-							<input
-								className="cityInputChange"
-								type="text"
-								// onChange={(e) => setShipCity(e.target.value)}
-								required
-							></input>
+							<input className="cityInputChange" type="text" required></input>
 						</label>
 					</div>
 					<div className="inputFields">
 						<label>
 							State:
-							<input
-								className="stateInputChange"
-								type="text"
-								// onChange={(e) => setShipState(e.target.value)}
-								required
-							></input>
+							<input className="stateInputChange" type="text" required></input>
 						</label>
 					</div>
 					<div className="inputFields">
@@ -153,7 +110,6 @@ const UserGeneralInfoAndShippingOptions = (props) => {
 							<input
 								className="zipcodeInputChange"
 								type="text"
-								// onChange={(e) => setShipZipcode(e.target.value)}
 								required
 							></input>
 						</label>
@@ -165,41 +121,25 @@ const UserGeneralInfoAndShippingOptions = (props) => {
 					<div className="inputFields">
 						<label>
 							Street Address
-							<input
-								className="streetAddressInputChange"
-								type="text"
-								// onChange={(e) => setBillingStreetAddress(e.target.value)}
-							></input>
+							<input className="streetAddressInputChange" type="text"></input>
 						</label>
 					</div>
 					<div className="inputFields">
 						<label>
 							City:
-							<input
-								className="cityInputChange"
-								type="text"
-								// onChange={(e) => setBillingCity(e.target.value)}
-							></input>
+							<input className="cityInputChange" type="text"></input>
 						</label>
 					</div>
 					<div className="inputFields">
 						<label>
 							State:
-							<input
-								className="stateInputChange"
-								type="text"
-								// onChange={(e) => setBillingState(e.target.value)}
-							></input>
+							<input className="stateInputChange" type="text"></input>
 						</label>
 					</div>
 					<div className="inputFields">
 						<label>
 							Zip:
-							<input
-								className="zipcodeInputChange"
-								type="text"
-								// onChange={(e) => setBillingZipcode(e.target.value)}
-							></input>
+							<input className="zipcodeInputChange" type="text"></input>
 						</label>
 					</div>
 				</div>

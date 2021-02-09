@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import uniqid from "uniqid";
 import ShopItemCard from "./ShopItemCard";
-import facebook from "../Icons/icons8-facebook.svg";
-import instagram from "../Icons/icons8-instagram.svg";
-import twitter from "../Icons/icons8-twitter-24.png";
 
 const Shop = (props) => {
 	const shopRendering = () => {

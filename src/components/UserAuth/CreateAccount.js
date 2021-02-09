@@ -1,8 +1,6 @@
 import { React } from "react";
-// import Error from "../Error";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import googleLogo from "../../assets/icons8-google.svg";
 
 const FormDiv = styled.div`
 	height: 90vh;
@@ -131,13 +129,13 @@ const CreateAccount = (props) => {
 							onChange={(e) => props.handleChange(e)}
 						></FormInputs>
 					</FormLabels>
-					{/* <Error errors={props.errors} /> */}
+
 					<br></br>
-					{/* <Link to="/Shop"> */}
+
 					<SignUpButton type="submit">
 						<b>Sign Up</b>
 					</SignUpButton>
-					{/* </Link> */}
+
 					<br></br>
 					<AlreadyHaveAnAccount>Already have an account?</AlreadyHaveAnAccount>
 					<Link style={{ textDecoration: "none" }} to="/Login">

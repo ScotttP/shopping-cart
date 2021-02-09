@@ -1,25 +1,10 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 
-// import firebase from "../../components/firebaseConfig";
-
-// import "firebase/firestore";
-
-// const firestore = firebase.firestore();
-
 const Payment = (props) => {
 	const [cardNumber, setCardNumber] = useState("");
 	const [expirationDate, setExpirationDate] = useState("");
 	const [cardCode, setCardCode] = useState("");
-	// const userRef = firestore.collection("users").doc(`${props.currentUser.uid}`);
-	// useEffect(() => {
-	// 	userRef.get().then((doc) => {
-	// 		if (!props.currentUser.isAnonymous) {
-	// 			setCardNumber(doc.data().cardNumber);
-	// 			setExpirationDate(doc.data().expirationDate);
-	// 		}
-	// 	});
-	// }, []);
 
 	const submit = () => {
 		props.setAsInReview();

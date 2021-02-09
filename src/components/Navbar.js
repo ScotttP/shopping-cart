@@ -1,21 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Logo from "../components/taylorMadeLogo.png";
 import Logo from "../images/Scottmade.png";
 import golfBag from "../components/golf-bag.svg";
 
 const Navbar = (props) => {
-	const LoginAndAccountRender = () => {
-		// if (
-		// 	props.currentUser.isAnonymous === false &&
-		// 	props.currentUser !== null &&
-		// 	props.currentUser !== ""
-		// )
-		// 	return <Link to="/Account">Account</Link>;
-		// else return <Link to="/Login">Login</Link>;
-		return null;
-	};
-
 	return (
 		<header id="navBarContainer">
 			<div id="navBarList">
@@ -32,7 +20,6 @@ const Navbar = (props) => {
 				</p>
 
 				<div id="navBarRight">
-					{/* <p id="accountElement">{LoginAndAccountRender()}</p> */}
 					<p id="shopElement">
 						<Link to="/shop">Shop</Link>
 					</p>
