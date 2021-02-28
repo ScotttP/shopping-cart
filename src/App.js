@@ -75,7 +75,7 @@ const App = () => {
 				addAnonUserToFirestore();
 			})
 			.then(() => {
-				localStorage.setItem("uid", firebaseAuth.currentUser.uid);
+				localStorage.setItem("uid", currentUser.uid);
 			})
 			.catch((error) => console.log(error));
 	};
@@ -90,17 +90,14 @@ const App = () => {
 	};
 
 	const addAnonUserToFirestore = async () => {
-		if (
-			firebaseAuth.currentUser.uid !== null ||
-			firebaseAuth.currentUser.uid !== undefined
-		) {
+		if (currentUser.uid !== null || currentUser.uid !== undefined) {
 			try {
-				usersRef.doc(`${firebaseAuth.currentUser.uid}`).set({
+				usersRef.doc(`${currentUser.uid}`).set({
 					firstName: "",
 					lastName: "",
 					email: "",
 					password: "",
-					userID: firebaseAuth.currentUser.uid,
+					userID: currentUser.uid,
 					cardNumber: "",
 					expirationDate: "",
 				});
@@ -112,7 +109,7 @@ const App = () => {
 
 	const authStateObserver = (user) => {
 		if (user) {
-			setCurrentUser(firebaseAuth.currentUser);
+			setCurrentUser(firebaseAuth.currentUser); //need to set in order for the application not to crash.
 		}
 	};
 
@@ -147,7 +144,7 @@ const App = () => {
 
 	return (
 		<Router basename={process.env.PUBLIC_URL + "/"}>
-			<Navbar currentUser={currentUser} sumQty={sumQty()} />
+			<Navbar sumQty={sumQty()} />
 			<Switch>
 				<Route exact path="/">
 					<Home handleFilter={(e) => handleFilter(e)}></Home>
@@ -163,7 +160,6 @@ const App = () => {
 
 				<Route exact path="/cart">
 					<Cart
-						currentUser={currentUser}
 						isInReview={isInReview}
 						setAsInReview={(e) => setAsInReview(e)}
 						sumQty={sumQty()}
@@ -172,7 +168,6 @@ const App = () => {
 
 				<Route exact path="/shop/:productName">
 					<ItemDetails
-						currentUser={firebaseAuth.currentUser}
 						signInAnonymously={() => signInAnonymously()}
 					></ItemDetails>
 				</Route>
@@ -185,14 +180,12 @@ const App = () => {
 
 				<Route exact path="/Payment">
 					<Payment
-						currentUser={currentUser}
 						isInReview={isInReview}
 						setAsInReview={(e) => setAsInReview(e)}
 					></Payment>
 				</Route>
 				<Route exact path="/Review">
 					<Cart
-						currentUser={currentUser}
 						isInReview={isInReview}
 						setAsInReview={(e) => setAsInReview(e)}
 						shippingCharge={shippingCharge}
