@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const LoginOrGuestCheckout = (props) => {
-	if (props.currentUser || props.currentUser.isAnonymous) {
+	if (props.currentUser)
 		return (
 			<div>
 				<Link to="/Login">
@@ -14,9 +14,7 @@ const LoginOrGuestCheckout = (props) => {
 				</Link>
 			</div>
 		);
-	} else {
-		return null;
-	}
+	else return null;
 };
 
 export default LoginOrGuestCheckout;

@@ -84,8 +84,9 @@ const App = () => {
 		//this adds the number of items in the cart to the navbar. as well as adds total quantity in cart component
 		if (cartList === undefined || cartList.length <= 0) return 0;
 		else {
-			let array = cartList.map((item) => item.quantity);
-			return array.reduce((acc, curr) => acc + curr);
+			return cartList
+				.map((item) => item.quantity)
+				.reduce((prev, curr) => prev + curr);
 		}
 	};
 
@@ -114,10 +115,7 @@ const App = () => {
 	};
 
 	const setAsInReview = (e) => {
-		setIsInReview((prevState) => {
-			if (prevState === false) return true;
-			else return false;
-		});
+		setIsInReview((prevState) => !prevState);
 	};
 
 	const selectShippingCharge = (e) => {
@@ -134,12 +132,13 @@ const App = () => {
 
 	useEffect(() => {
 		if (!localStorage.getItem("uid")) {
+			// on page load, the user signs in
 			signInAnonymously();
 		}
 	}, [currentUser]);
 
 	useEffect(() => {
-		setFilteredArray(productList);
+		setFilteredArray(productList); // filters the array based on what the user clicked on.
 	}, [productList]);
 
 	return (
@@ -147,21 +146,21 @@ const App = () => {
 			<Navbar sumQty={sumQty()} />
 			<Switch>
 				<Route exact path="/">
-					<Home handleFilter={(e) => handleFilter(e)}></Home>
+					<Home handleFilter={handleFilter}></Home>
 				</Route>
 
 				<Route exact path="/shop">
 					<Shop
 						productList={productList}
 						filteredArray={filteredArray}
-						handleFilter={(e) => handleFilter(e)}
+						handleFilter={handleFilter}
 					/>
 				</Route>
 
 				<Route exact path="/cart">
 					<Cart
 						isInReview={isInReview}
-						setAsInReview={(e) => setAsInReview(e)}
+						setAsInReview={setAsInReview}
 						sumQty={sumQty()}
 					/>
 				</Route>
@@ -181,13 +180,13 @@ const App = () => {
 				<Route exact path="/Payment">
 					<Payment
 						isInReview={isInReview}
-						setAsInReview={(e) => setAsInReview(e)}
+						setAsInReview={setAsInReview}
 					></Payment>
 				</Route>
 				<Route exact path="/Review">
 					<Cart
 						isInReview={isInReview}
-						setAsInReview={(e) => setAsInReview(e)}
+						setAsInReview={setAsInReview}
 						shippingCharge={shippingCharge}
 					/>
 				</Route>

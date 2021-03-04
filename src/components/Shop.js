@@ -24,29 +24,17 @@ const Shop = (props) => {
 	return (
 		<div id="shopContainer">
 			<div id="filterContainer">
-				<button
-					onClick={(e) => props.handleFilter(e)}
-					className="viewAllClubsButton"
-				>
+				<button onClick={props.handleFilter} className="viewAllClubsButton">
 					All
 				</button>
-				<button
-					onClick={(e) => props.handleFilter(e)}
-					className="viewDriversButton"
-				>
+				<button onClick={props.handleFilter} className="viewDriversButton">
 					Drivers
 				</button>
-				<button
-					onClick={(e) => props.handleFilter(e)}
-					className="viewIronsButton"
-				>
+				<button onClick={props.handleFilter} className="viewIronsButton">
 					Irons
 				</button>
 
-				<button
-					onClick={(e) => props.handleFilter(e)}
-					className="viewPuttersButton"
-				>
+				<button onClick={props.handleFilter} className="viewPuttersButton">
 					Putters
 				</button>
 			</div>

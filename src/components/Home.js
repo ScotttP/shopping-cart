@@ -17,7 +17,7 @@ const Home = (props) => {
 					to="/shop"
 					id="linkToDrivers"
 					className="viewDriversButton"
-					onClick={(e) => props.handleFilter(e)}
+					onClick={props.handleFilter}
 				>
 					<span>Drivers</span>
 				</Link>
@@ -25,7 +25,7 @@ const Home = (props) => {
 					to="/shop"
 					id="linkToIrons"
 					className="viewIronsButton"
-					onClick={(e) => props.handleFilter(e)}
+					onClick={props.handleFilter}
 				>
 					<span>Irons</span>
 				</Link>
@@ -34,7 +34,7 @@ const Home = (props) => {
 					to="/shop"
 					id="linkToPutters"
 					className="viewPuttersButton"
-					onClick={(e) => props.handleFilter(e)}
+					onClick={props.handleFilter}
 				>
 					<span>Putters</span>
 				</Link>
